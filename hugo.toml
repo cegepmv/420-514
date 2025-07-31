@@ -1,4 +1,4 @@
-baseURL = 'https://cegepmv.github.io/420-515'
+baseURL = 'https://cegepmv.github.io/420-515/'
 languageCode = 'fr-ca'
 title = 'Maintenance de logiciel'
 theme = 'hugo-theme-relearn'
