@@ -2,6 +2,7 @@
 title = "Gestionnaire de source"
 type = "chapter"
 weight = 2
+draft = false
 +++
 
 # Introduction à Git
