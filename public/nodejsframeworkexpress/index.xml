@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cadriciel (framework) côté serveur : Node.js / express :: Collecte et interprétation de données</title>
+    <link>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</link>
+    <description>Dans ce module, on va développer une API ou une application serveur complète avec un cadriciel moderne.</description>
+    <generator>Hugo</generator>
+    <language>fr-ca</language>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/420-514/nodejsframeworkexpress/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NodeJs</title>
+      <link>http://localhost:1313/420-514/nodejsframeworkexpress/nodejs/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-514/nodejsframeworkexpress/nodejs/index.html</guid>
+      <description>Introduction à Node.js Historique Avant 2009 le langage (JavaScript) n’était utilisé qu’au côté client et ne peut être exécuté que dans le navigateur (browser) Le code JavaScript était donc cantonné au côté client. Il servait à :&#xA;manipuler le DOM (Document Object Model), valider des formulaires, créer des animations simples, ajouter de l’interactivité à la page. ⚠️ Aucune possibilité de gérer :&#xA;des fichiers sur le serveur, une base de données, un système de fichiers ou un réseau. Tout cela était réservé aux langages côté serveur (PHP, Java, Python, C#, etc.).</description>
+    </item>
+    <item>
+      <title>Laboratoire : Commencer avec Node.js et Express.js</title>
+      <link>http://localhost:1313/420-514/nodejsframeworkexpress/lab/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-514/nodejsframeworkexpress/lab/index.html</guid>
+      <description>1. Installer Node.js Assurez-vous que Node.js est installé sur votre machine. Vous pouvez le télécharger depuis le site officiel de Node.js.&#xA;Vérifier l’installation : node -v npm -v&#xD;Exécuter un script : // hello.js console.log(&#34;Hello Node.js 🚀&#34;);&#xD;Puis :&#xA;node hello.js&#xD;2. Initialiser un Nouveau Projet Node.js Ouvrez votre terminal et créez un nouveau dossier pour votre projet. Accédez à ce dossier, puis exécutez la commande suivante pour initialiser un nouveau projet Node.js :</description>
+    </item>
+  </channel>
+</rss>

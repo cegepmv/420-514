@@ -1,6 +1,6 @@
-baseURL = 'https://cegepmv.github.io/420-515/'
+baseURL = 'https://cegepmv.github.io/420-514/'
 languageCode = 'fr-ca'
-title = 'Maintenance de logiciel'
+title = 'Collecte et interprétation de données'
 theme = 'hugo-theme-relearn'
 [params]
   # Change default color scheme with a variant one. Can be empty, "red", "blue", "green".

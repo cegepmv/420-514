@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Maintenance de logiciel</title>
-    <link>http://localhost:1313/420-515/</link>
-    <description>Recent content on Maintenance de logiciel</description>
+    <title>Collecte et interprétation de données</title>
+    <link>http://localhost:1313/420-514/index.html</link>
+    <description></description>
     <generator>Hugo</generator>
     <language>fr-ca</language>
-    <atom:link href="http://localhost:1313/420-515/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Aug 2025 21:03:09 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/420-514/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Préalables</title>
+      <link>http://localhost:1313/420-514/intro/index.html</link>
+      <pubDate>Thu, 21 Aug 2025 11:41:38 -0400</pubDate>
+      <guid>http://localhost:1313/420-514/intro/index.html</guid>
+      <description>Dans ce module nous ferons une courte révision des notions essentielles au cours.</description>
+    </item>
+    <item>
+      <title>Cadriciel (framework) côté serveur : Node.js / express</title>
+      <link>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</link>
+      <pubDate>Sun, 24 Aug 2025 21:03:09 -0400</pubDate>
+      <guid>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</guid>
+      <description>Dans ce module, on va développer une API ou une application serveur complète avec un cadriciel moderne.</description>
+    </item>
   </channel>
 </rss>
