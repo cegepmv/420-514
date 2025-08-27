@@ -1,6 +1,7 @@
 +++
 draft = false
 title = 'Laboratoire : Commencer avec Node.js et Express.js'
+weight = 23
 +++
 
 ## 1. Installer Node.js
@@ -92,7 +93,7 @@ nodemon index.js
 
 Si vous rencontrez cette erreur sur Windows :
 
-![image.png](image.png)
+![nodemon erreur](/420-514/images/erreur_nodemon.png)
 
 Vous pouvez la restriction de la politique de sécurité avec la commande suivante :
 

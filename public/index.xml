@@ -6,7 +6,7 @@
     <description></description>
     <generator>Hugo</generator>
     <language>fr-ca</language>
-    <lastBuildDate>Sun, 24 Aug 2025 21:03:09 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 21 Aug 2025 11:41:38 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/420-514/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Préalables</title>
@@ -18,7 +18,7 @@
     <item>
       <title>Cadriciel (framework) côté serveur : Node.js / express</title>
       <link>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</link>
-      <pubDate>Sun, 24 Aug 2025 21:03:09 -0400</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</guid>
       <description>Dans ce module, on va développer une API ou une application serveur complète avec un cadriciel moderne.</description>
     </item>

@@ -351,7 +351,10 @@ Node.js excelle dans les opérations asynchrones (lecture de fichiers, accès r�
 const fs = require('fs');
 
 fs.readFile('message.txt', 'utf8', (err, data) => {
-  if (err) throw err;
+  if (err) {
+    console.error('Error reading the file:', err);
+    return;
+  }
   console.log("Lecture asynchrone :", data);
 });
 
@@ -383,6 +386,7 @@ emitter.emit('salut', 'Alice');
 Site de Node.js : 
 
 [Node.js — Exécuter du JavaScript partout](https://nodejs.org/fr)
+
 [Documentation officielle de Node.js](https://nodejs.org/docs/latest/api/)
 
 Formation : [https://app.pluralsight.com/library/courses/nodejs-express-foundations](https://app.pluralsight.com/library/courses/nodejs-express-foundations/description)
