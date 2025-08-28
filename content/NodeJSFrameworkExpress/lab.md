@@ -1,6 +1,6 @@
 +++
 draft = false
-title = 'Laboratoire : Commencer avec Node.js et Express.js'
+title = '🧪 Laboratoire : Commencer avec Node.js et Express.js'
 weight = 23
 +++
 

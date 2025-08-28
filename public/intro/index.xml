@@ -9,14 +9,14 @@
     <lastBuildDate>Thu, 21 Aug 2025 11:41:38 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/420-514/intro/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Révision</title>
+      <title>📘 Révision</title>
       <link>http://localhost:1313/420-514/intro/revision/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/intro/revision/index.html</guid>
       <description>Rappel API REST 🌼 Une API REST se doit d’être sans état Stateless. La communication entre le client et le serveur ne doit pas dépendre d’un quelconque contexte provenant du serveur. 🌼 Ainsi, chaque requête doit contenir l’ensemble des informations nécessaires à son traitement. Cela permet au de traiter indifféremment les requêtes de plusieurs clients via de multiples instances de serveurs.&#xA;🌼 Pour chaque réponse renvoyée par l’API, un code doit être envoyé, ce code correspond à l’état de la requête et dépend de la réussite ou non de celle-ci.</description>
     </item>
     <item>
-      <title>Cadriciels rappel</title>
+      <title>📘 Cadriciels rappel</title>
       <link>http://localhost:1313/420-514/intro/frameworkbe/index.html</link>
       <pubDate>Thu, 21 Aug 2025 11:41:38 -0400</pubDate>
       <guid>http://localhost:1313/420-514/intro/frameworkbe/index.html</guid>

@@ -1,7 +1,7 @@
 +++
 date = '2025-08-21T11:41:38-04:00'
 draft = false
-title = 'Cadriciels rappel'
+title = '📘 Cadriciels rappel'
 +++
 
 ## Cadriciel côté serveur

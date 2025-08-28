@@ -1,6 +1,6 @@
 +++
 draft = false
-title = 'Laboratoire : Gestion des Erreurs et Logging'
+title = '🧪 Laboratoire : Gestion des Erreurs et Logging'
 weight = 24
 +++
 

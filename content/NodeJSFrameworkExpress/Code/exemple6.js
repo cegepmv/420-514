@@ -3,7 +3,6 @@ const fs = require('fs');
 // Écriture
 fs.writeFileSync('message.txt', 'Bonjour Node.js Sync!');
 
-// Sans promise le programme s'exécute et se termine avant que l'écriture finit son exécution
 fs.writeFile('example.txt', 'Hello, Node.js Async!', (err) => {
     if (err) {
         console.error('Error writing to file:', err);
@@ -16,7 +15,7 @@ fs.writeFile('example.txt', 'Hello, Node.js Async!', (err) => {
 const data = fs.readFileSync('message.txt', 'utf8');
 console.log("Contenu du fichier :", data); 
 
-fs.readFile('message.txt', 'utf8', (err, data) => {
+fs.readFile('example.txt', 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading the file:', err);
     return;

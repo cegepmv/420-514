@@ -1,5 +1,5 @@
 +++
-title = "Révision"
+title = "📘 Révision"
 weight = 11
 draft = false
 +++

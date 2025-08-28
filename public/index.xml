@@ -22,5 +22,12 @@
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/index.html</guid>
       <description>Dans ce module, on va développer une API ou une application serveur complète avec un cadriciel moderne.</description>
     </item>
+    <item>
+      <title>HTTPRequestDataFormat</title>
+      <link>http://localhost:1313/420-514/httprequestdataformat/index.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/420-514/httprequestdataformat/index.html</guid>
+      <description>Dans ce chapitre, nous allons découvrir le fonctionnement des requêtes HTTP et leur rôle dans l’échange de données sur le Web. Nous verrons comment un client, tel qu’un navigateur, envoie une requête au serveur pour accéder à une ressource, et comment le serveur répond avec un code de statut, des en-têtes et éventuellement un contenu. Nous présenterons les différentes méthodes HTTP (GET, POST, etc.), la structure d’une requête et d’une réponse, ainsi que des exemples concrets d’échanges entre client et serveur.</description>
+    </item>
   </channel>
 </rss>

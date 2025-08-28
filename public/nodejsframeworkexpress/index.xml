@@ -8,28 +8,28 @@
     <language>fr-ca</language>
     <atom:link href="http://localhost:1313/420-514/nodejsframeworkexpress/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>NodeJs</title>
+      <title>📘 NodeJs</title>
       <link>http://localhost:1313/420-514/nodejsframeworkexpress/nodejs/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/nodejs/index.html</guid>
       <description>Introduction à Node.js Historique Avant 2009 le langage (JavaScript) n’était utilisé qu’au côté client et ne peut être exécuté que dans le navigateur (browser) Le code JavaScript était donc cantonné au côté client. Il servait à :&#xA;manipuler le DOM (Document Object Model), valider des formulaires, créer des animations simples, ajouter de l’interactivité à la page. ⚠️ Aucune possibilité de gérer :&#xA;des fichiers sur le serveur, une base de données, un système de fichiers ou un réseau. Tout cela était réservé aux langages côté serveur (PHP, Java, Python, C#, etc.).</description>
     </item>
     <item>
-      <title>Express</title>
+      <title>📘 Express</title>
       <link>http://localhost:1313/420-514/nodejsframeworkexpress/express/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/express/index.html</guid>
       <description>Introduction à Express Express est un framework web minimaliste pour Node.js, permettant de créer des applications web robustes et modulaires. Il facilite la gestion des routes, le rendu de vues dynamiques, et l’intégration de middlewares pour diverses tâches comme les sessions ou l’authentification.&#xA;Exemple d’Express const express = require(&#34;express&#34;); const app = express(); const port = 3000; app.get(&#34;/&#34;, (req, res) =&gt; { res.send(&#34;Hello World!&#34;); }); app.listen(port, () =&gt; { console.log(`Application à l&#39;écoute sur le port ${port}!`); });</description>
     </item>
     <item>
-      <title>Laboratoire : Commencer avec Node.js et Express.js</title>
+      <title>🧪 Laboratoire : Commencer avec Node.js et Express.js</title>
       <link>http://localhost:1313/420-514/nodejsframeworkexpress/lab/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/lab/index.html</guid>
       <description>1. Installer Node.js Assurez-vous que Node.js est installé sur votre machine. Vous pouvez le télécharger depuis le site officiel de Node.js.&#xA;Vérifier l’installation : node -v npm -v&#xD;Exécuter un script : // hello.js console.log(&#34;Hello Node.js 🚀&#34;);&#xD;Puis :&#xA;node hello.js&#xD;2. Initialiser un Nouveau Projet Node.js Ouvrez votre terminal et créez un nouveau dossier pour votre projet. Accédez à ce dossier, puis exécutez la commande suivante pour initialiser un nouveau projet Node.js :</description>
     </item>
     <item>
-      <title>Laboratoire Gestion des Erreurs et Logging</title>
+      <title>🧪 Laboratoire : Gestion des Erreurs et Logging</title>
       <link>http://localhost:1313/420-514/nodejsframeworkexpress/lab2/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/420-514/nodejsframeworkexpress/lab2/index.html</guid>

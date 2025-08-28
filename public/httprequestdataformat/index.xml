@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HTTPRequestDataFormat :: Collecte et interprétation de données</title>
-    <link>http://localhost:59741/420-514/httprequestdataformat/index.html</link>
-    <description>This is a new chapter.</description>
+    <link>http://localhost:1313/420-514/httprequestdataformat/index.html</link>
+    <description>Dans ce chapitre, nous allons découvrir le fonctionnement des requêtes HTTP et leur rôle dans l’échange de données sur le Web. Nous verrons comment un client, tel qu’un navigateur, envoie une requête au serveur pour accéder à une ressource, et comment le serveur répond avec un code de statut, des en-têtes et éventuellement un contenu. Nous présenterons les différentes méthodes HTTP (GET, POST, etc.), la structure d’une requête et d’une réponse, ainsi que des exemples concrets d’échanges entre client et serveur.</description>
     <generator>Hugo</generator>
     <language>fr-ca</language>
-    <atom:link href="http://localhost:59741/420-514/httprequestdataformat/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/420-514/httprequestdataformat/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Requêtes HTTP</title>
-      <link>http://localhost:59741/420-514/httprequestdataformat/httprequest/index.html</link>
+      <title>📘 Requêtes HTTP</title>
+      <link>http://localhost:1313/420-514/httprequestdataformat/httprequest/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59741/420-514/httprequestdataformat/httprequest/index.html</guid>
-      <description></description>
+      <guid>http://localhost:1313/420-514/httprequestdataformat/httprequest/index.html</guid>
+      <description>Le protocole HTTP HTTP (HyperText Transfer Protocol) est le protocole qui permet d’échanger des données sur le Web.&#xA;Il fonctionne selon un modèle client-serveur : c’est toujours le client (navigateur) qui envoie une requête, et le serveur qui répond.&#xA;HTTP est utilisé pour récupérer différentes ressources :&#xA;documents HTML, feuilles de style (CSS), images, vidéos, scripts, etc. Un document web complet est construit en combinant tous ces sous-documents envoyés par le serveur.</description>
     </item>
     <item>
-      <title>Formats de données</title>
-      <link>http://localhost:59741/420-514/httprequestdataformat/dataformat/index.html</link>
+      <title>📘 Manipulation de données</title>
+      <link>http://localhost:1313/420-514/httprequestdataformat/dataformat/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:59741/420-514/httprequestdataformat/dataformat/index.html</guid>
-      <description></description>
+      <guid>http://localhost:1313/420-514/httprequestdataformat/dataformat/index.html</guid>
+      <description>JSON et XML La manipulation de données JSON et XML est essentielle dans le développement d’applications web modernes, car ces formats sont couramment utilisés pour l’échange de données entre les serveurs et les clients. Voici un guide sur la façon de manipuler ces données en utilisant JavaScript.&#xA;1. Manipulation de données JSON JSON (JavaScript Object Notation) est un format de données léger, facile à lire et à écrire pour les humains, et facile à analyser et à générer pour les machines.</description>
     </item>
   </channel>
 </rss>
