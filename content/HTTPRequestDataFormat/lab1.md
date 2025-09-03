@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 title = '🧪 Laboratoire : Requêtes HTTP & échanges de données avec Node.js/Express'
 weight = 33
 +++
@@ -54,10 +54,15 @@ function validateUserPayload(req, res, next) {
 
 // ===== Routes de démonstration HTTP =====
 
+// GET simple
+app.get('/', (req, res) => {
+    res.status(200).send('Bienvenue!');
+});
+
 // GET simple + en-tête custom
 app.get('/hello', (req, res) => {
   res.set('X-Server', 'MV-Express');    // en-tête réponse
-  res.status(200).send('Bonjour 👋');
+  res.status(200).send('Bonjour!');
 });
 
 // HEAD : renvoie seulement les en-têtes
@@ -315,7 +320,7 @@ pm.environment.set("userId", pm.response.json().id);
 4. **Export Postman** (collection JSON) ou capture du **Runner** qui passe vert.
 
 
-## ⭐ Bonus (optionnel)
+## ⭐ Extra
 
 * `npm i cors` puis `app.use(require('cors')());` — tester les en-têtes CORS.
 * Pagination (`GET /users?page=1&limit=5`) et tri.
