@@ -5,9 +5,9 @@ weight = 24
 +++
 
 
-### Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging
+### Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging
 
-1. **Ajouter un Middleware de Logging**
+1. **Ajouter un middleware de logging**
     - Créez un middleware qui enregistre chaque requête reçue par le serveur.
     - Implémentez le code suivant au début de votre fichier `index.js` :
     
@@ -23,7 +23,7 @@ weight = 24
     });
     ```
     
-2. **Ajouter un Middleware de Gestion des Erreurs**
+2. **Ajouter un middleware de gestion des erreurs**
     - Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée.
     - Placez ce middleware à la fin de toutes vos routes dans `index.js` :
     
@@ -36,7 +36,7 @@ weight = 24
     ```
     
 
-### Partie 2 : Servir des Fichiers Statiques
+### Partie 2 : Servir des fichiers statiques
 
 1. **Créer un Dossier `public`**
     - Créez un dossier `public` à la racine de votre projet avec la commande suivante :
@@ -45,7 +45,7 @@ weight = 24
     mkdir public
     ```
     
-2. **Ajouter un Fichier HTML dans le Dossier `public`**
+2. **Ajouter un fichier HTML dans le dossier `public`**
     - Créez un fichier `index.html` dans le dossier `public` avec le contenu suivant :
     
     ```html
@@ -63,7 +63,7 @@ weight = 24
     </html>
     ```
     
-3. **Configurer Express pour Servir les Fichiers Statiques**
+3. **Configurer Express pour servir les fichiers statiques**
     - Ajoutez le code suivant dans votre fichier `index.js` pour permettre à Express de servir les fichiers du dossier `public` :
     
     ```jsx
@@ -72,7 +72,7 @@ weight = 24
     ```
     
 
-### Partie 3 : Utiliser la Librairie de Journalisation `Winston`
+### Partie 3 : Utiliser la librairie de journalisation `Winston`
 
 1. **Installer Winston**
     - Installez la librairie Winston en exécutant la commande suivante dans votre terminal :
@@ -108,9 +108,9 @@ weight = 24
     ```
     
 
-### Partie 4 : Tester les Améliorations
+### Partie 4 : Tester les améliorations
 
-1. **Test du Middleware de Logging**
+1. **Test du middleware de logging**
     - Lancez votre serveur avec `node index.js`.
     - Accédez à différentes routes (par exemple, `/` ou `/info`) et vérifiez que les requêtes sont enregistrées dans le terminal et dans le fichier `logs/app.log`.
 2. **Test du Middleware de Gestion des Erreurs**
@@ -126,7 +126,7 @@ weight = 24
 3. **Test de la Servitude des Fichiers Statiques**
     - Accédez à `http://localhost:3000/` dans votre navigateur pour voir la page HTML servie par Express.
 
-### Partie 5 : Fichier `index.js` Complet
+### Partie 5 : Fichier `index.js` complet
 
 Voici un exemple complet après l'ajout des middlewares et Winston :
 
@@ -194,8 +194,8 @@ app.listen(port, () => {
 });
 ```
 
-### Résultats Attendus
+### Résultats attendus
 
 1. **Logging**: Toutes les requêtes HTTP seront enregistrées dans la console et dans le fichier `logs/app.log`.
-2. **Gestion des Erreurs**: En cas d'erreur, un message d'erreur approprié sera affiché, et les détails seront enregistrés dans les logs.
-3. **Servitude de Fichiers Statiques**: La page HTML située dans le dossier `public` sera servie par Express lorsque l'on accède à l'URL racine du serveur.
+2. **Gestion des erreurs**: En cas d'erreur, un message d'erreur approprié sera affiché, et les détails seront enregistrés dans les logs.
+3. **Servitude de fichiers statiques**: La page HTML située dans le dossier `public` sera servie par Express lorsque l'on accède à l'URL racine du serveur.

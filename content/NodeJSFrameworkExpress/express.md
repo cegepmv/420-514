@@ -29,7 +29,7 @@ app.listen(port, () => {
 
 Source : [https://app.pluralsight.com/library/courses/nodejs-express-foundations/description](https://app.pluralsight.com/library/courses/nodejs-express-foundations/description)
 
-## Middleware et Gestion des Erreurs
+## Middleware et gestion des erreurs
 
 Les middlewares sont des fonctions intermédiaires dans le traitement des requêtes. Ils sont essentiels pour gérer les fichiers statiques, les sessions, les erreurs, etc.
 
@@ -144,7 +144,7 @@ Dans cet exemple :
 2. **Composabilité** : Les middlewares peuvent être chaînés pour créer un pipeline de traitement des requêtes.
 3. **Réutilisabilité** : Vous pouvez créer des middlewares personnalisés qui peuvent être réutilisés à travers plusieurs routes ou applications.
 
-## Utilisation des Bases de Données
+## Utilisation des bases de données
 
 Node.js prend en charge plusieurs bases de données comme MongoDB. Pour connecter votre application à une base de données, vous devez installer le pilote correspondant.
 
@@ -169,11 +169,11 @@ MongoClient.connect("mongodb://localhost:27017/animals", (err, client) => {
 
 Autre middlewares pour la gestion du logging, ainsi que pour servir des fichiers statiques comme des pages HTML avec Express.
 
-### Ajouter des Middlewares pour le Logging
+### Ajouter des middlewares pour le logging
 
 Les middlewares sont des fonctions qui ont accès à l'objet `request` (req), l'objet `response` (res) et à la fonction `next` dans le cycle de requête-réponse. Ils sont utiles pour intercepter et gérer des requêtes avant qu'elles ne parviennent aux routes définies.
 
-### Ajouter un Middleware de Logging
+### Ajouter un middleware de logging
 
 Un middleware de logging peut enregistrer chaque requête reçue par le serveur. Ajoutez le code suivant au début de votre fichier `index.js` :
 
@@ -189,7 +189,7 @@ app.use((req, res, next) => {
 });
 ```
 
-### Servir des Fichiers Statiques
+### Servir des fichiers statiques
 
 Pour servir des fichiers statiques comme des pages HTML, CSS, ou des images, Express offre une méthode simple. Créez un dossier `public` dans votre projet pour stocker ces fichiers.
 
@@ -221,7 +221,7 @@ Pour servir des fichiers statiques comme des pages HTML, CSS, ou des images, Exp
     ```
     
 
-#### Configurer Express pour Servir les Fichiers Statiques
+#### Configurer Express pour servir les fichiers statiques
 
 Ajoutez le code suivant à votre `index.js` pour permettre à Express de servir les fichiers du dossier `public` :
 
@@ -232,8 +232,8 @@ app.use(express.static('public'));
 
 #### Tester
 
-1. **Testez le Middleware de Logging** : Lancez votre serveur avec `node index.js` et accédez à différentes routes (par exemple, `/` ou `/info`). Vous devriez voir les requêtes enregistrées dans le terminal.
-2. **Testez le Middleware de Gestion des Erreurs** : Pour simuler une erreur, vous pouvez créer une route qui lève une exception :
+1. **Testez le middleware de logging** : Lancez votre serveur avec `node index.js` et accédez à différentes routes (par exemple, `/` ou `/info`). Vous devriez voir les requêtes enregistrées dans le terminal.
+2. **Testez le middleware de gestion des erreurs** : Pour simuler une erreur, vous pouvez créer une route qui lève une exception :
     
     ```jsx
     app.get('/cause-error', (req, res) => {
@@ -243,7 +243,7 @@ app.use(express.static('public'));
     
     En accédant à cette route (`GET <http://localhost:3000/cause-error`>), vous verrez le message d'erreur personnalisé.
     
-3. **Testez la Servitude des Fichiers Statiques** : Accédez à `http://localhost:3000/` dans votre navigateur. Vous devriez voir la page HTML créée dans `public/index.html`.
+3. **Testez la servitude des fichiers statiques** : Accédez à `http://localhost:3000/` dans votre navigateur. Vous devriez voir la page HTML créée dans `public/index.html`.
 
 #### Le Fichier `index.js`
 
@@ -302,11 +302,11 @@ app.listen(port, () => {
 
 ---
 
-## Utiliser la librairie de Journalisation `Winston`
+## Utiliser la librairie de journalisation `Winston`
 
 Winston est une bibliothèque de journalisation (logging) populaire pour Node.js. Elle permet aux développeurs de capturer, formater, et gérer des logs dans différentes sorties (fichiers, console, bases de données, etc.). Winston est flexible et extensible, ce qui en fait un choix idéal pour les projets nécessitant une gestion fine des logs, notamment pour le débogage, la surveillance et le suivi des événements.
 
-### Principales Fonctionnalités de Winston
+### Principales fonctionnalités de Winston
 
 - **Multiples Transports** : Winston peut envoyer des logs vers différents supports appelés "transports" (fichiers, bases de données, systèmes de journalisation distants, etc.).
 - **Niveaux de Log** : Il prend en charge différents niveaux de log (ex: error, warn, info, debug) pour filtrer et gérer les logs en fonction de leur importance.
@@ -326,7 +326,7 @@ Pour installer Winston dans votre projet Node.js, utilisez la commande suivante 
 npm install winston
 ```
 
-### Exemple d'Utilisation de Winston
+### Exemple d'utilisation de Winston
 
 Voici un exemple simple d'utilisation de Winston pour configurer un logger qui envoie les logs à la console et à un fichier.
 

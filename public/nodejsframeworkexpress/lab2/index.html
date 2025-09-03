@@ -5,50 +5,50 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.148.2">
     <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
-    <meta name="description" content="Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging Ajouter un Middleware de Logging
-Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un Middleware de Gestion des Erreurs
-Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des Fichiers Statiques Créer un Dossier public">
+    <meta name="description" content="Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging Ajouter un middleware de logging
+Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un middleware de gestion des erreurs
+Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des fichiers statiques Créer un Dossier public">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="🧪 Laboratoire : Gestion des Erreurs et Logging :: Collecte et interprétation de données">
-    <meta name="twitter:description" content="Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging Ajouter un Middleware de Logging
-Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un Middleware de Gestion des Erreurs
-Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des Fichiers Statiques Créer un Dossier public">
+    <meta name="twitter:description" content="Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging Ajouter un middleware de logging
+Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un middleware de gestion des erreurs
+Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des fichiers statiques Créer un Dossier public">
     <meta property="og:url" content="http://localhost:1313/420-514/nodejsframeworkexpress/lab2/index.html">
     <meta property="og:site_name" content="Collecte et interprétation de données">
     <meta property="og:title" content="🧪 Laboratoire : Gestion des Erreurs et Logging :: Collecte et interprétation de données">
-    <meta property="og:description" content="Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging Ajouter un Middleware de Logging
-Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un Middleware de Gestion des Erreurs
-Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des Fichiers Statiques Créer un Dossier public">
+    <meta property="og:description" content="Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging Ajouter un middleware de logging
+Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un middleware de gestion des erreurs
+Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des fichiers statiques Créer un Dossier public">
     <meta property="og:locale" content="fr_ca">
     <meta property="og:type" content="article">
     <meta property="article:section" content="Cadriciel (framework) côté serveur : Node.js / express">
     <meta itemprop="name" content="🧪 Laboratoire : Gestion des Erreurs et Logging :: Collecte et interprétation de données">
-    <meta itemprop="description" content="Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging Ajouter un Middleware de Logging
-Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un Middleware de Gestion des Erreurs
-Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des Fichiers Statiques Créer un Dossier public">
+    <meta itemprop="description" content="Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging Ajouter un middleware de logging
+Créez un middleware qui enregistre chaque requête reçue par le serveur. Implémentez le code suivant au début de votre fichier index.js : const express = require(&#39;express&#39;); const app = express(); const port = 3000; // Middleware de logging app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); });Ajouter un middleware de gestion des erreurs
+Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée. Placez ce middleware à la fin de toutes vos routes dans index.js : // Middleware de gestion des erreurs app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).send(&#39;Une erreur est survenue!&#39;); });Partie 2 : Servir des fichiers statiques Créer un Dossier public">
     <meta itemprop="wordCount" content="679">
     <title>🧪 Laboratoire : Gestion des Erreurs et Logging :: Collecte et interprétation de données</title><link rel="icon" href="/420-123/images/favicon.png" type="image/png">
-    <link href="/420-514/css/auto-complete/auto-complete.min.css?1756408263" rel="stylesheet">
-    <script src="/420-514/js/auto-complete/auto-complete.min.js?1756408263" defer></script>
-    <script src="/420-514/js/search-lunr.js?1756408263" defer></script>
-    <script src="/420-514/js/search.js?1756408263" defer></script>
+    <link href="/420-514/css/auto-complete/auto-complete.min.css?1756903674" rel="stylesheet">
+    <script src="/420-514/js/auto-complete/auto-complete.min.js?1756903674" defer></script>
+    <script src="/420-514/js/search-lunr.js?1756903674" defer></script>
+    <script src="/420-514/js/search.js?1756903674" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/420-514/searchindex.en.js?1756408263";
+      window.relearn.index_js_url="/420-514/searchindex.en.js?1756903674";
     </script>
-    <script src="/420-514/js/lunr/lunr.min.js?1756408263" defer></script>
-    <script src="/420-514/js/lunr/lunr.stemmer.support.min.js?1756408263" defer></script>
-    <script src="/420-514/js/lunr/lunr.multi.min.js?1756408263" defer></script>
-    <script src="/420-514/js/lunr/lunr.fr.min.js?1756408263" defer></script>
+    <script src="/420-514/js/lunr/lunr.min.js?1756903674" defer></script>
+    <script src="/420-514/js/lunr/lunr.stemmer.support.min.js?1756903674" defer></script>
+    <script src="/420-514/js/lunr/lunr.multi.min.js?1756903674" defer></script>
+    <script src="/420-514/js/lunr/lunr.fr.min.js?1756903674" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['fr'];
     </script>
-    <link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756408263" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756408263" rel="stylesheet"></noscript>
-    <link href="/420-514/css/perfect-scrollbar/perfect-scrollbar.min.css?1756408263" rel="stylesheet">
-    <link href="/420-514/css/theme.css?1756408263" rel="stylesheet">
-    <link href="/420-514/css/format-html.css?1756408263" rel="stylesheet" id="R-format-style">
+    <link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756903674" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756903674" rel="stylesheet"></noscript>
+    <link href="/420-514/css/perfect-scrollbar/perfect-scrollbar.min.css?1756903674" rel="stylesheet">
+    <link href="/420-514/css/theme.css?1756903674" rel="stylesheet">
+    <link href="/420-514/css/format-html.css?1756903674" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -136,10 +136,10 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 
 <h1 id="-laboratoire--gestion-des-erreurs-et-logging">🧪 Laboratoire : Gestion des Erreurs et Logging</h1>
 
-<h3 id="partie-1--ajouter-des-middlewares-pour-la-gestion-des-erreurs-et-le-logging">Partie 1 : Ajouter des Middlewares pour la Gestion des Erreurs et le Logging</h3>
+<h3 id="partie-1--ajouter-des-middlewares-pour-la-gestion-des-erreurs-et-le-logging">Partie 1 : Ajouter des middlewares pour la gestion des erreurs et le logging</h3>
 <ol>
 <li>
-<p><strong>Ajouter un Middleware de Logging</strong></p>
+<p><strong>Ajouter un middleware de logging</strong></p>
 <ul>
 <li>Créez un middleware qui enregistre chaque requête reçue par le serveur.</li>
 <li>Implémentez le code suivant au début de votre fichier <code>index.js</code> :</li>
@@ -155,7 +155,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Ajouter un Middleware de Gestion des Erreurs</strong></p>
+<p><strong>Ajouter un middleware de gestion des erreurs</strong></p>
 <ul>
 <li>Créez un middleware pour intercepter les erreurs et envoyer une réponse appropriée.</li>
 <li>Placez ce middleware à la fin de toutes vos routes dans <code>index.js</code> :</li>
@@ -167,7 +167,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
 </li>
 </ol>
-<h3 id="partie-2--servir-des-fichiers-statiques">Partie 2 : Servir des Fichiers Statiques</h3>
+<h3 id="partie-2--servir-des-fichiers-statiques">Partie 2 : Servir des fichiers statiques</h3>
 <ol>
 <li>
 <p><strong>Créer un Dossier <code>public</code></strong></p>
@@ -177,7 +177,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 <div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir public</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Ajouter un Fichier HTML dans le Dossier <code>public</code></strong></p>
+<p><strong>Ajouter un fichier HTML dans le dossier <code>public</code></strong></p>
 <ul>
 <li>Créez un fichier <code>index.html</code> dans le dossier <code>public</code> avec le contenu suivant :</li>
 </ul>
@@ -195,7 +195,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Configurer Express pour Servir les Fichiers Statiques</strong></p>
+<p><strong>Configurer Express pour servir les fichiers statiques</strong></p>
 <ul>
 <li>Ajoutez le code suivant dans votre fichier <code>index.js</code> pour permettre à Express de servir les fichiers du dossier <code>public</code> :</li>
 </ul>
@@ -203,7 +203,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;public&#39;</span>));</span></span></code></pre></div>
 </li>
 </ol>
-<h3 id="partie-3--utiliser-la-librairie-de-journalisation-winston">Partie 3 : Utiliser la Librairie de Journalisation <code>Winston</code></h3>
+<h3 id="partie-3--utiliser-la-librairie-de-journalisation-winston">Partie 3 : Utiliser la librairie de journalisation <code>Winston</code></h3>
 <ol>
 <li>
 <p><strong>Installer Winston</strong></p>
@@ -239,9 +239,9 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
 </li>
 </ol>
-<h3 id="partie-4--tester-les-améliorations">Partie 4 : Tester les Améliorations</h3>
+<h3 id="partie-4--tester-les-améliorations">Partie 4 : Tester les améliorations</h3>
 <ol>
-<li><strong>Test du Middleware de Logging</strong>
+<li><strong>Test du middleware de logging</strong>
 <ul>
 <li>Lancez votre serveur avec <code>node index.js</code>.</li>
 <li>Accédez à différentes routes (par exemple, <code>/</code> ou <code>/info</code>) et vérifiez que les requêtes sont enregistrées dans le terminal et dans le fichier <code>logs/app.log</code>.</li>
@@ -266,7 +266,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </ul>
 </li>
 </ol>
-<h3 id="partie-5--fichier-indexjs-complet">Partie 5 : Fichier <code>index.js</code> Complet</h3>
+<h3 id="partie-5--fichier-indexjs-complet">Partie 5 : Fichier <code>index.js</code> complet</h3>
 <p>Voici un exemple complet après l&rsquo;ajout des middlewares et Winston :</p>
 <div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">winston</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;winston&#39;</span>);
@@ -329,11 +329,11 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Serveur en écoute sur &lt;http://localhost&gt;:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
-<h3 id="résultats-attendus">Résultats Attendus</h3>
+<h3 id="résultats-attendus">Résultats attendus</h3>
 <ol>
 <li><strong>Logging</strong>: Toutes les requêtes HTTP seront enregistrées dans la console et dans le fichier <code>logs/app.log</code>.</li>
-<li><strong>Gestion des Erreurs</strong>: En cas d&rsquo;erreur, un message d&rsquo;erreur approprié sera affiché, et les détails seront enregistrés dans les logs.</li>
-<li><strong>Servitude de Fichiers Statiques</strong>: La page HTML située dans le dossier <code>public</code> sera servie par Express lorsque l&rsquo;on accède à l&rsquo;URL racine du serveur.</li>
+<li><strong>Gestion des erreurs</strong>: En cas d&rsquo;erreur, un message d&rsquo;erreur approprié sera affiché, et les détails seront enregistrés dans les logs.</li>
+<li><strong>Servitude de fichiers statiques</strong>: La page HTML située dans le dossier <code>public</code> sera servie par Express lorsque l&rsquo;on accède à l&rsquo;URL racine du serveur.</li>
 </ol>
 
   <footer class="footline">
@@ -387,7 +387,7 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
             <li class="" data-nav-id="/420-514/nodejsframeworkexpress/express/index.html"><a class="padding" href="/420-514/nodejsframeworkexpress/express/index.html">📘 Express</a></li>
             <li class="" data-nav-id="/420-514/nodejsframeworkexpress/lab/index.html"><a class="padding" href="/420-514/nodejsframeworkexpress/lab/index.html">🧪 Laboratoire : Commencer avec Node.js et Express.js</a></li>
             <li class="active " data-nav-id="/420-514/nodejsframeworkexpress/lab2/index.html"><a class="padding" href="/420-514/nodejsframeworkexpress/lab2/index.html">🧪 Laboratoire : Gestion des Erreurs et Logging</a></li></ul></li>
-            <li class="" data-nav-id="/420-514/httprequestdataformat/index.html"><a class="padding" href="/420-514/httprequestdataformat/index.html">3. HTTPRequestDataFormat</a><ul id="R-subsections-d6ec56fba70521aa4bd5cbcc16874d4b" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/420-514/httprequestdataformat/index.html"><a class="padding" href="/420-514/httprequestdataformat/index.html">3. Requêtes HTTP et format de données</a><ul id="R-subsections-d6ec56fba70521aa4bd5cbcc16874d4b" class="collapsible-menu"></ul></li>
           </ul>
         </div>
         <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
@@ -410,8 +410,8 @@ Créez un middleware pour intercepter les erreurs et envoyer une réponse approp
 <br>Creative Commons BY-NC-SA</br></div>
       </div>
     </aside>
-    <script src="/420-514/js/clipboard/clipboard.min.js?1756408263" defer></script>
-    <script src="/420-514/js/perfect-scrollbar/perfect-scrollbar.min.js?1756408263" defer></script>
-    <script src="/420-514/js/theme.js?1756408263" defer></script>
+    <script src="/420-514/js/clipboard/clipboard.min.js?1756903674" defer></script>
+    <script src="/420-514/js/perfect-scrollbar/perfect-scrollbar.min.js?1756903674" defer></script>
+    <script src="/420-514/js/theme.js?1756903674" defer></script>
   </body>
 </html>

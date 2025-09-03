@@ -29,6 +29,9 @@
     <loc>http://localhost:1313/420-514/httprequestdataformat/httprequest/index.html</loc>
   </url>
   <url>
+    <loc>http://localhost:1313/420-514/httprequestdataformat/asyncrequest/index.html</loc>
+  </url>
+  <url>
     <loc>http://localhost:1313/420-514/httprequestdataformat/dataformat/index.html</loc>
   </url>
   <url>

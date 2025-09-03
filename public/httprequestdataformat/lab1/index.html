@@ -5,50 +5,46 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.148.2">
     <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
-    <meta name="description" content="Parfait — voici le laboratoire complet rassemblé en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).
-🧰 Prérequis &amp; Mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
+    <meta name="description" content="Prérequis &amp; mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
 // server.js const express = require(&#39;express&#39;); const app = express(); app.use(express.json()); // ===== Middleware de log (ligne de requête) ===== app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); }); // ===== Mock &#34;DB&#34; en mémoire ===== let nextId = 3; let users = [ { id: 1, name: &#39;Alice&#39;, email: &#39;alice@example.com&#39;, role: &#39;student&#39; }, { id: 2, name: &#39;Bob&#39;, email: &#39;bob@example.com&#39;, role: &#39;student&#39; }, ]; // ===== Middlewares utilitaires ===== function findUser(req, res, next) { const id = Number(req.params.id); const user = users.find(u =&gt; u.id === id); if (!user) return res.status(404).json({ error: &#39;Utilisateur non trouvé&#39; }); req.user = user; next(); } function validateUserPayload(req, res, next) { const { name, email, role } = req.body ?? {}; if (!name || !email) return res.status(400).json({ error: &#39;name et email sont requis&#39; }); if (role &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } next(); } // ===== Routes de démonstration HTTP ===== // GET simple &#43; en-tête custom app.get(&#39;/hello&#39;, (req, res) =&gt; { res.set(&#39;X-Server&#39;, &#39;MV-Express&#39;); // en-tête réponse res.status(200).send(&#39;Bonjour 👋&#39;); }); // HEAD : renvoie seulement les en-têtes app.head(&#39;/ping&#39;, (req, res) =&gt; res.status(200).end()); // Codes de statut à la demande (ex: /status/404) app.get(&#39;/status/:code&#39;, (req, res) =&gt; res.sendStatus(Number(req.params.code))); // ===== Ressource /users (CRUD) ===== // Liste &#43; filtre ?q= app.get(&#39;/users&#39;, (req, res) =&gt; { const q = (req.query.q || &#39;&#39;).toLowerCase(); const result = q ? users.filter(u =&gt; [u.name, u.email, u.role].some(v =&gt; String(v).toLowerCase().includes(q))) : users; res.status(200).json({ count: result.length, data: result }); }); // Lire par id app.get(&#39;/users/:id&#39;, findUser, (req, res) =&gt; res.status(200).json(req.user)); // Créer app.post(&#39;/users&#39;, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase())) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } const user = { id: nextId&#43;&#43;, name, email, role }; users.push(user); res.status(201).location(`/users/${user.id}`).json(user); }); // Remplacer (PUT) app.put(&#39;/users/:id&#39;, findUser, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, { name, email, role }); res.status(200).json(req.user); }); // Modifier partiel (PATCH) app.patch(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { const allowed = [&#39;name&#39;, &#39;email&#39;, &#39;role&#39;]; const payload = Object.fromEntries( Object.entries(req.body ?? {}).filter(([k]) =&gt; allowed.includes(k)) ); if (&#39;role&#39; in payload &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(payload.role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } if (&#39;email&#39; in payload &amp;&amp; users.some(u =&gt; u.email.toLowerCase() === payload.email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, payload); res.status(200).json(req.user); }); // Supprimer app.delete(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { users = users.filter(u =&gt; u.id !== req.user.id); res.status(204).send(); }); // Erreur volontaire app.get(&#39;/boom&#39;, (req, res) =&gt; { throw new Error(&#39;Oups 💥&#39;); }); // Handler d’erreurs (toujours à la fin) app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).json({ error: &#39;Erreur interne&#39;, detail: err.message }); }); app.listen(3000, () =&gt; console.log(&#39;Serveur prêt : http://localhost:3000&#39;));Lancer :">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="🧪 Laboratoire : Requêtes HTTP & échanges de données avec Node.js/Express :: Collecte et interprétation de données">
-    <meta name="twitter:description" content="Parfait — voici le laboratoire complet rassemblé en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).
-🧰 Prérequis &amp; Mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
+    <meta name="twitter:description" content="Prérequis &amp; mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
 // server.js const express = require(&#39;express&#39;); const app = express(); app.use(express.json()); // ===== Middleware de log (ligne de requête) ===== app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); }); // ===== Mock &#34;DB&#34; en mémoire ===== let nextId = 3; let users = [ { id: 1, name: &#39;Alice&#39;, email: &#39;alice@example.com&#39;, role: &#39;student&#39; }, { id: 2, name: &#39;Bob&#39;, email: &#39;bob@example.com&#39;, role: &#39;student&#39; }, ]; // ===== Middlewares utilitaires ===== function findUser(req, res, next) { const id = Number(req.params.id); const user = users.find(u =&gt; u.id === id); if (!user) return res.status(404).json({ error: &#39;Utilisateur non trouvé&#39; }); req.user = user; next(); } function validateUserPayload(req, res, next) { const { name, email, role } = req.body ?? {}; if (!name || !email) return res.status(400).json({ error: &#39;name et email sont requis&#39; }); if (role &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } next(); } // ===== Routes de démonstration HTTP ===== // GET simple &#43; en-tête custom app.get(&#39;/hello&#39;, (req, res) =&gt; { res.set(&#39;X-Server&#39;, &#39;MV-Express&#39;); // en-tête réponse res.status(200).send(&#39;Bonjour 👋&#39;); }); // HEAD : renvoie seulement les en-têtes app.head(&#39;/ping&#39;, (req, res) =&gt; res.status(200).end()); // Codes de statut à la demande (ex: /status/404) app.get(&#39;/status/:code&#39;, (req, res) =&gt; res.sendStatus(Number(req.params.code))); // ===== Ressource /users (CRUD) ===== // Liste &#43; filtre ?q= app.get(&#39;/users&#39;, (req, res) =&gt; { const q = (req.query.q || &#39;&#39;).toLowerCase(); const result = q ? users.filter(u =&gt; [u.name, u.email, u.role].some(v =&gt; String(v).toLowerCase().includes(q))) : users; res.status(200).json({ count: result.length, data: result }); }); // Lire par id app.get(&#39;/users/:id&#39;, findUser, (req, res) =&gt; res.status(200).json(req.user)); // Créer app.post(&#39;/users&#39;, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase())) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } const user = { id: nextId&#43;&#43;, name, email, role }; users.push(user); res.status(201).location(`/users/${user.id}`).json(user); }); // Remplacer (PUT) app.put(&#39;/users/:id&#39;, findUser, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, { name, email, role }); res.status(200).json(req.user); }); // Modifier partiel (PATCH) app.patch(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { const allowed = [&#39;name&#39;, &#39;email&#39;, &#39;role&#39;]; const payload = Object.fromEntries( Object.entries(req.body ?? {}).filter(([k]) =&gt; allowed.includes(k)) ); if (&#39;role&#39; in payload &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(payload.role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } if (&#39;email&#39; in payload &amp;&amp; users.some(u =&gt; u.email.toLowerCase() === payload.email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, payload); res.status(200).json(req.user); }); // Supprimer app.delete(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { users = users.filter(u =&gt; u.id !== req.user.id); res.status(204).send(); }); // Erreur volontaire app.get(&#39;/boom&#39;, (req, res) =&gt; { throw new Error(&#39;Oups 💥&#39;); }); // Handler d’erreurs (toujours à la fin) app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).json({ error: &#39;Erreur interne&#39;, detail: err.message }); }); app.listen(3000, () =&gt; console.log(&#39;Serveur prêt : http://localhost:3000&#39;));Lancer :">
     <meta property="og:url" content="http://localhost:1313/420-514/httprequestdataformat/lab1/index.html">
     <meta property="og:site_name" content="Collecte et interprétation de données">
     <meta property="og:title" content="🧪 Laboratoire : Requêtes HTTP & échanges de données avec Node.js/Express :: Collecte et interprétation de données">
-    <meta property="og:description" content="Parfait — voici le laboratoire complet rassemblé en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).
-🧰 Prérequis &amp; Mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
+    <meta property="og:description" content="Prérequis &amp; mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
 // server.js const express = require(&#39;express&#39;); const app = express(); app.use(express.json()); // ===== Middleware de log (ligne de requête) ===== app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); }); // ===== Mock &#34;DB&#34; en mémoire ===== let nextId = 3; let users = [ { id: 1, name: &#39;Alice&#39;, email: &#39;alice@example.com&#39;, role: &#39;student&#39; }, { id: 2, name: &#39;Bob&#39;, email: &#39;bob@example.com&#39;, role: &#39;student&#39; }, ]; // ===== Middlewares utilitaires ===== function findUser(req, res, next) { const id = Number(req.params.id); const user = users.find(u =&gt; u.id === id); if (!user) return res.status(404).json({ error: &#39;Utilisateur non trouvé&#39; }); req.user = user; next(); } function validateUserPayload(req, res, next) { const { name, email, role } = req.body ?? {}; if (!name || !email) return res.status(400).json({ error: &#39;name et email sont requis&#39; }); if (role &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } next(); } // ===== Routes de démonstration HTTP ===== // GET simple &#43; en-tête custom app.get(&#39;/hello&#39;, (req, res) =&gt; { res.set(&#39;X-Server&#39;, &#39;MV-Express&#39;); // en-tête réponse res.status(200).send(&#39;Bonjour 👋&#39;); }); // HEAD : renvoie seulement les en-têtes app.head(&#39;/ping&#39;, (req, res) =&gt; res.status(200).end()); // Codes de statut à la demande (ex: /status/404) app.get(&#39;/status/:code&#39;, (req, res) =&gt; res.sendStatus(Number(req.params.code))); // ===== Ressource /users (CRUD) ===== // Liste &#43; filtre ?q= app.get(&#39;/users&#39;, (req, res) =&gt; { const q = (req.query.q || &#39;&#39;).toLowerCase(); const result = q ? users.filter(u =&gt; [u.name, u.email, u.role].some(v =&gt; String(v).toLowerCase().includes(q))) : users; res.status(200).json({ count: result.length, data: result }); }); // Lire par id app.get(&#39;/users/:id&#39;, findUser, (req, res) =&gt; res.status(200).json(req.user)); // Créer app.post(&#39;/users&#39;, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase())) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } const user = { id: nextId&#43;&#43;, name, email, role }; users.push(user); res.status(201).location(`/users/${user.id}`).json(user); }); // Remplacer (PUT) app.put(&#39;/users/:id&#39;, findUser, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, { name, email, role }); res.status(200).json(req.user); }); // Modifier partiel (PATCH) app.patch(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { const allowed = [&#39;name&#39;, &#39;email&#39;, &#39;role&#39;]; const payload = Object.fromEntries( Object.entries(req.body ?? {}).filter(([k]) =&gt; allowed.includes(k)) ); if (&#39;role&#39; in payload &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(payload.role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } if (&#39;email&#39; in payload &amp;&amp; users.some(u =&gt; u.email.toLowerCase() === payload.email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, payload); res.status(200).json(req.user); }); // Supprimer app.delete(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { users = users.filter(u =&gt; u.id !== req.user.id); res.status(204).send(); }); // Erreur volontaire app.get(&#39;/boom&#39;, (req, res) =&gt; { throw new Error(&#39;Oups 💥&#39;); }); // Handler d’erreurs (toujours à la fin) app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).json({ error: &#39;Erreur interne&#39;, detail: err.message }); }); app.listen(3000, () =&gt; console.log(&#39;Serveur prêt : http://localhost:3000&#39;));Lancer :">
     <meta property="og:locale" content="fr_ca">
     <meta property="og:type" content="article">
-    <meta property="article:section" content="HTTPRequestDataFormat">
+    <meta property="article:section" content="Requêtes HTTP et format de données">
     <meta itemprop="name" content="🧪 Laboratoire : Requêtes HTTP & échanges de données avec Node.js/Express :: Collecte et interprétation de données">
-    <meta itemprop="description" content="Parfait — voici le laboratoire complet rassemblé en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).
-🧰 Prérequis &amp; Mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
+    <meta itemprop="description" content="Prérequis &amp; mise en place mkdir http-lab &amp;&amp; cd http-lab npm init -y npm i expressCrée server.js :
 // server.js const express = require(&#39;express&#39;); const app = express(); app.use(express.json()); // ===== Middleware de log (ligne de requête) ===== app.use((req, res, next) =&gt; { console.log(`${req.method} ${req.url}`); next(); }); // ===== Mock &#34;DB&#34; en mémoire ===== let nextId = 3; let users = [ { id: 1, name: &#39;Alice&#39;, email: &#39;alice@example.com&#39;, role: &#39;student&#39; }, { id: 2, name: &#39;Bob&#39;, email: &#39;bob@example.com&#39;, role: &#39;student&#39; }, ]; // ===== Middlewares utilitaires ===== function findUser(req, res, next) { const id = Number(req.params.id); const user = users.find(u =&gt; u.id === id); if (!user) return res.status(404).json({ error: &#39;Utilisateur non trouvé&#39; }); req.user = user; next(); } function validateUserPayload(req, res, next) { const { name, email, role } = req.body ?? {}; if (!name || !email) return res.status(400).json({ error: &#39;name et email sont requis&#39; }); if (role &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } next(); } // ===== Routes de démonstration HTTP ===== // GET simple &#43; en-tête custom app.get(&#39;/hello&#39;, (req, res) =&gt; { res.set(&#39;X-Server&#39;, &#39;MV-Express&#39;); // en-tête réponse res.status(200).send(&#39;Bonjour 👋&#39;); }); // HEAD : renvoie seulement les en-têtes app.head(&#39;/ping&#39;, (req, res) =&gt; res.status(200).end()); // Codes de statut à la demande (ex: /status/404) app.get(&#39;/status/:code&#39;, (req, res) =&gt; res.sendStatus(Number(req.params.code))); // ===== Ressource /users (CRUD) ===== // Liste &#43; filtre ?q= app.get(&#39;/users&#39;, (req, res) =&gt; { const q = (req.query.q || &#39;&#39;).toLowerCase(); const result = q ? users.filter(u =&gt; [u.name, u.email, u.role].some(v =&gt; String(v).toLowerCase().includes(q))) : users; res.status(200).json({ count: result.length, data: result }); }); // Lire par id app.get(&#39;/users/:id&#39;, findUser, (req, res) =&gt; res.status(200).json(req.user)); // Créer app.post(&#39;/users&#39;, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase())) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } const user = { id: nextId&#43;&#43;, name, email, role }; users.push(user); res.status(201).location(`/users/${user.id}`).json(user); }); // Remplacer (PUT) app.put(&#39;/users/:id&#39;, findUser, validateUserPayload, (req, res) =&gt; { const { name, email, role = &#39;student&#39; } = req.body; if (users.some(u =&gt; u.email.toLowerCase() === email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, { name, email, role }); res.status(200).json(req.user); }); // Modifier partiel (PATCH) app.patch(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { const allowed = [&#39;name&#39;, &#39;email&#39;, &#39;role&#39;]; const payload = Object.fromEntries( Object.entries(req.body ?? {}).filter(([k]) =&gt; allowed.includes(k)) ); if (&#39;role&#39; in payload &amp;&amp; ![&#39;student&#39;, &#39;admin&#39;, &#39;teacher&#39;].includes(payload.role)) { return res.status(400).json({ error: &#34;role doit être &#39;student&#39; | &#39;admin&#39; | &#39;teacher&#39;&#34; }); } if (&#39;email&#39; in payload &amp;&amp; users.some(u =&gt; u.email.toLowerCase() === payload.email.toLowerCase() &amp;&amp; u.id !== req.user.id)) { return res.status(409).json({ error: &#39;Email déjà utilisé&#39; }); } Object.assign(req.user, payload); res.status(200).json(req.user); }); // Supprimer app.delete(&#39;/users/:id&#39;, findUser, (req, res) =&gt; { users = users.filter(u =&gt; u.id !== req.user.id); res.status(204).send(); }); // Erreur volontaire app.get(&#39;/boom&#39;, (req, res) =&gt; { throw new Error(&#39;Oups 💥&#39;); }); // Handler d’erreurs (toujours à la fin) app.use((err, req, res, next) =&gt; { console.error(err.stack); res.status(500).json({ error: &#39;Erreur interne&#39;, detail: err.message }); }); app.listen(3000, () =&gt; console.log(&#39;Serveur prêt : http://localhost:3000&#39;));Lancer :">
-    <meta itemprop="wordCount" content="926">
+    <meta itemprop="wordCount" content="1192">
     <title>🧪 Laboratoire : Requêtes HTTP &amp; échanges de données avec Node.js/Express :: Collecte et interprétation de données</title><link rel="icon" href="/420-123/images/favicon.png" type="image/png">
-    <link href="/420-514/css/auto-complete/auto-complete.min.css?1756408193" rel="stylesheet">
-    <script src="/420-514/js/auto-complete/auto-complete.min.js?1756408193" defer></script>
-    <script src="/420-514/js/search-lunr.js?1756408193" defer></script>
-    <script src="/420-514/js/search.js?1756408193" defer></script>
+    <link href="/420-514/css/auto-complete/auto-complete.min.css?1756903610" rel="stylesheet">
+    <script src="/420-514/js/auto-complete/auto-complete.min.js?1756903610" defer></script>
+    <script src="/420-514/js/search-lunr.js?1756903610" defer></script>
+    <script src="/420-514/js/search.js?1756903610" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/420-514/searchindex.en.js?1756408193";
+      window.relearn.index_js_url="/420-514/searchindex.en.js?1756903610";
     </script>
-    <script src="/420-514/js/lunr/lunr.min.js?1756408193" defer></script>
-    <script src="/420-514/js/lunr/lunr.stemmer.support.min.js?1756408193" defer></script>
-    <script src="/420-514/js/lunr/lunr.multi.min.js?1756408193" defer></script>
-    <script src="/420-514/js/lunr/lunr.fr.min.js?1756408193" defer></script>
+    <script src="/420-514/js/lunr/lunr.min.js?1756903610" defer></script>
+    <script src="/420-514/js/lunr/lunr.stemmer.support.min.js?1756903610" defer></script>
+    <script src="/420-514/js/lunr/lunr.multi.min.js?1756903610" defer></script>
+    <script src="/420-514/js/lunr/lunr.fr.min.js?1756903610" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['fr'];
     </script>
-    <link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756408193" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756408193" rel="stylesheet"></noscript>
-    <link href="/420-514/css/perfect-scrollbar/perfect-scrollbar.min.css?1756408193" rel="stylesheet">
-    <link href="/420-514/css/theme.css?1756408193" rel="stylesheet">
-    <link href="/420-514/css/format-html.css?1756408193" rel="stylesheet" id="R-format-style">
+    <link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756903610" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/420-514/fonts/fontawesome/css/fontawesome-all.min.css?1756903610" rel="stylesheet"></noscript>
+    <link href="/420-514/css/perfect-scrollbar/perfect-scrollbar.min.css?1756903610" rel="stylesheet">
+    <link href="/420-514/css/theme.css?1756903610" rel="stylesheet">
+    <link href="/420-514/css/format-html.css?1756903610" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -113,7 +109,7 @@
             <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
             </div>
           </div>
-          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420-514/index.html"><span itemprop="name">Collecte et interprétation de données</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420-514/httprequestdataformat/index.html"><span itemprop="name">HTTPRequestDataFormat</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">🧪 Laboratoire : Requêtes HTTP &amp; échanges de données avec Node.js/Express</span><meta itemprop="position" content="3"></li>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420-514/index.html"><span itemprop="name">Collecte et interprétation de données</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/420-514/httprequestdataformat/index.html"><span itemprop="name">Requêtes HTTP et format de données</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">🧪 Laboratoire : Requêtes HTTP &amp; échanges de données avec Node.js/Express</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
@@ -136,8 +132,7 @@
 
 <h1 id="-laboratoire--requêtes-http--échanges-de-données-avec-nodejsexpress">🧪 Laboratoire : Requêtes HTTP &amp; échanges de données avec Node.js/Express</h1>
 
-<p>Parfait — voici le <strong>laboratoire complet rassemblé</strong> en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).</p>
-<h2 id="-prérequis--mise-en-place">🧰 Prérequis &amp; Mise en place</h2>
+<h2 id="prérequis--mise-en-place">Prérequis &amp; mise en place</h2>
 <div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir http-lab <span style="color:#f92672">&amp;&amp;</span> cd http-lab
 </span></span><span style="display:flex;"><span>npm init -y
 </span></span><span style="display:flex;"><span>npm i express</span></span></code></pre></div>
@@ -265,6 +260,57 @@
 <h2 id="-partie-a--explorer-avec-curl">🧭 Partie A — Explorer avec <strong>curl</strong></h2>
 <blockquote>
 <p>Astuce : ajoute <code>-i</code> pour voir les <strong>en-têtes</strong> de réponse, <code>-s</code> pour silencieux, et <code>| jq</code> pour formater le JSON.</p></blockquote>
+<table>
+  <thead>
+      <tr>
+          <th>Commande</th>
+          <th>Méthode</th>
+          <th>Usage</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>curl http://.../users</code></td>
+          <td>GET</td>
+          <td>Récupérer tous les utilisateurs</td>
+      </tr>
+      <tr>
+          <td><code>curl &quot;http://.../users?q=nom&quot;</code></td>
+          <td>GET</td>
+          <td>Recherche par query string</td>
+      </tr>
+      <tr>
+          <td><code>curl -X POST -d ...</code></td>
+          <td>POST</td>
+          <td>Créer un utilisateur</td>
+      </tr>
+      <tr>
+          <td><code>curl http://.../users/1</code></td>
+          <td>GET</td>
+          <td>Lire un utilisateur</td>
+      </tr>
+      <tr>
+          <td><code>curl -X PUT -d ...</code></td>
+          <td>PUT</td>
+          <td>Remplacer entièrement un utilisateur</td>
+      </tr>
+      <tr>
+          <td><code>curl -X PATCH -d ...</code></td>
+          <td>PATCH</td>
+          <td>Modifier partiellement</td>
+      </tr>
+      <tr>
+          <td><code>curl -X DELETE ...</code></td>
+          <td>DELETE</td>
+          <td>Supprimer un utilisateur</td>
+      </tr>
+      <tr>
+          <td><code>curl -i -X POST ... (conflit)</code></td>
+          <td>POST</td>
+          <td>Démontrer les erreurs et codes 400/409</td>
+      </tr>
+  </tbody>
+</table>
 <ol>
 <li><strong>GET</strong> <code>/hello</code></li>
 </ol>
@@ -319,8 +365,105 @@
 </span></span><span style="display:flex;"><span>curl -i -X POST -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;name&#34;:&#34;Dup&#34;,&#34;email&#34;:&#34;alice@example.com&#34;}&#39;</span> http://localhost:3000/users</span></span></code></pre></div>
 <p>→ Observe <strong>404</strong>, <strong>500</strong>, <strong>409</strong>.</p>
-<hr>
-<h2 id="-partie-b--scénario-postman">🧪 Partie B — Scénario <strong>Postman</strong></h2>
+<p>Résumé des résultats :</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Commande <code>curl</code></th>
+          <th>Code HTTP attendu</th>
+          <th>Réponse JSON (ou texte) observée</th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td><code>curl -i http://localhost:3000/hello</code></td>
+          <td>200 OK</td>
+          <td>Corps texte : <code>Bonjour 👋</code> + en-tête <code>X-Server</code></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td><code>curl -I http://localhost:3000/ping</code></td>
+          <td>200 OK</td>
+          <td>Aucun corps, uniquement les en-têtes</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>`curl -s <a href="http://localhost:3000/users" rel="external" target="_blank">http://localhost:3000/users</a></td>
+          <td>jq`</td>
+          <td>200 OK</td>
+          <td>Liste complète des utilisateurs (<code>count</code>, <code>data: [...]</code>)</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>`curl -s &ldquo;<a href="http://localhost:3000/users?q=alice" rel="external" target="_blank">http://localhost:3000/users?q=alice</a>&rdquo;</td>
+          <td>jq`</td>
+          <td>200 OK</td>
+          <td>Résultat filtré par le paramètre <code>q</code></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td><code>curl -i -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;Chloe&quot;,&quot;email&quot;:&quot;chloe@example.com&quot;}' http://localhost:3000/users</code></td>
+          <td>201 Created</td>
+          <td>Objet utilisateur créé + en-tête <code>Location</code></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>`curl -s <a href="http://localhost:3000/users/1" rel="external" target="_blank">http://localhost:3000/users/1</a></td>
+          <td>jq`</td>
+          <td>200 OK</td>
+          <td>Détails de l’utilisateur avec <code>id=1</code></td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>`curl -s -X PUT -H &ldquo;Content-Type: application/json&rdquo; -d &lsquo;{&ldquo;name&rdquo;:&ldquo;Alice Doe&rdquo;,&ldquo;email&rdquo;:&quot;<a href="mailto:alice.d@example.com" rel="external" target="_blank">alice.d@example.com</a>&quot;}&rsquo; <a href="http://localhost:3000/users/1" rel="external" target="_blank">http://localhost:3000/users/1</a></td>
+          <td>jq`</td>
+          <td>200 OK</td>
+          <td>Utilisateur remplacé par les nouvelles données</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>`curl -s -X PATCH -H &ldquo;Content-Type: application/json&rdquo; -d &lsquo;{&ldquo;role&rdquo;:&ldquo;admin&rdquo;}&rsquo; <a href="http://localhost:3000/users/1" rel="external" target="_blank">http://localhost:3000/users/1</a></td>
+          <td>jq`</td>
+          <td>200 OK</td>
+          <td>Champ <code>role</code> modifié</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td><code>curl -i -X DELETE http://localhost:3000/users/1</code></td>
+          <td>204 No Content</td>
+          <td>Aucun corps dans la réponse</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>10</td>
+          <td><code>curl -i http://localhost:3000/status/404</code></td>
+          <td>404 Not Found</td>
+          <td>JSON ou message d’erreur</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>11</td>
+          <td><code>curl -i http://localhost:3000/boom</code></td>
+          <td>500 Server Error</td>
+          <td>JSON <code>{ &quot;error&quot;: &quot;Erreur interne&quot;, ... }</code></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>12</td>
+          <td><code>curl -i -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;name&quot;:&quot;Dup&quot;,&quot;email&quot;:&quot;alice@example.com&quot;}' http://localhost:3000/users</code></td>
+          <td>409 Conflict</td>
+          <td>JSON <code>{ &quot;error&quot;: &quot;Email déjà utilisé&quot; }</code></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-partie-b--scénario-postman">🧭 Partie B — Scénario <strong>Postman</strong></h2>
 <ol>
 <li>
 <p><strong>Environnement</strong> : <code>baseUrl = http://localhost:3000</code>.</p>
@@ -344,20 +487,33 @@
 <p><strong>Data-driven</strong> : CSV <code>name,email,role</code> et utiliser <code>{{name}}</code>, <code>{{email}}</code>, <code>{{role}}</code> dans le Body du POST.</p>
 </li>
 </ol>
+<p>Exemple :</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csv" data-lang="csv"><span style="display:flex;"><span><span style="color:#e6db74">name</span>,<span style="color:#e6db74">email</span>,<span style="color:#e6db74">role</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">Alice</span>,<span style="color:#e6db74">alice@example.com</span>,<span style="color:#e6db74">student</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">Bob</span>,<span style="color:#e6db74">bob@example.com</span>,<span style="color:#e6db74">teacher</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">Chloe</span>,<span style="color:#e6db74">chloe@example.com</span>,<span style="color:#e6db74">admin</span></span></span></code></pre></div>
+<p>Requête POST dans Postman :
+URL : <code>POST {{baseUrl}}/api/posts</code></p>
+<p>Headers :</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0"><code class="language-pgsql" data-lang="pgsql">Content-Type: application/json</code></pre></div>
+<p>Body (raw/JSON) :</p>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;{{name}}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;{{email}}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;role&#34;</span>: <span style="color:#e6db74">&#34;{{role}}&#34;</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Ici, {{name}}, {{email}} et {{role}} sont des variables de Postman qui seront remplacées par les valeurs du CSV.</p>
 <p>Snippets tests utiles :</p>
 <div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;200 OK&#34;</span>, () =&gt; <span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">code</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">200</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;JSON&#34;</span>, () =&gt; <span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>).<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#34;application/json&#34;</span>));
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">environment</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;userId&#34;</span>, <span style="color:#a6e22e">pm</span>.<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>().<span style="color:#a6e22e">id</span>);</span></span></code></pre></div>
-<hr>
-<h2 id="-à-remettre-format-court">📋 À remettre (format court)</h2>
+<h2 id="-à-produire">📋 À produire</h2>
 <ol>
 <li><strong>Tableau</strong> “requête → réponse” pour 6 routes (méthode, chemin, <strong>code</strong>, en-têtes clés, corps).</li>
 <li><strong>3 captures</strong> onglet <em>Network</em> (annotation : ligne de requête, en-têtes, corps).</li>
-<li><strong>3 commandes curl</strong> + sorties commentées (ce que montre chaque partie).</li>
-<li><strong>1 paragraphe</strong> : différence <strong>GET/POST/HEAD</strong> + quand utiliser <strong>201, 204, 400, 404, 409, 500</strong>.</li>
+<li><strong>3 commandes curl</strong> + sorties.</li>
 <li><strong>Export Postman</strong> (collection JSON) ou capture du <strong>Runner</strong> qui passe vert.</li>
 </ol>
-<hr>
 <h2 id="-bonus-optionnel">⭐ Bonus (optionnel)</h2>
 <ul>
 <li><code>npm i cors</code> puis <code>app.use(require('cors')());</code> — tester les en-têtes CORS.</li>
@@ -411,8 +567,9 @@
           <ul class="enlarge morespace collapsible-menu">
             <li class="" data-nav-id="/420-514/intro/index.html"><a class="padding" href="/420-514/intro/index.html">1. Préalables</a><ul id="R-subsections-58f2a84c91d5deefe8bdd3a21213404a" class="collapsible-menu"></ul></li>
             <li class="" data-nav-id="/420-514/nodejsframeworkexpress/index.html"><a class="padding" href="/420-514/nodejsframeworkexpress/index.html">2. Cadriciel (framework) côté serveur : Node.js / express</a><ul id="R-subsections-0ef22c48ddd9f1f383c22c15e8abd43a" class="collapsible-menu"></ul></li>
-            <li class="parent " data-nav-id="/420-514/httprequestdataformat/index.html"><a class="padding" href="/420-514/httprequestdataformat/index.html">3. HTTPRequestDataFormat</a><ul id="R-subsections-d6ec56fba70521aa4bd5cbcc16874d4b" class="collapsible-menu">
+            <li class="parent " data-nav-id="/420-514/httprequestdataformat/index.html"><a class="padding" href="/420-514/httprequestdataformat/index.html">3. Requêtes HTTP et format de données</a><ul id="R-subsections-d6ec56fba70521aa4bd5cbcc16874d4b" class="collapsible-menu">
             <li class="" data-nav-id="/420-514/httprequestdataformat/httprequest/index.html"><a class="padding" href="/420-514/httprequestdataformat/httprequest/index.html">📘 Requêtes HTTP</a></li>
+            <li class="" data-nav-id="/420-514/httprequestdataformat/asyncrequest/index.html"><a class="padding" href="/420-514/httprequestdataformat/asyncrequest/index.html">🌐 Requêtes asynchrones</a></li>
             <li class="" data-nav-id="/420-514/httprequestdataformat/dataformat/index.html"><a class="padding" href="/420-514/httprequestdataformat/dataformat/index.html">📘 Manipulation de données</a></li>
             <li class="active " data-nav-id="/420-514/httprequestdataformat/lab1/index.html"><a class="padding" href="/420-514/httprequestdataformat/lab1/index.html">🧪 Laboratoire : Requêtes HTTP &amp; échanges de données avec Node.js/Express</a></li></ul></li>
           </ul>
@@ -437,8 +594,8 @@
 <br>Creative Commons BY-NC-SA</br></div>
       </div>
     </aside>
-    <script src="/420-514/js/clipboard/clipboard.min.js?1756408193" defer></script>
-    <script src="/420-514/js/perfect-scrollbar/perfect-scrollbar.min.js?1756408193" defer></script>
-    <script src="/420-514/js/theme.js?1756408193" defer></script>
+    <script src="/420-514/js/clipboard/clipboard.min.js?1756903610" defer></script>
+    <script src="/420-514/js/perfect-scrollbar/perfect-scrollbar.min.js?1756903610" defer></script>
+    <script src="/420-514/js/theme.js?1756903610" defer></script>
   </body>
 </html>

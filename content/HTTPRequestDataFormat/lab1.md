@@ -4,11 +4,8 @@ title = '🧪 Laboratoire : Requêtes HTTP & échanges de données avec Node.js/
 weight = 33
 +++
 
-Parfait — voici le **laboratoire complet rassemblé** en un seul document prêt à distribuer (copie/colle tel quel dans ton LMS ou en PDF).
 
-
-
-## 🧰 Prérequis & Mise en place
+## Prérequis & mise en place
 
 ```bash
 mkdir http-lab && cd http-lab
@@ -150,6 +147,18 @@ node server.js
 
 > Astuce : ajoute `-i` pour voir les **en-têtes** de réponse, `-s` pour silencieux, et `| jq` pour formater le JSON.
 
+| Commande                        | Méthode | Usage                                  |
+| ------------------------------- | ------- | -------------------------------------- |
+| `curl http://.../users`         | GET     | Récupérer tous les utilisateurs        |
+| `curl "http://.../users?q=nom"` | GET     | Recherche par query string             |
+| `curl -X POST -d ...`           | POST    | Créer un utilisateur                   |
+| `curl http://.../users/1`       | GET     | Lire un utilisateur                    |
+| `curl -X PUT -d ...`            | PUT     | Remplacer entièrement un utilisateur   |
+| `curl -X PATCH -d ...`          | PATCH   | Modifier partiellement                 |
+| `curl -X DELETE ...`            | DELETE  | Supprimer un utilisateur               |
+| `curl -i -X POST ... (conflit)` | POST    | Démontrer les erreurs et codes 400/409 |
+
+
 1. **GET** `/hello`
 
 ```bash
@@ -229,9 +238,25 @@ curl -i -X POST -H "Content-Type: application/json" \
 
 → Observe **404**, **500**, **409**.
 
----
+Résumé des résultats :
 
-## 🧪 Partie B — Scénario **Postman**
+| #  | Commande `curl`                                                                                                                                                                                           | Code HTTP attendu | Réponse JSON (ou texte) observée                |                                                          |
+| -- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ----------------------------------------------- | -------------------------------------------------------- |
+| 1  | `curl -i http://localhost:3000/hello`                                                                                                                                                                     | 200 OK            | Corps texte : `Bonjour 👋` + en-tête `X-Server` |                                                          |
+| 2  | `curl -I http://localhost:3000/ping`                                                                                                                                                                      | 200 OK            | Aucun corps, uniquement les en-têtes            |                                                          |
+| 3  | \`curl -s [http://localhost:3000/users](http://localhost:3000/users)                                                                                                                                      | jq\`              | 200 OK                                          | Liste complète des utilisateurs (`count`, `data: [...]`) |
+| 4  | \`curl -s "[http://localhost:3000/users?q=alice](http://localhost:3000/users?q=alice)"                                                                                                                    | jq\`              | 200 OK                                          | Résultat filtré par le paramètre `q`                     |
+| 5  | `curl -i -H "Content-Type: application/json" -d '{"name":"Chloe","email":"chloe@example.com"}' http://localhost:3000/users`                                                                               | 201 Created       | Objet utilisateur créé + en-tête `Location`     |                                                          |
+| 6  | \`curl -s [http://localhost:3000/users/1](http://localhost:3000/users/1)                                                                                                                                  | jq\`              | 200 OK                                          | Détails de l’utilisateur avec `id=1`                     |
+| 7  | \`curl -s -X PUT -H "Content-Type: application/json" -d '{"name":"Alice Doe","email":"[alice.d@example.com](mailto:alice.d@example.com)"}' [http://localhost:3000/users/1](http://localhost:3000/users/1) | jq\`              | 200 OK                                          | Utilisateur remplacé par les nouvelles données           |
+| 8  | \`curl -s -X PATCH -H "Content-Type: application/json" -d '{"role":"admin"}' [http://localhost:3000/users/1](http://localhost:3000/users/1)                                                               | jq\`              | 200 OK                                          | Champ `role` modifié                                     |
+| 9  | `curl -i -X DELETE http://localhost:3000/users/1`                                                                                                                                                         | 204 No Content    | Aucun corps dans la réponse                     |                                                          |
+| 10 | `curl -i http://localhost:3000/status/404`                                                                                                                                                                | 404 Not Found     | JSON ou message d’erreur                        |                                                          |
+| 11 | `curl -i http://localhost:3000/boom`                                                                                                                                                                      | 500 Server Error  | JSON `{ "error": "Erreur interne", ... }`       |                                                          |
+| 12 | `curl -i -X POST -H "Content-Type: application/json" -d '{"name":"Dup","email":"alice@example.com"}' http://localhost:3000/users`                                                                         | 409 Conflict      | JSON `{ "error": "Email déjà utilisé" }`        |                                                          |
+
+
+## 🧭 Partie B — Scénario **Postman**
 
 1. **Environnement** : `baseUrl = http://localhost:3000`.
 
@@ -249,6 +274,31 @@ curl -i -X POST -H "Content-Type: application/json" \
 
 4. **Data-driven** : CSV `name,email,role` et utiliser `{{name}}`, `{{email}}`, `{{role}}` dans le Body du POST.
 
+Exemple : 
+```csv
+name,email,role
+Alice,alice@example.com,student
+Bob,bob@example.com,teacher
+Chloe,chloe@example.com,admin
+```
+Requête POST dans Postman :
+URL : `POST {{baseUrl}}/api/posts`
+
+Headers :
+```pgsql
+Content-Type: application/json
+```
+
+Body (raw/JSON) :
+```json
+{
+  "name": "{{name}}",
+  "email": "{{email}}",
+  "role": "{{role}}"
+}
+```
+Ici, {{name}}, {{email}} et {{role}} sont des variables de Postman qui seront remplacées par les valeurs du CSV.
+
 Snippets tests utiles :
 
 ```js
@@ -257,18 +307,13 @@ pm.test("JSON", () => pm.response.headers.get("Content-Type").includes("applicat
 pm.environment.set("userId", pm.response.json().id);
 ```
 
----
-
-## 📋 À remettre (format court)
+## 📋 À produire
 
 1. **Tableau** “requête → réponse” pour 6 routes (méthode, chemin, **code**, en-têtes clés, corps).
 2. **3 captures** onglet *Network* (annotation : ligne de requête, en-têtes, corps).
-3. **3 commandes curl** + sorties commentées (ce que montre chaque partie).
-4. **1 paragraphe** : différence **GET/POST/HEAD** + quand utiliser **201, 204, 400, 404, 409, 500**.
-5. **Export Postman** (collection JSON) ou capture du **Runner** qui passe vert.
+3. **3 commandes curl** + sorties.
+4. **Export Postman** (collection JSON) ou capture du **Runner** qui passe vert.
 
-
----
 
 ## ⭐ Bonus (optionnel)
 

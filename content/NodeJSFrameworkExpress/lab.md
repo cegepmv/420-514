@@ -28,7 +28,7 @@ Puis :
 node hello.js
 ```
 
-## 2. Initialiser un Nouveau Projet Node.js
+## 2. Initialiser un nouveau projet Node.js
 
 Ouvrez votre terminal et créez un nouveau dossier pour votre projet. Accédez à ce dossier, puis exécutez la commande suivante pour initialiser un nouveau projet Node.js :
 
@@ -49,7 +49,7 @@ npm install express --save
 ```
 Express facilite la gestion des routes et des réponses.
 
-## 4. Configurer le Serveur Express
+## 4. Configurer le serveur Express
 
 Créez un fichier `index.js` dans le dossier racine de votre projet, puis ajoutez-y le code suivant pour configurer un serveur de base avec Express.js :
 
@@ -67,7 +67,7 @@ app.listen(port, () => {
 });
 ```
 
-## 5. Démarrer le Serveur
+## 5. Démarrer le serveur
 
 Vous pouvez maintenant démarrer votre serveur en exécutant la commande suivante dans votre terminal :
 
@@ -77,7 +77,7 @@ node index.js
 
 Cela démarrera le serveur et affichera `Serveur en écoute sur http://localhost:3000`. Vous pouvez accéder à cette URL via votre navigateur pour voir le message "Hello, World!".
 
-## 6. Installer Nodemon pour un Développement Plus Efficace
+## 6. Installer nodemon pour un développement plus efficace
 
 Pour un développement plus pratique, vous pouvez installer `nodemon`. Cet outil redémarre automatiquement le serveur à chaque fois que vous modifiez le code :
 
@@ -107,7 +107,7 @@ On peut aussi démarrer le serveur node en mode `watch-path` pour une mise à jo
 node --watch-path=./src .\src\index.js
 ```
 
-## 7. Structurer Votre Projet
+## 7. Structurer votre projet
 
 Il est recommandé de structurer votre projet de manière à ce qu'il soit facilement maintenable :
 
@@ -123,7 +123,7 @@ Il est recommandé de structurer votre projet de manière à ce qu'il soit facil
 
 </aside>
 
-## 8. Ajouter des Middlewares
+## 8. Ajouter des middlewares
 
 Vous pouvez ajouter des middlewares pour gérer les requêtes, comme le parsing des corps de requêtes JSON :
 
@@ -132,7 +132,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 ```
 
-## 9. Ajouter des Routes Supplémentaires
+## 9. Ajouter des routes supplémentaires
 
 Commençons par ajouter des routes supplémentaires dans votre application. Pour une meilleure organisation, nous allons créer un dossier `routes/` où nous stockerons les différents fichiers de routes.
 
@@ -166,7 +166,7 @@ app.listen(port, () => {
 });
 ```
 
-### 9.1 Créer un Fichier de Routes
+### 9.1 Créer un fichier de routes
 
 Créez un fichier `routes/users.js` :
 
@@ -187,7 +187,7 @@ router.get('/:id', (req, res) => {
 module.exports = router;
 ```
 
-### 9.2 Utiliser les Routes dans l'Application Principale
+### 9.2 Utiliser les routes dans l'application principale
 
 Modifiez votre fichier `index.js` pour inclure ces nouvelles routes :
 
@@ -227,7 +227,7 @@ const data = fs.readFileSync('data.txt', 'utf8');
 console.log(data);
 ```
 
-## 11. Asynchrone et Promises
+## 11. Asynchrone et promises
 
 ```js
 const fs = require('fs').promises;

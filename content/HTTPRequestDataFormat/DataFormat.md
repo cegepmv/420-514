@@ -1,7 +1,7 @@
 +++
 draft = false
 title = '📘 Manipulation de données'
-weight = 32
+weight = 33
 +++
 
 # JSON et XML

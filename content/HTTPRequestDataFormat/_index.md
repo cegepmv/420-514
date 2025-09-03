@@ -1,5 +1,5 @@
 +++
-title = "HTTPRequestDataFormat"
+title = "Requêtes HTTP et format de données"
 type = "chapter"
 weight = 3
 pre = "3. "
