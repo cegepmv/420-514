@@ -191,13 +191,16 @@ curl -s http://localhost:3000/users | jq
 ```bash
 curl -s "http://localhost:3000/users?q=alice" | jq
 ```
+Assurez-vous que `jq` est déjà installé :
+* Sur Windows 
+```sh
+winget install jq
+```
 
 5. **POST** `/users` (création)
 
 ```bash
-curl -i -H "Content-Type: application/json" \
-  -d '{"name":"Chloe","email":"chloe@example.com","role":"teacher"}' \
-  http://localhost:3000/users
+curl -i -H "Content-Type: application/json" -d '{"name":"Chloe","email":"chloe@example.com","role":"teacher"}' http://localhost:3000/users
 ```
 
 → Attends **201 Created** + en-tête **Location**.
@@ -211,17 +214,13 @@ curl -s http://localhost:3000/users/1 | jq
 7. **PUT** `/users/1` (remplacement)
 
 ```bash
-curl -s -X PUT -H "Content-Type: application/json" \
-  -d '{"name":"Alice Doe","email":"alice.d@example.com","role":"student"}' \
-  http://localhost:3000/users/1 | jq
+curl -s -X PUT -H "Content-Type: application/json" -d '{"name":"Alice Doe","email":"alice.d@example.com","role":"student"}' http://localhost:3000/users/1 | jq
 ```
 
 8. **PATCH** `/users/1` (modif partielle)
 
 ```bash
-curl -s -X PATCH -H "Content-Type: application/json" \
-  -d '{"role":"admin"}' \
-  http://localhost:3000/users/1 | jq
+curl -s -X PATCH -H "Content-Type: application/json" -d '{"role":"admin"}' http://localhost:3000/users/1 | jq
 ```
 
 9. **DELETE** `/users/1`
@@ -324,5 +323,7 @@ pm.environment.set("userId", pm.response.json().id);
 
 * `npm i cors` puis `app.use(require('cors')());` — tester les en-têtes CORS.
 * Pagination (`GET /users?page=1&limit=5`) et tri.
+
+[Documentation de curl](https://docs.oracle.com/en/cloud/saas/marketing/eloqua-develop/Developers/GettingStarted/APIRequests/curl-requests.htm)
 
 
