@@ -50,12 +50,12 @@ Les classes de caractères permettent de définir un ensemble de caractères pos
     - Exemple : `b[aeiou]g` correspondra à `"bag"`, `"beg"`, `"big"`, `"bog"`, `"bug"`.
 - **`[a-z]`** : Correspond à tout caractère entre `a` et `z` (lettres minuscules).
 - **`[^abc]`** : Négation : correspond à tout caractère sauf `a`, `b` ou `c`.
-- **`\\d`** : Correspond à n'importe quel chiffre (équivalent à `[0-9]`).
-- **`\\D`** : Correspond à n'importe quel caractère qui n'est pas un chiffre (équivalent à `[^0-9]`).
-- **`\\w`** : Correspond à tout caractère alphanumérique (lettres et chiffres, ainsi que le caractère de soulignement `_`).
-- **`\\W`** : Correspond à tout caractère non alphanumérique.
-- **`\\s`** : Correspond à tout espace blanc (espace, tabulation, saut de ligne).
-- **`\\S`** : Correspond à tout caractère qui n'est pas un espace blanc.
+- **`\d`** : Correspond à n'importe quel chiffre (équivalent à `[0-9]`).
+- **`\D`** : Correspond à n'importe quel caractère qui n'est pas un chiffre (équivalent à `[^0-9]`).
+- **`\w`** : Correspond à tout caractère alphanumérique (lettres et chiffres, ainsi que le caractère de soulignement `_`).
+- **`\W`** : Correspond à tout caractère non alphanumérique.
+- **`\s`** : Correspond à tout espace blanc (espace, tabulation, saut de ligne).
+- **`\S`** : Correspond à tout caractère qui n'est pas un espace blanc.
 
 ### 4. **Quantificateurs**
 
@@ -77,9 +77,9 @@ Les quantificateurs permettent de spécifier combien de fois un élément peut a
 
 ### 6. **Caractères d’échappement**
 
-Si vous voulez utiliser un métacaractère comme un caractère ordinaire, vous devez le précéder d’un **`\\`** (backslash).
+Si vous voulez utiliser un métacaractère comme un caractère ordinaire, vous devez le précéder d’un **`\`** (backslash).
 
-- Exemple : Pour correspondre à un point (`.`) dans une chaîne, vous devez utiliser `\\.`.
+- Exemple : Pour correspondre à un point (`.`) dans une chaîne, vous devez utiliser `\.`.
 
 ## C. Validation de données avec les expressions régulières
 
@@ -95,7 +95,7 @@ Une adresse e-mail doit respecter certains formats. Par exemple, elle doit conte
     - `^[a-zA-Z0-9._%+-]+` : Le nom d'utilisateur commence par un ou plusieurs caractères alphanumériques, points, soulignements, ou symboles comme `%` ou `+`.
     - `@` : Le symbole `@` obligatoire.
     - `[a-zA-Z0-9.-]+` : Le nom de domaine qui accepte des lettres, des chiffres, des tirets ou des points.
-    - `\\.` : Un point pour séparer le domaine de l'extension.
+    - `\.` : Un point pour séparer le domaine de l'extension.
     - `[a-zA-Z]{2,}` : L'extension doit contenir au moins 2 caractères alphabétiques.
     - `^` et `$` : Ces caractères indiquent respectivement le début et la fin de la chaîne à valider, pour éviter les correspondances partielles.
 
@@ -115,16 +115,16 @@ console.log(validateEmail(email));  // true
 Pour valider un numéro de téléphone, comme un numéro nord-américain au format `(123) 456-7890`, on peut utiliser :
 
 ```
-^\\(\\d{3}\\) \\d{3}-\\d{4}$
+^\(\d{3}\) \d{3}-\d{4}$
 ```
 
 - **Explication** :
-    - `^\\(` : Commence par une parenthèse ouvrante.
-    - `\\d{3}` : Trois chiffres.
-    - `\\)` : Parenthèse fermante.
-    - `\\d{3}` : Trois chiffres pour la partie suivante du numéro.
+    - `^\(` : Commence par une parenthèse ouvrante.
+    - `\d{3}` : Trois chiffres.
+    - `\)` : Parenthèse fermante.
+    - `\d{3}` : Trois chiffres pour la partie suivante du numéro.
     - `` : Un tiret.
-    - `\\d{4}` : Quatre chiffres pour la fin du numéro.
+    - `\d{4}` : Quatre chiffres pour la fin du numéro.
 
 Si vous voulez permettre plusieurs formats, comme `(123) 456-7890` ou `123-456-7890`, vous pouvez modifier la regex comme suit :
 
@@ -142,7 +142,7 @@ Un code postal canadien doit suivre le format A1A 1A1. Pour valider un code post
 
 - **Explication** :
     - `[A-Za-z]` : Une lettre (majuscule ou minuscule).
-    - `\\d` : Un chiffre.
+    - `\d` : Un chiffre.
     - Le format se répète, avec un espace entre les deux groupes.
 
 ## D. **Nettoyage de données avec les expressions régulières**
@@ -159,8 +159,8 @@ Si une chaîne contient plusieurs espaces consécutifs ou des espaces avant/apr�
     ^\s+|\s+$
     ```
     
-    - `^\\s+` : Correspond aux espaces au début de la chaîne.
-    - `\\s+$` : Correspond aux espaces à la fin de la chaîne.
+    - `^\s+` : Correspond aux espaces au début de la chaîne.
+    - `\s+$` : Correspond aux espaces à la fin de la chaîne.
 - Pour réduire les espaces multiples entre les mots en un seul espace :
     
     ```
