@@ -88,7 +88,7 @@ Si vous voulez utiliser un métacaractère comme un caractère ordinaire, vous d
 Une adresse e-mail doit respecter certains formats. Par exemple, elle doit contenir un nom d'utilisateur, un symbole `@`, un domaine, et une extension (.com, .org, etc.). Une regex courante pour valider une adresse e-mail ressemble à :
 
 ```
-^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$
+^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
 ```
 
 - **Explication** :
