@@ -17,11 +17,14 @@ Sans sécurité :
 **Exemple concret** :
 Une API de streaming vidéo sans authentification ➝ n’importe qui peut télécharger gratuitement le contenu en envoyant des requêtes HTTP.
 
+![Exemple d'API Web](/420-514/images/how-a-web-api-works.avif)
+
 ### Endpoints API
 
 * Un endpoint est l’URL d’accès à une ressource.
 * Ils représentent une **surface d’attaque critique** : ex. `/api/users/:id`.
 * Bonne pratique : vérifier les autorisations sur chaque endpoint et ne jamais exposer d’infos sensibles inutilement.
+![Sécurité d'API](/420-514/images/what-is-api-security.avif)
 
 ## **Types d’API et différences**
 
@@ -32,6 +35,9 @@ Une API de streaming vidéo sans authentification ➝ n’importe qui peut tél�
 * **API nord-sud** : ouvertes vers l’extérieur.
 * **API est-ouest** : utilisées en interne.
 
+![Exemple écosystème d'API](/420-514/images/api-landscape.avif)
+
+![Exemples de type d'API](/420-514/images/what-are-api-types.avif)
 
 ## **Qu’est-ce que la sécurité des API ?**
 
@@ -58,7 +64,6 @@ Une API de streaming vidéo sans authentification ➝ n’importe qui peut tél�
 
 * Authentification = montrer sa carte d’identité à l’entrée d’un bâtiment.
 * Autorisation = badge qui permet ou non d’entrer dans certaines salles.
-
 
 
 ## Sécurité des API REST vs SOAP
@@ -150,13 +155,39 @@ Vulnérabilités courantes : injections SQL, JSON mal validés, absence de limit
 
 9. Sécuriser les dépendances tierces.
 
-10. Utiliser des en-têtes de sécurité.
+10. **Utiliser des en-têtes de sécurité** tel que : validez les saisies utilisateur pour l’en-tête Content-Type et le format des données (ce qui  d’empêche les attaques par injection en rejetant les saisies imprévues ou malformées.)
 
-11. Contrôler l’accès (RBAC, ABAC).
+11. **Contrôler l’accès** : 
+Pour renforcer la sécurité d’une API, il est essentiel de contrôler **qui a accès à quoi**. Deux approches principales sont utilisées : **RBAC** et **ABAC**.
 
-12. Masquer les données sensibles (cartes bancaires).
+    🔹RBAC (Role-Based Access Control – contrôle d’accès basé sur les rôles)
+
+      * **Principe** : les permissions sont accordées en fonction du rôle de l’utilisateur (ex. : admin, manager, utilisateur).
+      * **Exemple** :
+
+        * Un **admin** peut créer, modifier et supprimer des ressources.
+        * Un **manager** peut uniquement consulter et modifier.
+        * Un **utilisateur** peut seulement consulter.
+
+    🔹 ABAC (Attribute-Based Access Control – contrôle d’accès basé sur les attributs)
+
+    * **Principe** : les permissions dépendent d’attributs liés à l’utilisateur, à la ressource ou au contexte.
+    * **Exemple** :
+
+      * Un utilisateur ne peut accéder à un document **que s’il appartient à son département** (attribut `department=user.department`).
+      * Une API bancaire permet un virement **uniquement pendant les heures ouvrables** (attribut contextuel : `time < 18h`).
+
+      
+    **En pratique**, beaucoup d’API combinent **RBAC** (pour gérer les grands rôles) et **ABAC** (pour gérer des règles contextuelles fines).
+
+
+12. **Chiffrer et masquer les données sensibles** (cartes bancaires) :
+ Le chiffrement rend les données échangées ou stockées via une API illisibles sans clé de déchiffrement, protégeant ainsi leur confidentialité et leur intégrité même en cas d’interception. Les API peuvent parfois révéler par erreur des données sensibles (mots de passe, tokens, infos personnelles). Pour éviter cela, il faut chiffrer les données en transit et au repos, et ne jamais exposer ces informations dans les URL ou les logs.
+
 
 13. Liste blanche d’IP.
+
+![Évaluation posture sécurité API : étapes](/420-514/images/evaluate-your-api-security-posture.avif)
 
 ### **WAAP (Web Application and API Protection)**
 
@@ -333,5 +364,16 @@ La **sécurité des API** repose sur 4 piliers :
 👉 **Sans sécurité, les API sont des portes ouvertes aux attaquants.**
 
 
+## Ressources 
+[OWASP Top 10 API Security Risks – 2023
+](https://owasp.org/API-Security/editions/2023/fr/0x11-t10/)
 
+[Orientation sur les pratiques exemplaires en matière de sécurité des API](https://www.canada.ca/fr/gouvernement/systeme/gouvernement-numerique/innovations-gouvernementales-numeriques/permettre-interoperabilite/directives-api/securite.html)
+
+[
+Qu'est-ce que la sécurité des API ?](https://www.akamai.com/fr/glossary/what-is-api-security#:~:text=La%20s%C3%A9curit%C3%A9%20des%20API%20est,aux%20fonctionnalit%C3%A9s%20et%20aux%20donn%C3%A9es)
+
+[Liste de contrôle pour la sécurité des API : Meilleures pratiques, tests et NIST](https://www.f5.com/fr_fr/company/blog/api-security-checklist)
+
+[11 bonnes pratiques de sécurité API](https://datadome.co/fr/menaces/11-meilleures-pratiques-de-securite-api-conseils-pour-proteger-vos-actifs-numeriques/)
 
