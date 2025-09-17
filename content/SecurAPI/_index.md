@@ -1,5 +1,5 @@
 +++
-title = "SecurAPI"
+title = "Securité des APIs"
 type = "chapter"
 pre = "6. "
 weight = 6
