@@ -12,4 +12,4 @@ Une documentation claire doit permettre de :
 * Tester facilement chaque requête (ex: via Swagger ou Postman)
 * Connaître les paramètres, types de données, statuts HTTP, erreurs, règles de sécurité, etc.
 
-Danse ce chapitre nous allons voir comment documenter une API.
+Dans ce chapitre nous allons voir comment documenter une API.

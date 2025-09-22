@@ -25,10 +25,13 @@ npm install --save-dev @types/swagger-ui-express
 
 ### 2. **Configuration de Swagger dans votre projet Express**
 
-Voici un exemple de fichier `app.js` ou `server.js` où Swagger est configuré :
+Voici un exemple de fichier `app.ts` ou `server.ts` où Swagger est configuré :
 
 ```jsx
-const express = require('express');
+import express, {Request, Response} from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
@@ -44,7 +47,7 @@ const swaggerOptions = {
       description: 'A simple API to manage users',
     },
   },
-  apis: ['./routes/*.js'], // Fichier où les routes de l'API sont définies
+  apis: ['./src/routes/*.ts'], // Fichier où les routes de l'API sont définies
 };
 
 // Générer la documentation à partir des options
@@ -55,6 +58,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Autres routes et middleware Express
 app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, TypeScript with Express! Connexion sécurisée.');
+});
 
 // Exemple de route
 app.get('/users', (req, res) => {
@@ -75,7 +82,7 @@ app.listen(PORT, () => {
 
 ### 3. **Décrire les routes avec Swagger**
 
-Pour que Swagger puisse générer la documentation, vous devez ajouter des commentaires dans vos fichiers de route. Par exemple, dans un fichier `routes/users.js` :
+Pour que Swagger puisse générer la documentation, vous devez ajouter des commentaires dans vos fichiers de route. Par exemple, dans un fichier `routes/users.ts` :
 
 ```jsx
 /**
@@ -169,7 +176,7 @@ Un fichier HTML statique sera généré (utile pour un dépôt GitHub ou héberg
     ```jsx
     /**
      * @swagger
-     * /users/{id}:
+     * /api/users/{id}:
      *   get:
      *     summary: Get a user by ID
      *     parameters:
@@ -219,13 +226,13 @@ Pour documenter votre API avec OpenAPI en utilisant Swagger, vous devez suivre u
 
 ## Exemple pour annoter les routes avec OpenAPI
 
-Vous devez annoter vos routes avec des commentaires conformes à la spécification OpenAPI. Modifiez `routes/users.js` comme suit :
+Vous devez annoter vos routes avec des commentaires conformes à la spécification OpenAPI. Modifiez `routes/users.ts` comme suit :
 
 ### 1. Configurer Swagger et OpenAPI
 
-Modifiez votre fichier `index.js` pour inclure la configuration Swagger conforme à OpenAPI 3.0 :
+Modifiez votre fichier `index.ts` pour inclure la configuration Swagger conforme à OpenAPI 3.0 :
 
-**`index.js`** :
+**`index.ts`** :
 
 ```jsx
 const express = require('express');
