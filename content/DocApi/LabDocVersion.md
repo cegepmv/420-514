@@ -5,7 +5,7 @@ title = '🧪 Laboratoire : Documentation Swagger et versionnement'
 weight = 74
 +++
 
-## 🧪 Exercice pratique
+## 🧪 Exercices pratiques
 ### Objectifs :
 
 * Documenter l'API

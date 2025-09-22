@@ -84,7 +84,7 @@ Pour que Swagger puisse générer la documentation, vous devez ajouter des comme
 ```jsx
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     summary: Retrieve a list of users
  *     description: Retrieve a list of users from the API. Can be used to populate a list of users in your system.
@@ -700,6 +700,12 @@ Fichier `swagger.json` (extrait)
 ```
 
 #### Intégration dans `app.ts`
+
+Assurez-vous d'abord que dans le fichier `tsconfig.json` dans le `"compilerOptions":` la propriété suivante est à `true`.
+
+```ts
+"resolveJsonModule": true,                        /* Enable importing .json files. */
+```
 
 ```ts
 import swaggerUi from 'swagger-ui-express';
