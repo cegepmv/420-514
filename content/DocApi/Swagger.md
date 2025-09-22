@@ -32,9 +32,6 @@ import express, {Request, Response} from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
-
 const app = express();
 
 // Définir les options de Swagger
