@@ -1,6 +1,7 @@
 +++
 date = '2025-09-29T09:03:05-04:00'
-draft = true
+draft = false
+weight = 83
 title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
 +++
 
