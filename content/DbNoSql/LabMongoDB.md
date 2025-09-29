@@ -1,7 +1,6 @@
 +++
-date = '2025-09-29T09:03:05-04:00'
 draft = false
-weight = 83
+weight = 84
 title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
 +++
 
