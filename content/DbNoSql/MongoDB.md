@@ -1,7 +1,7 @@
 +++
-date = '2025-09-28T21:54:53-04:00'
-draft = true
-title = 'Base de données document : MongoDB'
+weight = 82
+draft = false
+title = '📘 Base de données document : MongoDB'
 +++
 
 
