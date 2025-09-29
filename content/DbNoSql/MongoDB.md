@@ -112,7 +112,7 @@ MongoDB est optimisé pour les cas d'utilisation où la flexibilité et la rapid
 - **Big Data et Analytics** : Avec son framework d'agrégation et sa capacité à gérer des volumes de données massifs via le sharding, MongoDB est souvent utilisé dans les projets de Big Data.
 - **IoT (Internet des Objets)** : MongoDB est utilisé pour stocker des flux de données en temps réel issus des capteurs IoT, car il peut gérer de grandes quantités de données hétérogènes.
 
-![image.png](image.png)
+![MongoDB use cases](/420-514/images/MongoDB_useCases.png)
 
 ## 4. Avantages de MongoDB
 

@@ -1,5 +1,5 @@
 +++
-title = "Bases de données NoSQL"
+title = "📘 Bases de données NoSQL"
 weight = 81
 draft = false
 +++
