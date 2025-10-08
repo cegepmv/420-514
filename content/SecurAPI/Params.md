@@ -1,7 +1,8 @@
 +++
 date = '2025-09-22T00:04:44-04:00'
-draft = true
-title = 'Les paramètres de configuration et gestion de sessions'
+draft = false
+title = '📘 Les paramètres de configuration et gestion de sessions'
+weight = 52
 +++
 
 La prise en charge des paramètres de configuration pour personnaliser l'application en fonction des environnements (développement, production).
@@ -34,6 +35,12 @@ Installez [`dotenv`](https://www.npmjs.com/package/dotenv) en utilisant npm :
 ```bash
 npm install dotenv
 ```
+Une autre librairie permet de bien gérer les configurations des environnements est : `config`
+
+```bash
+npm i config
+npm i --save-dev @types/config
+``` 
 
 ### 1.2 Créer un fichier `.env`
 
@@ -57,9 +64,31 @@ JWT_SECRET=${PROD_SECRET}
 LOG_LEVEL=error
 ```
 
+Ou avec la librairie `config` :
+- Créer un dossier `config` à la racine de votre projet (pas dans src).
+- Ajouter un fichier `default.json` (contient les valeurs par défaut des variables d'environnemnt et qui vont être utilisées si la valeur dans le fichier d'un environnement est absente).
+- Ajouter un fichier `development.json`. 
+- Ajouter un fichier `production.json`. 
+
+> Il faut noter que cette librairie supporte d'autres format de fichiers tel que yaml, toml et xml. Évitez les .ts car ça cause des conflits avec d'autres librairies de tests.
+
 ### 2. Chargement et gestion des paramètres de configuration
 
 Pour centraliser la gestion des configurations, vous pouvez créer un fichier dédié, comme `config.ts`. Ce fichier récupérera les variables d'environnement et fournira des valeurs par défaut si nécessaire.
+
+
+On peut changer la variable d'environnement `NODE_ENV` en exécutant la ligne de commande suivante :
+
+```bash
+export NODE_ENV=development
+``` 
+ou 
+```bash
+export NODE_ENV=production
+``` 
+pour changer l'environnenement à production.
+
+on peut vérifier dans le fichier app.ts en affichant sa valeur : `console.log(`Environnement : ${app.get('env')}`);` (par défaut la valeur est `development`) ou en affichant la valeur de `process.env.NODE_ENV`.
 
 ### 2.1 Configuration du fichier `config.ts`
 
@@ -72,7 +101,6 @@ dotenv.config();
 
 export const config = {
   port: process.env.PORT || 3000,
-  sessionSecret: process.env.SESSION_SECRET || 'secret_par_defaut_pour_les_sessions',
   jwtSecret: process.env.JWT_SECRET || 'secret_par_defaut_pour_le_jwt',
   databaseUrl: process.env.DATABASE_URL || 'mongodb://localhost:27017/defaultdb',
   nodeEnv: process.env.NODE_ENV || 'development',
@@ -171,137 +199,45 @@ app.listen(port, () => {
 });
 ```
 
-### 2. Intégrer un système de gestion des sessions
+### 2. Stocker des informations sensibles
 
-#### Différence entre Session et JWT
+Les informations sensibles tel que les mots de passes et les secrets ne devraient pas être stockées directement dans le fichier de configuration.
+Une des façons les plus simples pour faire ça c'est de créer une variable d'environnement de la valeur sensible par ligne de commande. Exemple : 
 
-| Fonctionnalité      | Session (stateful)                | JWT (stateless)                   |
-| ------------------- | --------------------------------- | --------------------------------- |
-| Stockage de l’état  | Côté serveur (en mémoire, Redis…) | Côté client (dans le token)       |
-| Performances        | Moins scalable                    | Très scalable                     |
-| Invalidation        | Facile (supprimer session)        | Complexe (expire ou blacklist)    |
-| Sécurité du contenu | Serveur contrôle tout             | Risque de fuite de secret / token |
-
-> On préfère souvent JWT pour les APIs REST mais les sessions sont très utiles pour des interfaces Web sécurisées ou hybrides.
-
-Pour suivre les utilisateurs, nous allons utiliser `express-session`, un middleware qui permet de gérer les sessions. Cela vous permet de stocker des données par utilisateur et de les retrouver à chaque requête.
-
-### **Mécanisme de gestion des sessions**
-
-- **Session côté serveur** : La session est stockée côté serveur (par exemple en mémoire, en base de données ou dans un magasin comme Redis) et une clé de session est envoyée au client via un cookie. À chaque requête suivante, ce cookie est renvoyé pour identifier l'utilisateur.
-- **Session côté client** : La session peut être gérée entièrement côté client (par exemple avec des tokens JWT), mais cette méthode diffère du mécanisme classique basé sur les sessions.
-
-### 2.1 Installer `express-session`
-
-Installez le package `express-session` :
-
+ou 
 ```bash
-npm install express-session
-```
+export sell_app_jwt_secret=Abc1234
+``` 
 
-### 2.2 Configurer le middleware de session
+Dans le dossier config créer un fichier avec le nom suivant `custom-environment-variables.json`. Dans ce fichier on va définir une correspondance entre les paramètres de configurations et les variables d'environnement.
 
-Modifiez votre fichier `index.js` pour configurer et utiliser `express-session` :
+Exemple :
 
-```jsx
-import session from 'express-session';
-
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'ultraSecretKey123',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 1000 * 60 * 30 // 30 minutes
-  }
-}));
-```
-
-- **`resave`** : Indique si la session doit être sauvegardée dans le magasin même si elle n’a pas été modifiée durant la requête. La valeur par défaut est `false`.
-- **`saveUninitialized`** : Définit si une session non initialisée doit être sauvegardée. Une session est non initialisée quand elle est nouvelle mais n'a pas été modifiée. Par défaut, c'est `true`, mais il est souvent préférable de le mettre à `false` pour éviter de sauvegarder des sessions vides.
-- **`cookie`** : Configuration des cookies qui stockent l'ID de session. Cela peut inclure :
-    - **`secure`** : Indique si le cookie doit être envoyé uniquement sur des connexions HTTPS. En production, il doit être activé pour des raisons de sécurité.
-    - **`maxAge`** : Durée de vie du cookie avant son expiration. Par exemple, pour une durée de 30 minutes :
-        
-        ```jsx
-        cookie: { maxAge: 1800000 }
-        ```
-        
-- **`rolling`** : Si défini à `true`, le cookie de session est renvoyé à chaque requête, ce qui permet de prolonger la durée de vie de la session.
-
-### 2.3 Création de session après login
-```ts
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-
-  // Validation fictive
-  if (username === 'admin' && password === '1234') {
-    req.session.user = { username };
-    res.send('Connexion réussie');
-  } else {
-    res.status(401).send('Identifiants invalides');
-  }
-});
-```
-
-### 2.4 Utiliser les sessions
-
-Vous pouvez maintenant utiliser les sessions pour stocker et récupérer des informations par utilisateur. 
-Middleware de protection :
-```jsx
-function isAuthenticated(req, res, next) {
-  if (req.session.user) return next();
-  return res.status(401).send('Authentification requise');
+```json
+{
+  "jwtSecret": "sell_app_jwt_secret"
 }
+```
+Enlever la clé `jwtSecret` de vos fichier d'environnement .json sauf default.
 
-app.get('/dashboard', isAuthenticated, (req, res) => {
-  res.send(`Bienvenue ${req.session.user.username}`);
-});
-
+```ts
+const key = 'jwtSecret';
+console.log(config.has(key) ? config.get(key) : `la clé ${key} n'existe pas ou est mal chargée!`);
 ```
 
-Déconnexion :
-
-```jsx
-app.post('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) return res.status(500).send('Erreur déconnexion');
-    res.clearCookie('connect.sid');
-    res.send('Déconnecté');
-  });
-});
+vous pouvez lancer votre serveur avant de définir une valeur à la clé secrète ce qui affichera : 
+```bash
+votre_secret_jwt
 ```
-
-### 2.5. **Stockage des sessions**
-
-Le stockage des sessions peut être fait en mémoire, mais cela n'est pas adapté à des applications à grande échelle. Il est préférable d'utiliser un magasin de sessions persistant comme :
-
-- **Redis** : Un système de stockage en mémoire rapide.
-- **MongoDB** : Utilisé avec des bibliothèques comme `connect-mongo`.
-- **Memcached** : Pour des sessions distribuées.
-
-Exemple avec Redis :
-
-```jsx
-const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
-
-app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: 'mySuperSecretKey',
-    resave: false,
-    saveUninitialized: false
-}));
+Définir la valeur de la variable en exécutant la ligne de commande :
+```bash
+export sell_app_jwt_secret=Abc1234
+``` 
+Quand vous relancer votre serveur l'affichage précédent donnera :
+```bash
+Abc123
 ```
-
-### 2.6. **Sécurité des sessions**
-
-- **Utilisation de HTTPS** : Les cookies de session doivent être transmis uniquement via des connexions HTTPS pour éviter qu'ils ne soient interceptés.
-- **`httpOnly` cookie** : Définit si le cookie est accessible uniquement via le protocole HTTP(S) et non via des scripts JavaScript du côté client.
-- **Expiration des sessions** : Une session doit expirer après un certain temps d'inactivité pour des raisons de sécurité. C'est généralement géré par le paramètre `maxAge` du cookie.
-- **Protection contre les attaques CSRF et XSS** : Intégrer des protections contre les attaques Cross-Site Request Forgery (CSRF) et Cross-Site Scripting (XSS) est essentiel pour éviter la manipulation des sessions.
-
+Ce qui va écraser la valeur de la variable définie dans le fichier default.json.
 ### 3. Fichier `index.js` exemple
 
 Voici à quoi ressemble le fichier `index.js` après avoir ajouté toutes ces fonctionnalités :
