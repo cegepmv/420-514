@@ -1,6 +1,6 @@
 +++
 date = '2025-10-08T00:22:38-04:00'
-draft = true
+draft = false
 title = 'Configuration d’un serveur de test avec Node.js'
 +++
 
@@ -143,7 +143,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
 .catch((err) => console.error('Erreur de connexion à la base de données de test', err));
 ```
 
-### Résumé
+### Résumé des étapes
 
 1. **Environnements de configuration** : Utilisez des fichiers `.env` pour isoler les paramètres de test et de production.
 2. **Scripts de tests** : Configurez un script dans `package.json` pour lancer les tests dans l’environnement de test.
