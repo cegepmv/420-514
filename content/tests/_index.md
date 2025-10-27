@@ -1,5 +1,5 @@
 +++
-title = "Tests"
+title = "Serveur de test"
 type = "chapter"
 pre = "9. "
 weight = 9
