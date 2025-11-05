@@ -2,6 +2,7 @@
 date = '2025-10-27T07:10:47-04:00'
 draft = false
 title = 'Préparation des données'
+weight = 103
 +++
 
 La **préparation des données** est une étape clé avant de passer à des analyses plus poussées, comme la modélisation. C'est le processus de **nettoyage**, **transformation** et **formatage** des données afin de les rendre exploitables pour les algorithmes d'analyse et de machine learning.
