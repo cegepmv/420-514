@@ -1,5 +1,5 @@
 +++
-draft = true
+draft = false
 title = '📘 Big Data & Intelligence des Données'
 weight = 101
 +++
