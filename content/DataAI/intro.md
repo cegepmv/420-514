@@ -103,6 +103,7 @@ Cette architecture permet la séparation des responsabilités, la traçabilité,
 | Visualisation | Outil de Business Intelligence (BI) | Créer des rapports, graphiques, KPIs              |
 | Gouvernance   | Catalogue de données                | Gérer qualité, accès, conformité                  |
 
+![BI tools](/420-514/images/BI_tools.png)
 
 ## 6️. Étude de cas simple – Analyse des ventes
 

@@ -43,6 +43,7 @@ Les principaux environnements de développement qui sont adaptés pour travaille
 
 - **Description** : **VS Code** est un éditeur de texte populaire qui, avec des extensions, prend en charge les **notebooks Jupyter**. Il est souvent utilisé pour des projets Python complexes, tout en permettant l’intégration de notebooks.
 - **Utilisation** : Il est apprécié pour sa légèreté et sa flexibilité avec les extensions, permettant une gestion fluide des projets en Python et des notebooks Jupyter.
+- Il est recommandé d'installer cette extension : `ms-toolsai.jupyter`, d'autres extensions peuvent être installées pour ajouter plus de fonctionnalités.
 
 ### e) Kaggle
 
@@ -111,3 +112,5 @@ Matplotlib est une bibliothèque complète permettant de créer des visualisatio
 [Numpy_Python_Cheat_Sheet.pdf](/420-514/files/Numpy_Python_Cheat_Sheet.pdf)
 
 [Pandas_DF_cheat_sheet.pdf](/420-514/files/Pandas_DF_cheat_sheet.pdf)
+
+[Matplotlib_cheat_sheet.pdf](/420-514/files/Matplotlib_handout-beginner.pdf)

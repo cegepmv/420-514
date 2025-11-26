@@ -14,3 +14,5 @@ Ce chapitre vise à vous aider à :
 - Savoir comment les données sont collectées, stockées, traitées et utilisées
 - Connaître les rôles des professionnels de la donnée
 - Découvrir l’intelligence des données, au service des décisions
+
+![Data science roadmap](/420-514/images/Data_science_roadmap.png)

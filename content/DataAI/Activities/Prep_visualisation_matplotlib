@@ -1,0 +1,299 @@
+
+
+## 1. En-tête labo (enseignant ≈ étudiant)
+
+```markdown
+# Laboratoire : Introduction à Matplotlib
+
+## Objectifs
+
+À la fin de ce labo, vous serez capables de :
+- Tracer différents types de graphiques avec Matplotlib (courbes, barres, histogrammes, nuages de points).
+- Personnaliser les graphiques (titre, labels, légende).
+- Utiliser Matplotlib avec des données provenant d'un DataFrame pandas.
+- Interpréter visuellement des distributions simples.
+
+## Prérequis
+
+- Python de base.
+- Notions de base sur les données tabulaires.
+- Avoir installé : `matplotlib` et `pandas`:
+  - `pip install matplotlib pandas`
+```
+
+---
+
+## 2. Imports et dataset
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+data = {
+    "region": ["Nord", "Sud", "Est", "Ouest", "Centre"],
+    "ventes_2023": [120, 150, 90, 110, 130],
+    "ventes_2024": [140, 160, 100, 130, 150],
+    "nb_clients": [45, 60, 30, 40, 55]
+}
+
+df = pd.DataFrame(data)
+df
+```
+
+---
+
+## 3. Premier graphique simple
+
+### Code proposé aux étudiant·es
+
+```python
+x = [1, 2, 3, 4, 5]
+y = [2, 5, 3, 8, 7]
+
+plt.plot(x, y)
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.title("Premier graphique simple")
+plt.show()
+```
+
+### Corrigé / éléments de réponse
+
+**Q1. Que se passe-t-il si on enlève `plt.xlabel(...)` et `plt.ylabel(...)` ?**
+→ Le graphique s’affiche toujours, mais les axes n’ont pas de labels. Interprétation moins claire.
+
+**Q2. À quoi sert `plt.show()` ?**
+→ Il déclenche effectivement l’affichage du graphique (surtout important dans un script Python classique).
+
+**Q3. Modifier la liste `y` pour que la courbe soit strictement croissante.**
+Exemple de corrigé :
+
+```python
+y = [1, 2, 3, 4, 5]   # ou [2, 4, 6, 8, 10], etc.
+```
+
+---
+
+## 4. Diagramme en barres (ventes 2023)
+
+### Code étudiant
+
+```python
+plt.bar(df["region"], df["ventes_2023"])
+plt.xlabel("Région")
+plt.ylabel("Ventes en 2023")
+plt.title("Ventes 2023 par région")
+plt.show()
+```
+
+### Questions & corrigé
+
+**Q1. Changer le titre pour : "Ventes par région (année 2023)".**
+
+```python
+plt.bar(df["region"], df["ventes_2023"])
+plt.xlabel("Région")
+plt.ylabel("Ventes en 2023")
+plt.title("Ventes par région (année 2023)")
+plt.show()
+```
+
+**Q2. Inverser les axes avec `plt.barh`.**
+
+```python
+plt.barh(df["region"], df["ventes_2023"])
+plt.xlabel("Ventes en 2023")
+plt.ylabel("Région")
+plt.title("Ventes par région (année 2023)")
+plt.show()
+```
+
+**Q3. Quelle région a le plus de ventes en 2023 ? La moins ?**
+
+On peut le voir visuellement, mais aussi en code :
+
+```python
+region_max = df.loc[df["ventes_2023"].idxmax(), "region"]
+region_min = df.loc[df["ventes_2023"].idxmin(), "region"]
+region_max, region_min
+```
+
+Corrigé visuel avec les données :
+
+* Max : **Sud** (150)
+* Min : **Est** (90)
+
+---
+
+## 5. Barres groupées (2023 vs 2024)
+
+### Code étudiant
+
+```python
+regions = df["region"]
+indices = np.arange(len(regions))
+largeur = 0.35
+
+plt.bar(indices - largeur/2, df["ventes_2023"], width=largeur, label="2023")
+plt.bar(indices + largeur/2, df["ventes_2024"], width=largeur, label="2024")
+
+plt.xticks(indices, regions)
+plt.xlabel("Région")
+plt.ylabel("Ventes")
+plt.title("Comparaison des ventes 2023 vs 2024")
+plt.legend()
+plt.show()
+```
+
+### Corrigé / interprétation
+
+**Q1. Dans quelles régions observe-t-on une augmentation ?**
+Avec les données fournies : toutes les régions ont une augmentation (2024 > 2023).
+
+**Q2. Où l’augmentation semble la plus forte visuellement ?**
+On peut la voir sur les barres ou la calculer. Corrigé avec calcul :
+
+```python
+df["diff"] = df["ventes_2024"] - df["ventes_2023"]
+df[["region", "diff"]]
+```
+
+Tu peux répondre : augmentation la plus forte en **Nord, Ouest, Centre** (+20) si tu veux pousser un peu.
+
+**Q3. Comment le vérifier numériquement sans graphique ?**
+
+```python
+df["augmentation"] = df["ventes_2024"] - df["ventes_2023"]
+df
+```
+
+---
+
+## 6. Nuage de points (clients vs ventes 2024)
+
+### Code étudiant
+
+```python
+plt.scatter(df["nb_clients"], df["ventes_2024"])
+plt.xlabel("Nombre de clients")
+plt.ylabel("Ventes 2024")
+plt.title("Relation entre nombre de clients et ventes 2024")
+plt.show()
+```
+
+### Corrigé / interprétation
+
+**Q1. Voit-on une tendance générale ?**
+→ Oui, globalement : plus il y a de clients, plus les ventes sont élevées (tendance positive).
+
+**Q2. Y a-t-il des points "anormaux" ?**
+Avec ce petit dataset, on peut dire que **Nord** (45 clients, 140 ventes) vs **Centre** (55 clients, 150 ventes) ou **Ouest** (40 clients, 130 ventes) restent cohérents. On peut discuter du fait que l’échantillon est trop petit pour parler vraiment d’anomalies.
+
+**Q3. Pourquoi un scatter plutôt qu’un bar plot ici ?**
+→ Parce qu’on étudie la **relation entre deux variables numériques** (nb_clients, ventes_2024). Un scatter permet de voir la forme de la relation (corrélation, dispersion).
+
+---
+
+## 7. Histogramme (distribution des ventes 2024)
+
+### Code étudiant
+
+```python
+plt.hist(df["ventes_2024"], bins=5)
+plt.xlabel("Ventes 2024")
+plt.ylabel("Fréquence")
+plt.title("Distribution des ventes 2024")
+plt.show()
+```
+
+### Corrigé / interprétation
+
+**Q1. Essayer `bins=3` et `bins=10`.**
+→ Tu peux faire varier pour montrer l’effet de la granularité.
+
+```python
+plt.hist(df["ventes_2024"], bins=3)
+plt.title("bins=3")
+plt.show()
+
+plt.hist(df["ventes_2024"], bins=10)
+plt.title("bins=10")
+plt.show()
+```
+
+Éléments de réponse :
+
+* Moins de `bins` = moins de détails, mais plus lisible.
+* Plus de `bins` = plus de détails, mais graphique parfois "bruyant", surtout avec peu de données.
+
+**Q2. Les valeurs sont-elles regroupées ou dispersées ?**
+→ Ici, elles sont plutôt regroupées entre 100 et 160, avec un petit échantillon.
+
+**Q3. Si le dataset était plus grand ?**
+→ L’histogramme serait plus utile pour voir la forme de la distribution (en cloche, asymétrique, multimodale, etc.).
+
+---
+
+## 8. Mini-exercice final – Corrigé détaillé
+
+### Énoncé (pour étudiant·es)
+
+> On ajoute une colonne `taux_croissance` = croissance des ventes entre 2023 et 2024 (en %).
+>
+> 1. Calculer ce taux pour chaque région.
+> 2. Afficher le DataFrame.
+> 3. Tracer un diagramme en barres du taux par région.
+> 4. Ajouter :
+>
+>    * un titre clair,
+>    * des labels d’axes,
+>    * rotation des labels de l’axe x si besoin.
+> 5. Identifier la région où la croissance est la plus forte et la plus faible.
+
+### Corrigé (code)
+
+```python
+# 1. Calcul du taux de croissance en pourcentage
+df["taux_croissance"] = (df["ventes_2024"] - df["ventes_2023"]) / df["ventes_2023"] * 100
+
+# 2. Affichage pour vérification
+print(df)
+
+# 3. Diagramme en barres
+plt.bar(df["region"], df["taux_croissance"])
+plt.xlabel("Région")
+plt.ylabel("Taux de croissance (%)")
+plt.title("Taux de croissance des ventes (2023 → 2024)")
+plt.xticks(rotation=45)
+plt.show()
+```
+
+### Interprétation (corrigé texte)
+
+Avec les données :
+
+```python
+df[["region", "ventes_2023", "ventes_2024", "taux_croissance"]]
+```
+
+Tu obtiens par exemple :
+
+* Nord : (140-120)/120 ≈ 16.67 %
+* Sud : (160-150)/150 ≈ 6.67 %
+* Est : (100-90)/90 ≈ 11.11 %
+* Ouest : (130-110)/110 ≈ 18.18 %
+* Centre : (150-130)/130 ≈ 15.38 %
+
+**Croissance la plus forte** : Ouest (~18.18 %)
+**Croissance la plus faible** : Sud (~6.67 %)
+
+Tu peux aussi le faire calculer par les étudiant·es :
+
+```python
+region_max_croissance = df.loc[df["taux_croissance"].idxmax(), "region"]
+region_min_croissance = df.loc[df["taux_croissance"].idxmin(), "region"]
+region_max_croissance, region_min_croissance
+```
+
+

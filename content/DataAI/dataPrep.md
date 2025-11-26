@@ -7,6 +7,8 @@ weight = 104
 
 La **préparation des données** est une étape clé avant de passer à des analyses plus poussées, comme la modélisation. C'est le processus de **nettoyage**, **transformation** et **formatage** des données afin de les rendre exploitables pour les algorithmes d'analyse et de machine learning.
 
+![Data collection and preparation](/420-514/images/Data_collection_and_preparation.png)
+
 ## **1. Importer et charger les données**
 
 La première étape consiste à **charger** les données dans ton environnement de travail. Les jeux de données peuvent être dans différents formats comme CSV, Excel, JSON, etc.
