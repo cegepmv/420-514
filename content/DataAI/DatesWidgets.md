@@ -167,6 +167,10 @@ Voici un **tableau comparatif** des différents types de graphiques.
 | **Heatmap (carte thermique)** | - Visualiser les corrélations dans une matrice de données multidimensionnelles (corrélation, données géospatiales). | - Très visuel et intuitif pour les matrices de corrélation. - Parfait pour les données 2D. | - Nécessite souvent une légende pour interpréter les couleurs. |
 | **Graphique 3D** | - Représenter des surfaces ou des relations entre trois variables. | - Impressionnant visuellement. - Permet de visualiser des données complexes. | - Peut être difficile à interpréter. - Moins lisible en comparaison des graphiques 2D. |
 
+
+![Visualization types](/420-514/images/Visualization_types.png)
+
+
 ---
 
 ### **Conseil** :
