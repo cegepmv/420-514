@@ -1,6 +1,6 @@
 +++
 draft = false
-title = 'Projet fil conducteur — Plateforme énergétique'
+title = 'Projet fil conducteur - Plateforme énergétique'
 weight = 20
 +++
 
@@ -125,22 +125,22 @@ flowchart LR
     D --> R["Réflexion"]
 ```
 
-### Étape 1 — Comprendre le besoin
+### Étape 1 - Comprendre le besoin
 
 Nous commencerons par une situation concrète ou un nouveau besoin de la
 plateforme.
 
-### Étape 2 — Concevoir la solution
+### Étape 2 - Concevoir la solution
 
 Nous identifierons les ressources, les endpoints, les données et les composants
 NestJS nécessaires.
 
-### Étape 3 — Programmer ensemble
+### Étape 3 - Programmer ensemble
 
 L’implantation sera réalisée de manière guidée. Les choix importants seront
 expliqués et discutés avant ou pendant l’écriture du code.
 
-### Étape 4 — Vérifier le résultat
+### Étape 4 - Vérifier le résultat
 
 Nous utiliserons progressivement différents outils :
 
@@ -152,7 +152,7 @@ Nous utiliserons progressivement différents outils :
 - Newman;
 - outils de mesure de performance.
 
-### Étape 5 — Documenter et réfléchir
+### Étape 5 - Documenter et réfléchir
 
 Nous mettrons à jour la documentation et identifierons :
 
