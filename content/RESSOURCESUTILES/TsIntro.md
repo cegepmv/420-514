@@ -1,7 +1,6 @@
 +++
 draft = false
 title = 'Introduction à TypeScript'
-weight = 41
 +++
 
 ## 🔹Qu’est-ce que TypeScript ?

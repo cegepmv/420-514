@@ -3,7 +3,7 @@ title = "Serveur de test"
 type = "chapter"
 pre = "9. "
 weight = 9
-draft = false
+draft = true
 +++
 
 Dans ce chapitre nous allons parler de serveurs de test. Pourquoi tester ? 

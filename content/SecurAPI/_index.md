@@ -3,7 +3,7 @@ title = "Securité des APIs"
 type = "chapter"
 pre = "6. "
 weight = 6
-draft = false
+draft = true
 +++
 
 Les API sont devenues l’épine dorsale des systèmes modernes : elles relient applications, bases de données, services et utilisateurs. Mais elles représentent aussi un vecteur d’attaque privilégié.

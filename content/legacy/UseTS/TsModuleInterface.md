@@ -1,6 +1,6 @@
 +++
 draft = false
-title = 'Modules et Interfaces'
+title = 'Modules et Interfaces en TypeScript'
 weight = 42
 +++
 

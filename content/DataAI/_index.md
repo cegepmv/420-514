@@ -3,7 +3,7 @@ title = "Collecte, interprétation et intelligence de données"
 type = "chapter"
 pre = "10. "
 weight = 10
-draft = false
+draft = true
 +++
 
 Aujourd’hui, la donnée est partout : applications mobiles, capteurs, sites web, réseaux sociaux, etc.  
