@@ -1,4 +1,5 @@
 +++ 
+showDate = false
 title = 'Collecte et interprétation de données' 
 type = "home" 
 +++

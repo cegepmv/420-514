@@ -1,12 +1,12 @@
 +++
 draft = false
-title = 'Projet fil conducteur - Plateforme énergétique'
+title = '🧩 Projet fil conducteur - Plateforme énergétique'
 weight = 20
 +++
 
 ## Un projet construit ensemble
 
-Le projet fil conducteur est un **projet d’apprentissage réalisé progressivement en classe**.
+Le [projet fil conducteur](https://github.com/orgs/420-MV/projects/2) est un **projet d’apprentissage réalisé progressivement en classe**.
 
 Il nous permettra d’appliquer les notions du cours dans un contexte commun, de
 voir comment elles s’intègrent dans une solution complète et de conserver un
@@ -169,7 +169,7 @@ Nous mettrons à jour la documentation et identifierons :
 Le projet sera suivi dans GitHub à l’aide :
 
 - d’un dépôt de code commun;
-- d’un GitHub Project;
+- d’un [GitHub Project](https://docs.github.com/fr/issues/planning-and-tracking-with-projects);
 - d’issues parentes correspondant aux semaines;
 - de sous-issues correspondant aux fonctionnalités;
 - de branches de travail;
