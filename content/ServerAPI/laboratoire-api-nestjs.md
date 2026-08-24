@@ -17,7 +17,7 @@ uniquement sur le dépôt `energy-api`.
 On révisera le fonctionnement de NestJS tout en mettant en place une architecture
 qui pourra évoluer pendant la session.
 
----
+
 
 ## 2. Portée
 
@@ -32,7 +32,7 @@ qui pourra évoluer pendant la session.
 - vérifier les endpoints avec Postman ou `curl`;
 - documenter et versionner le premier incrément.
 
----
+
 
 ## 3. Objectifs d'apprentissage
 
@@ -48,7 +48,7 @@ qui pourra évoluer pendant la session.
 - tester manuellement une API;
 - produire un commit Git cohérent.
 
----
+
 
 ## 4. Architecture visée
 
@@ -73,7 +73,7 @@ flowchart TD
 | DTO | Décrire les données attendues à l'entrée | Contenir l'identifiant produit par le serveur |
 | Entité | Représenter une donnée de l'application | Recevoir directement la requête HTTP |
 
----
+
 
 ## 5. Résultat attendu
 
@@ -86,7 +86,7 @@ flowchart TD
 Les données seront conservées temporairement en mémoire et disparaîtront au
 redémarrage de l'application.
 
----
+
 
 ## 6. Préparation
 
@@ -107,7 +107,7 @@ git remote -v
 
 Le laboratoire doit être réalisé uniquement dans `energy-api`.
 
----
+
 
 ## 7. Partie 1 - Préparer Git
 
@@ -238,7 +238,6 @@ Issue associée :
 [S01][API] Mettre en place l'architecture initiale de l'API NestJS
 ```
 
----
 
 ## 8. Partie 2 - Observer le projet NestJS
 
@@ -280,7 +279,6 @@ Questions de révision :
 4. Comment NestJS fournit-il une instance du service au contrôleur?
 5. Quel fichier représente le point d'entrée de l'application?
 
----
 
 ## 9. Partie 3 - Nettoyer et configurer l'application
 
@@ -315,7 +313,6 @@ Bonnes pratiques :
 - limiter `main.ts` à la configuration générale;
 - utiliser des routes en minuscules orientées vers les ressources.
 
----
 
 ## 10. Partie 4 - Créer le module de santé
 
@@ -357,7 +354,6 @@ GET /api/health
 curl -i http://localhost:3000/api/health
 ```
 
----
 
 ## 11. Partie 5 - Concevoir `buildings`
 
@@ -400,7 +396,6 @@ src/buildings/
 `id` ne doit pas appartenir au DTO de création. Le DTO prépare l'architecture
 future; la validation automatique sera ajoutée plus tard.
 
----
 
 ## 12. Partie 6 - Consulter les bâtiments
 
@@ -427,7 +422,7 @@ Contraintes :
 - le service ne connaît ni Postman ni `curl`;
 - aucun type `any` n'est utilisé.
 
----
+
 
 ## 13. Partie 7 - Ajouter un bâtiment
 
@@ -472,7 +467,7 @@ Bonnes pratiques attendues :
 - les noms des classes sont au singulier et les routes de collection au pluriel;
 - la collection ne doit pas être publique.
 
----
+
 
 ## 14. Partie 8 - Tester manuellement
 
