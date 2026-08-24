@@ -495,7 +495,7 @@ curl -i -X POST http://localhost:3000/api/buildings \
   }'
 ```
 
----
+
 
 ## 15. Revue d'architecture
 
@@ -527,7 +527,7 @@ src/
     └── buildings.service.ts
 ```
 
----
+
 
 ## 16. Documenter et versionner
 
@@ -550,7 +550,7 @@ git commit -m "feat: mettre en place l'architecture initiale de l'API"
 git push -u origin feature/s01-architecture-initiale
 ```
 
----
+
 
 ## 17. Critères de réussite
 
@@ -571,7 +571,7 @@ git push -u origin feature/s01-architecture-initiale
 - [ ] Le `README.md` est à jour.
 - [ ] La modification est associée à une branche et à un commit cohérent.
 
----
+
 
 ## 18. Questions de synthèse
 
@@ -584,7 +584,7 @@ git push -u origin feature/s01-architecture-initiale
 7. Quelle limite possède le stockage en mémoire?
 8. Quelle prochaine notion permettra de valider automatiquement les données?
 
----
+
 
 ## 19. Route supplémentaire
 
@@ -600,7 +600,7 @@ Contraintes :
 - une ressource absente produit une exception HTTP appropriée;
 - la logique de recherche n'est pas dupliquée dans le contrôleur.
 
----
+
 
 ## 20. Bilan
 
