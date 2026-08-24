@@ -129,31 +129,31 @@ Une méthode HTTP indique l’intention de la requête.
 
 ### Exemples appliqués au projet
 
-```http
+```
 GET /api/buildings
 ```
 
 Consulter tous les bâtiments.
 
-```http
+```
 GET /api/buildings/42
 ```
 
 Consulter le bâtiment `42`.
 
-```http
+```
 POST /api/buildings
 ```
 
 Créer un bâtiment.
 
-```http
+```
 PATCH /api/buildings/42
 ```
 
 Modifier une partie du bâtiment `42`.
 
-```http
+```
 DELETE /api/buildings/42
 ```
 

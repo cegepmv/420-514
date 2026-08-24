@@ -12,10 +12,10 @@ theme = 'hugo-theme-relearn'
   # Désactiver search bar
   # disableSearch = true
   # Hide breadcrumbs in the header and only show the current page title
-  disableBreadcrumb = false
+  disableBreadcrumb = true
   # If set to true, hide table of contents menu in the header of all pages
-  disableToc = true
+  disableToc = false
   # Hide Next and Previous page buttons normally displayed full height beside content
-  disableNextPrev = true
+  disableNextPrev = false
 #comment
 
