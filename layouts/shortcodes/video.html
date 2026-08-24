@@ -1,0 +1,8 @@
+<video
+  class="post-video"
+  src="{{ .Get "src" | relURL }}"
+  {{ if (eq (.Get "controls") "true") }}controls{{ end }}
+  {{ if (eq (.Get "loop") "true") }}loop{{ end }}
+  {{ if (eq (.Get "autoplay") "true") }}autoplay muted playsinline{{ end }}>
+  {{ .Inner }}
+</video>

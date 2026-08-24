@@ -1,37 +1,95 @@
 +++
-date = '2025-08-21T11:41:38-04:00'
 draft = false
-title = '📘 Cadriciels rappel'
+title = '📘 Cadriciels (framework) : rappel'
 weight = 12
 +++
 
-## Cadriciel côté serveur
+## Rappel : les cadriciels
 
-### Qu’est-ce qu’un cadriciel côté serveur ?
+Un **cadriciel** (*framework*) est un ensemble structuré d’outils, de conventions et de composants réutilisables permettant de développer une application.
 
-Un **cadriciel** (ou *framework*) est un ensemble structuré d’outils, de bibliothèques et de conventions qui facilite et accélère le développement d’applications.
-Lorsqu’on parle de **cadriciel côté serveur**, on fait référence aux frameworks conçus pour la partie *backend* d’une application, c’est-à-dire :
+Lorsqu’on parle de **cadriciel côté serveur**, on fait référence aux frameworks conçus pour la partie *backend* d’une application, par exemple :
 
-* la logique métier (traitement des données, règles d’affaires)
+* le démarrage de l’application;
+* la définition des routes;
 * la gestion des requêtes/réponses entre le client et le serveur
+* la gestion des dépendances;
+* la validation des données;
+* la gestion des erreurs;
+* l’organisation du code;
+* la logique métier (traitement des données, règles d’affaires)
 * la communication avec les bases de données
 * la sécurité et la gestion des utilisateurs
 
-En d’autres termes, au lieu de tout programmer « à la main », on s’appuie sur une **infrastructure déjà prête** qui propose des solutions éprouvées et standardisées.
 
-### Pourquoi utiliser un cadriciel côté serveur ?
+## Cadriciel et bibliothèque
 
-1. **Gain de temps et productivité** : on évite de réinventer la roue pour gérer les routes, la sécurité, ou encore les sessions.
-2. **Organisation du code** : un framework impose une structure claire (souvent basée sur le modèle MVC ou MVVM).
-3. **Sécurité intégrée** : gestion des failles courantes (injections SQL, XSS, CSRF, etc.).
-4. **Évolutivité** : plus simple d’ajouter de nouvelles fonctionnalités.
-5. **Communauté et support** : documentation, forums, mises à jour régulières.
+Une bibliothèque et un cadriciel fournissent tous les deux du code réutilisable, mais leur fonctionnement diffère.
+
+| Bibliothèque                                            | Cadriciel                                             |
+| ------------------------------------------------------- | ----------------------------------------------------- |
+| On appelle la bibliothèque lorsque cela est nécessaire. | Le cadriciel appelle notre code au moment approprié.  |
+| On conserve le contrôle général de l’application.       | Le cadriciel contrôle le cycle d’exécution.           |
+| Elle répond généralement à un besoin précis.            | Il propose une structure complète et des conventions. |
+| Exemple : une bibliothèque de calculs.                  | Exemple : NestJS pour développer une API.             |
+
+Cette différence correspond au principe d’**inversion de contrôle** :
+
+> Avec un cadriciel, on écrit des composants qui seront détectés, créés et exécutés par le cadriciel.
 
 
-### Exemples de cadriciels côté serveur
+## Pourquoi utiliser un cadriciel?
 
-* **Node.js / Express.js** (JavaScript / TypeScript)
-* **Django** et **Flask** (Python)
-* **Spring Boot** (Java)
-* **ASP.NET Core** (C#)
-* **Laravel** et **Symfony** (PHP)
+### Avantages
+
+* accélération du développement;
+* structure uniforme entre les projets;
+* séparation plus claire des responsabilités;
+* réutilisation de composants existants;
+* meilleure maintenabilité;
+* intégration facilitée des tests et de la sécurité;
+* travail d’équipe plus prévisible;
+* Communauté et support.
+
+### Limites
+
+* période d’apprentissage;
+* conventions à respecter;
+* dépendance envers l’écosystème du cadriciel;
+* risque d’utiliser des fonctionnalités sans comprendre leur fonctionnement;
+* complexité parfois inutile pour une très petite application.
+
+
+
+## Quelques exemples
+
+| Domaine         | Cadriciels       |
+| --------------- | ---------------- |
+| Backend Node.js | NestJS, Express  |
+| Frontend Web    | Angular, Next.js |
+| Java            | Spring Boot (BE)     |
+| .NET            | ASP.NET Core (BE)    |
+| Python          | Django, Flask (BE), FastAPI  (BE)|
+| PHP             | Laravel (BE), Symfony  (BE)|
+
+
+> La frontière entre une bibliothèque et un cadriciel peut parfois être nuancée. Par exemple, Express est souvent qualifié de cadriciel minimaliste, tandis que NestJS impose une structure beaucoup plus complète.
+
+
+
+## À retenir
+
+Un cadriciel ne remplace pas les connaissances en programmation ou en HTTP. Il fournit une structure permettant de les appliquer de manière organisée.
+
+> Dans `energy-api`, NestJS déterminera notamment : 
+> * comment l’application démarre;
+> * comment les routes sont déclarées;
+> * comment les composants sont regroupés;
+> * comment les services sont injectés;
+> * comment une requête HTTP atteint le bon contrôleur.
+
+
+
+
+
+

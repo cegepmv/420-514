@@ -7,10 +7,13 @@ draft = false
 
 ## Rappel API REST
 
-🌼 Une API REST se doit d’être sans état Stateless. La communication entre le client et le serveur ne doit pas dépendre d’un quelconque contexte provenant du serveur. 
-🌼 Ainsi, chaque requête doit contenir l’ensemble des informations nécessaires à son traitement. Cela permet au de traiter indifféremment les requêtes de plusieurs clients via de multiples instances de serveurs.
+Une API REST se doit d’être sans état Stateless. La communication entre le client et le serveur ne doit pas dépendre d’un quelconque contexte provenant du serveur. 
+
+Ainsi, chaque requête doit contenir l’ensemble des informations nécessaires à son traitement. Cela permet de traiter indifféremment les requêtes de plusieurs clients via de multiples instances de serveurs.
  
-🌼 Pour chaque réponse renvoyée par l’API, un code doit être envoyé, ce code correspond à l’état de la requête et dépend de la réussite ou non de celle-ci. 
+Pour chaque réponse renvoyée par l’API, un code doit être envoyé, ce code correspond à l’état de la requête et dépend de la réussite ou non de celle-ci. 
+
+![API Rest](/420-514/images/api/api_rest.png)
 
 ![Rest api design](/420-514/images/Rest_api_design.png)
 

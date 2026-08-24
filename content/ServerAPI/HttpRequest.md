@@ -1,8 +1,13 @@
 +++
 draft = false
-title = '📘 Requêtes HTTP'
+title = '📘 Rappel : Serveur et requêtes HTTP'
 weight = 21
 +++
+
+## **Role du serveur**
+
+![Parties de requête HTTP](/420-514/images/api/role_backend.png)
+
 
 ## **Le protocole HTTP**
 

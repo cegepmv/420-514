@@ -1,0 +1,12 @@
+/* S'applique aux vidéos dans les articles */
+.post-video,
+.article-content video,
+.post-content video,
+main article video {
+  display: block;
+  max-width: 100%;  /* ne dépasse jamais la colonne */
+  width: 100%;      /* occupe toute la largeur dispo de la colonne */
+  height: auto;     /* conserve les proportions */
+  margin: 1rem 0;
+  border-radius: .5rem; /* optionnel, juste pour le style */
+}
