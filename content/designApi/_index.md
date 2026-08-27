@@ -5,9 +5,16 @@ pre = "2. "
 draft = false
 +++
 
-[Design d'API et bonnes pratiques en](https://www.youtube.com/watch?v=7QfswaV0re4)
 
-[Design d'API et bonnes pratiques fr](https://www.youtube.com/watch?v=pH7ZT9cOL0k)
+Design d'API et bonnes pratiques en
+
+{{< video src="https://www.youtube.com/watch?v=7QfswaV0re4" alt="Design d'API et bonnes pratiques en" controls="true" loop="false" />}}
+
+
+Design d'API et bonnes pratiques fr
+
+{{< video src="https://www.youtube.com/watch?v=pH7ZT9cOL0k" alt="Design d'API et bonnes pratiques fr" controls="true" loop="false" />}}
+
 
 ## Erreurs fréquentes
 
