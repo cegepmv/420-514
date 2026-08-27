@@ -143,7 +143,7 @@ console.log(new XMLSerializer().serializeToString(xmlDoc));
 - **XML** : Nécessite plus de travail, avec des outils comme `DOMParser` et `XMLSerializer` pour l'analyse et la sérialisation.
 - **Conversion entre JSON et XML** : Non native, nécessite des fonctions personnalisées.
 
----
+
 
 Pour un affichage bien présentable des fichier JSON sur le navigateur Chrome, vous pouvez installer l’extension suivante : 
 

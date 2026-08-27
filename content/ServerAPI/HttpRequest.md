@@ -273,3 +273,5 @@ Le serveur doit vérifier :
 - que les valeurs respectent les règles de validation.
 
 La validation complète avec des DTO sera approfondie ultérieurement.
+
+[Que'est-ce qu'une API REST](https://www.youtube.com/watch?v=-mN3VyJuCjM)
