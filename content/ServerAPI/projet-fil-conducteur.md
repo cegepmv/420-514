@@ -235,6 +235,72 @@ POST /api/buildings
 La persistance MongoDB, la validation complète et la sécurité seront ajoutées
 pendant les incréments suivants.
 
+
+## Modèle de données général
+
+### Bâtiment
+
+```json
+{
+  "code": "PC",
+  "name": "Pavillon central",
+  "address": "7000, rue Marie-Victorin",
+  "active": true
+}
+```
+
+### Local
+
+```json
+{
+  "code": "A-204",
+  "buildingId": "identifiant-du-batiment",
+  "floor": 2,
+  "type": "laboratoire",
+  "capacity": 30
+}
+```
+
+### Capteur
+
+```json
+{
+  "serialNumber": "ENERGY-A204-01",
+  "roomId": "identifiant-du-local",
+  "type": "multifonction",
+  "unit": "kWh",
+  "status": "active",
+  "installedAt": "2026-08-01T08:00:00Z"
+}
+```
+
+### Mesure
+
+```json
+{
+  "sensorId": "identifiant-du-capteur",
+  "timestamp": "2026-08-13T14:30:00Z",
+  "temperature": 24.3,
+  "humidity": 48,
+  "energyConsumption": 3.7,
+  "occupancy": 18
+}
+```
+
+### Alerte
+
+```json
+{
+  "sensorId": "identifiant-du-capteur",
+  "type": "high_consumption",
+  "severity": "warning",
+  "message": "Consommation supérieure au seuil configuré.",
+  "status": "open",
+  "createdAt": "2026-08-13T14:31:00Z"
+}
+```
+
+
 ---
 
 ## À retenir
