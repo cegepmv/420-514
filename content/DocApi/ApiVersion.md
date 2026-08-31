@@ -1,6 +1,6 @@
 +++
 date = '2025-09-21T23:45:12-04:00'
-draft = false
+draft = true
 title = 'Versionnement des API RESTful'
 weight = 73
 +++

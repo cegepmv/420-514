@@ -435,6 +435,29 @@ git branch -d feature/10-gestion-buildings
 10. Fermer l'issue parente et la déplacer à Done
 ```
 
+Exemple :
+
+```mermaid
+flowchart TD
+    M["main"]
+    F["feature/10-gestion-buildings"]
+    I10["Issue parente #10"]
+    S11["Sous-issue #11 : module"]
+    S12["Sous-issue #12 : GET collection"]
+    S13["Sous-issue #13 : GET par ID"]
+    S14["Sous-issue #14 : POST"]
+    PR["Pull request vers main"]
+
+    I10 --> F
+    F --> S11
+    F --> S12
+    F --> S13
+    F --> S14
+    M --> F
+    F --> PR
+    PR --> M
+```
+
 ## Liste de vérification
 
 ### Issue parente et branche `feature`

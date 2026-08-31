@@ -3,7 +3,7 @@ title = "Documentation et vertionnement d'Api"
 type = "chapter"
 pre = "7. "
 weight = 7
-draft = true
+draft = false
 +++
 
 Une documentation claire doit permettre de :

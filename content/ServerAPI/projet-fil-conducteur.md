@@ -242,10 +242,13 @@ pendant les incréments suivants.
 
 ```json
 {
+  "id": "e733b449-de11-46d1-a3fc-1dd86be1738f",
   "code": "PC",
   "name": "Pavillon central",
   "address": "7000, rue Marie-Victorin",
-  "active": true
+  "yearBuilt": 1969,
+  "createdAt": "2026-08-26T21:27:26.738Z",
+  "modifiedAt": "2026-08-26T21:27:26.738Z"
 }
 ```
 
