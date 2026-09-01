@@ -1,6 +1,6 @@
 +++
 date = '2025-09-21T22:19:32-04:00'
-draft = true
+draft = false
 title = 'Swagger / OpenApi'
 weight = 42
 +++
@@ -355,7 +355,6 @@ Un changement de documentation peut donc révéler un changement de contrat exig
 - vérifier la correspondance avec les tests E2E.
 
 ### 8.1 Swagger UI en production
-git add 
 Plusieurs stratégies sont possibles :
 
 | Stratégie | Usage |
