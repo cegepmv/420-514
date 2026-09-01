@@ -14,6 +14,10 @@ Dans <code>energy-api</code> :
     npm install @nestjs/swagger
 
 On doit choisir une version compatible avec la version majeure de NestJS utilisée par le projet.
+Pour notre projet c'est la version 11 donc :
+```bash
+npm install @nestjs/swagger@^11.4.7
+```
 
 ### 2. Séparer la configuration
 

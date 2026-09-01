@@ -2,11 +2,11 @@
 date = '2025-09-21T22:19:32-04:00'
 draft = true
 title = 'Swagger / OpenApi'
-weight = 72
+weight = 42
 +++
 
 
-# 1. Pourquoi documenter une API?
+## 1. Pourquoi documenter une API?
 
 Une API est utilisée par d’autres logiciels, équipes ou services. Son code source ne constitue pas un contrat suffisant pour ses consommateurs.
 
@@ -20,7 +20,7 @@ Une documentation d’API doit répondre à des questions concrètes :
 - quelles erreurs peuvent survenir?
 - quelle version du contrat utilise-t-on?
 
-## 1.1 Le contrat d’API
+### 1.1 Le contrat d’API
 
 Le contrat décrit les échanges observables entre un fournisseur et ses consommateurs.
 
@@ -38,7 +38,7 @@ Le contrat décrit les échanges observables entre un fournisseur et ses consomm
 
 Le contrat ne décrit pas la manière dont les données sont conservées. Un client ne devrait pas avoir besoin de savoir si l’API utilise un tableau en mémoire ou MongoDB.
 
-## 1.2 Conséquences d’une documentation insuffisante
+### 1.2 Conséquences d’une documentation insuffisante
 
 - interprétations différentes du même endpoint;
 - requêtes invalides répétées;
@@ -49,7 +49,7 @@ Le contrat ne décrit pas la manière dont les données sont conservées. Un cli
 - exemples qui divergent du code.
 
 
-# 2. OpenAPI et Swagger
+## 2. OpenAPI et Swagger
 
 Les termes sont liés, mais ils ne désignent pas exactement la même chose.
 
@@ -61,7 +61,7 @@ Les termes sont liés, mais ils ne désignent pas exactement la même chose.
 | <code>@nestjs/swagger</code> | Module NestJS qui génère le document et expose Swagger UI |
 | Swagger Editor | Outil permettant d’écrire et de prévisualiser une spécification |
 
-## 2.1 Une distinction essentielle
+### 2.1 Une distinction essentielle
 
 OpenAPI est le contrat lisible par les outils. Swagger UI est seulement une représentation interactive de ce contrat.
 
@@ -71,7 +71,7 @@ Une API peut donc :
 - afficher Swagger UI à partir d’un document généré;
 - utiliser la spécification pour générer un client, effectuer des tests ou valider des changements.
 
-## 2.2 Ce qu’OpenAPI ne fait pas
+### 2.2 Ce qu’OpenAPI ne fait pas
 
 Une spécification ne garantit pas automatiquement que :
 
@@ -85,9 +85,9 @@ La documentation doit être vérifiée avec le code et les tests.
 
 
 
-# 3. Deux approches de conception
+## 3. Deux approches de conception
 
-## 3.1 Design first
+### 3.1 Design first
 
 On écrit d’abord le contrat OpenAPI, puis on implémente l’API.
 
@@ -104,7 +104,7 @@ Limites :
 - apprentissage plus exigeant du format OpenAPI;
 - mise à jour manuelle nécessaire sans automatisation.
 
-## 3.2 Code first
+### 3.2 Code first
 
 On écrit l’application et ses métadonnées, puis on génère OpenAPI à partir du code.
 
@@ -121,7 +121,7 @@ Limites :
 - les informations non déductibles doivent être ajoutées;
 - un décorateur oublié produit une documentation incomplète.
 
-## 3.3 Approche retenue pour <code>energy-api</code>
+### 3.3 Approche retenue pour <code>energy-api</code>
 
 On utilise une approche hybride :
 
@@ -132,7 +132,7 @@ On utilise une approche hybride :
 5. on la compare aux tests E2E et à la documentation publique.
 
 
-# 4. Structure d’un document OpenAPI
+## 4. Structure d’un document OpenAPI
 
 Un document OpenAPI contient plusieurs sections principales.
 
@@ -146,11 +146,11 @@ Un document OpenAPI contient plusieurs sections principales.
     components:
       schemas: {}
 
-## 4.1 <code>openapi</code>
+### 4.1 <code>openapi</code>
 
 Cette propriété indique la version de la spécification utilisée. Elle ne représente pas la version fonctionnelle de l’API.
 
-## 4.2 <code>info</code>
+### 4.2 <code>info</code>
 
 Elle présente le produit :
 
@@ -160,7 +160,7 @@ Elle présente le produit :
 - licence;
 - coordonnées de contact, si pertinentes.
 
-## 4.3 <code>servers</code>
+### 4.3 <code>servers</code>
 
 Cette section décrit les adresses possibles :
 
@@ -170,7 +170,7 @@ Cette section décrit les adresses possibles :
 
 On évite de publier une adresse interne ou confidentielle.
 
-## 4.4 <code>tags</code>
+### 4.4 <code>tags</code>
 
 Les tags regroupent les opérations par domaine :
 
@@ -180,7 +180,7 @@ Les tags regroupent les opérations par domaine :
 
 Un tag ne représente pas nécessairement un module technique. Il doit aider le consommateur à naviguer dans le contrat.
 
-## 4.5 <code>paths</code>
+### 4.5 <code>paths</code>
 
 Cette section décrit les chemins et leurs opérations.
 
@@ -195,7 +195,7 @@ Pour chaque opération, on peut préciser :
 - sécurité;
 - dépréciation.
 
-## 4.6 <code>components.schemas</code>
+### 4.6 <code>components.schemas</code>
 
 Les schémas représentent les données réutilisables :
 
@@ -209,11 +209,11 @@ La réutilisation évite de recopier la même définition dans chaque endpoint.
 
 
 
-# 5. Décrire une opération HTTP
+## 5. Décrire une opération HTTP
 
 Prenons la création d’un bâtiment.
 
-## 5.1 Informations nécessaires
+### 5.1 Informations nécessaires
 
 | Élément | Valeur attendue |
 |---|---|
@@ -226,7 +226,7 @@ Prenons la création d’un bâtiment.
 | En-tête | <code>Location</code> |
 | Erreurs | <code>400</code>, <code>409</code>, <code>415</code> |
 
-## 5.2 Paramètres
+### 5.2 Paramètres
 
 OpenAPI distingue principalement :
 
@@ -239,7 +239,7 @@ OpenAPI distingue principalement :
 
 Un paramètre de chemin est toujours obligatoire.
 
-## 5.3 Corps de requête
+### 5.3 Corps de requête
 
 Le corps précise :
 
@@ -250,7 +250,7 @@ Le corps précise :
 
 Le corps ne doit pas inclure une propriété générée par le serveur, comme l’identifiant d’une nouvelle ressource.
 
-## 5.4 Réponses
+### 5.4 Réponses
 
 Chaque opération doit documenter :
 
@@ -264,7 +264,7 @@ Documenter seulement <code>200</code> n’est pas suffisant si l’implémentati
 
 
 
-# 6. Swagger UI comme outil d’exploration
+## 6. Swagger UI comme outil d’exploration
 
 Swagger UI permet :
 
@@ -275,7 +275,7 @@ Swagger UI permet :
 - de voir les réponses;
 - de télécharger ou consulter la spécification.
 
-## 6.1 Limites de « Try it out »
+### 6.1 Limites de « Try it out »
 
 Une requête réussie dans Swagger UI ne remplace pas :
 
@@ -287,7 +287,7 @@ Une requête réussie dans Swagger UI ne remplace pas :
 
 Swagger UI est surtout un outil d’exploration et de démonstration.
 
-## 6.2 Scénarios de démonstration
+### 6.2 Scénarios de démonstration
 
 1. consulter la collection vide;
 2. créer un bâtiment;
@@ -302,9 +302,9 @@ On compare ensuite les résultats observés aux réponses documentées.
 
 
 
-# 7. Maintenir la documentation
+## 7. Maintenir la documentation
 
-## 7.1 Source de vérité
+### 7.1 Source de vérité
 
 Dans une approche code first :
 
@@ -316,7 +316,7 @@ Dans une approche code first :
 
 Le fichier généré ne devrait pas être modifié manuellement, car il sera écrasé à la prochaine génération.
 
-## 7.2 Vérifications en intégration continue
+### 7.2 Vérifications en intégration continue
 
 Une équipe peut :
 
@@ -326,7 +326,7 @@ Une équipe peut :
 - détecter les changements incompatibles;
 - publier la documentation avec la version déployée.
 
-## 7.3 Changements incompatibles
+### 7.3 Changements incompatibles
 
 Exemples :
 
@@ -341,7 +341,7 @@ Un changement de documentation peut donc révéler un changement de contrat exig
 
 
 
-# 8. Bonnes pratiques pour un projet public
+## 8. Bonnes pratiques pour un projet public
 
 - fournir un titre, une description et une version significatifs;
 - séparer l’URL de documentation du préfixe de l’API;
@@ -354,8 +354,8 @@ Un changement de documentation peut donc révéler un changement de contrat exig
 - conserver le document JSON accessible aux outils lorsque cela est utile;
 - vérifier la correspondance avec les tests E2E.
 
-## 8.1 Swagger UI en production
-
+### 8.1 Swagger UI en production
+git add 
 Plusieurs stratégies sont possibles :
 
 | Stratégie | Usage |

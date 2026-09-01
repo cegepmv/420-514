@@ -1,8 +1,8 @@
 +++
 title = "Documentation et vertionnement d'Api"
 type = "chapter"
-pre = "7. "
-weight = 7
+pre = "3. "
+weight = 4
 draft = false
 +++
 
