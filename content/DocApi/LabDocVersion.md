@@ -19,6 +19,15 @@ Pour notre projet c'est la version 11 donc :
 npm install @nestjs/swagger@^11.4.7
 ```
 
+> Attention : Ne pas utiliser `--force` ou `--legacy-peer-deps`. Avec NestJS 11, conserver `@nestjs/swagger` dans la version majeure 11.
+
+Vérifier :
+
+```bash
+npm list @nestjs/common @nestjs/core @nestjs/swagger
+```
+
+
 ### 2. Séparer la configuration
 
 Pour éviter d’alourdir <code>main.ts</code>, on peut créer :
@@ -50,7 +59,7 @@ Exemple :
 
       SwaggerModule.setup('docs', app, documentFactory, {
         jsonDocumentUrl: 'docs/openapi.json',
-        customSiteTitle: 'Energy API — Documentation',
+        customSiteTitle: 'Energy API - Documentation',
       });
     }
 ```
@@ -68,7 +77,7 @@ Dans <code>main.ts</code>, l’ordre recommandé est :
     const app = await NestFactory.create(AppModule);
     configureApp(app);
     configureSwagger(app);
-    await app.listen(...);
+    await app.listen(process.env.PORT ?? 3000);
 
 ```
 
@@ -86,7 +95,6 @@ Avec cette configuration :
 
 Il est préférable de ne pas installer Swagger UI sous <code>/api</code>, car ce chemin est déjà le préfixe fonctionnel de l’API.
 
----
 
 ## 5. Documenter les DTO
 
@@ -168,7 +176,6 @@ Pour documenter les réponses, on privilégie une classe :
 Cette classe décrit le contrat de sortie; elle ne doit pas nécessairement contenir de logique.
 
 
-
 ## 6. Documenter les contrôleurs
 
 ### 6.1 Regrouper avec <code>@ApiTags()</code>
@@ -236,7 +243,6 @@ On ne doit pas ajouter des décorateurs qui répètent sans valeur :
 - un exemple différent du DTO.
 
 La qualité de la documentation est plus importante que le nombre d’annotations.
-
 
 
 ## 7. Documenter Problem Details
