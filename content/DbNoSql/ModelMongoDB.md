@@ -1,7 +1,7 @@
 +++
 draft = false
 weight = 83
-title = 'La modélisation des données dans MongoDB'
+title = '📘 La modélisation des données dans MongoDB'
 +++
 
 
