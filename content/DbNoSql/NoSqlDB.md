@@ -24,10 +24,10 @@ Les bases de données clé-valeur sont les plus simples parmi les bases NoSQL. E
 #### Exemple :
 
 ```json
-"username123": {
-    "name": "John Doe",
-    "age": 30,
-    "email": "johndoe@example.com"
+"sensor123": {
+    "temperature": 22.5,
+    "humidity": 60,
+    "timestamp": "2023-10-15T10:00:00Z"
 }
 ```
 
@@ -65,17 +65,27 @@ Ces bases stockent des données sous forme de documents, généralement en forma
 
 ```json
 {
-  "_id": "abc123",
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "orders": [
-    {"product_id": "prod1", "quantity": 2},
-    {"product_id": "prod2", "quantity": 1}
+  "_id": "sensor123",
+  "location": "Building A - Room 101",
+  "readings": [
+    {
+      "type": "temperature",
+      "value": 22.5,
+      "unit": "C",
+      "timestamp": "2023-10-15T10:00:00Z"
+    },
+    {
+      "type": "humidity",
+      "value": 60,
+      "unit": "%",
+      "timestamp": "2023-10-15T10:00:00Z"
+    }
   ]
 }
 ```
 
-Le document ci-dessus représente un utilisateur avec des informations sur ses commandes.
+**_id** : Identifiant unique du capteur.
+Le document ci-dessus représente un utilisateur avec les données des relevés énergétiques.
 
 #### Avantages :
 
@@ -106,10 +116,13 @@ Les bases de données en colonnes larges organisent les données dans des colonn
 
 #### Exemple :
 
-| Clé | Nom | Âge | Adresse |
+| Capteur | Température | Humidité | Timestamp |
 | --- | --- | --- | --- |
-| user1 | John | 30 | 123 Main Street |
-| user2 | Alice | 25 | 456 Oak Street |
+| sensor1 | 22.5 | 60 | 2023-10-15T10:00:00Z |
+| sensor2 | 21.0 | 55 | 2023-10-15T10:05:00Z |
+
+**Colonnes** : Chaque colonne représente un type de donnée collectée.
+**Utilisation** : Idéal pour stocker des données de capteurs énergétiques à grande échelle.
 
 Les colonnes peuvent être ajoutées ou supprimées dynamiquement sans affecter les autres entrées.
 
@@ -140,7 +153,7 @@ Les colonnes peuvent être ajoutées ou supprimées dynamiquement sans affecter 
 
 Les bases de données orientées graphe sont conçues pour gérer des relations complexes entre les données, en utilisant des nœuds et des arêtes. Chaque nœud représente une entité, et chaque arête représente une relation entre ces entités. Elles sont particulièrement utiles pour les applications nécessitant une navigation rapide à travers des relations complexes.
 
-#### Exemple :
+#### Exemple 1 :
 
 Dans un réseau social, un nœud peut représenter un utilisateur, et les arêtes peuvent représenter les relations d’amitié ou d'abonnement entre utilisateurs.
 
@@ -151,6 +164,21 @@ Dans un réseau social, un nœud peut représenter un utilisateur, et les arête
    |                     |
 (Post)---[Comments]---(User)
 ```
+#### Exemple 2 :
+
+Dans le cadre de notre projet `energy-api` le schéma pourrait resembler à :
+
+```scheme
+(Sensor)---[LocatedIn]---(Room)
+   |                          |
+[Measures]                [PartOf]
+   |                          |
+(Building)---[SuppliesEnergyTo]---(Grid)
+```
+
+**Nœuds** : Représentent des capteurs, des pièces, des bâtiments, etc.
+**Arêtes** : Représentent les relations entre ces entités, comme la localisation ou les connexions énergétiques.
+**Utilisation** : Idéal pour modéliser les relations entre les capteurs, les bâtiments, et le réseau énergétique.
 
 #### Avantages :
 
@@ -174,7 +202,7 @@ Dans un réseau social, un nœud peut représenter un utilisateur, et les arête
 - Moteurs de recommandation (par exemple, recommandations de produits ou d’amis).
 - Systèmes de gestion de la fraude (détection de schémas relationnels).
 
----
+
 
 #### Résumé des différences principales
 

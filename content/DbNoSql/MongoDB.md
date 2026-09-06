@@ -22,25 +22,30 @@ MongoDB stocke les données sous forme de **documents**. Un document est une uni
 
 ```json
 {
-  "_id": "12345",
-  "name": "Alice",
-  "email": "alice@example.com",
-  "age": 25,
-  "orders": [
+  "_id": "sensor123",
+  "location": "Building A - Room 101",
+  "type": "temperature",
+  "unit": "C",
+  "readings": [
     {
-      "product_id": "p123",
-      "quantity": 2
+      "value": 22.5,
+      "timestamp": "2023-10-15T10:00:00Z"
     },
     {
-      "product_id": "p456",
-      "quantity": 1
+      "value": 23.0,
+      "timestamp": "2023-10-15T11:00:00Z"
     }
   ]
 }
 ```
 
-- **_id** : Clé primaire unique (générée automatiquement par MongoDB si non spécifiée).
-- **Document** : Peut contenir des champs imbriqués (comme le tableau "orders").
+- **_id** : Clé primaire unique (générée automatiquement par MongoDB si non spécifiée). Dans ce cas, c'est l'identifiant unique du capteur.
+- **location** : Localisation du capteur dans un bâtiment.
+- **type** : Type de mesure effectuée (par exemple, température).
+- **readings** : Tableau contenant les relevés de données avec leur valeur et leur timestamp.
+
+Ce format est idéal pour stocker les données énergétiques collectées par des capteurs dans le cadre du projet `energy-api`.
+
 
 | **RDBMS** | **MongoDB** |
 | --- | --- |
@@ -84,8 +89,9 @@ MongoDB offre une syntaxe puissante pour écrire des requêtes complexes :
 Exemple d'une requête d'agrégation pour calculer le nombre total de produits commandés par chaque utilisateur :
 
 ```json
-db.orders.aggregate([
-  { "$group": { "_id": "$customer_id", "totalQuantity": { "$sum": "$quantity" } } }
+db.sensors.aggregate([
+  { "$unwind": "$readings" },
+  { "$group": { "_id": "$_id", "averageTemperature": { "$avg": "$readings.value" } } }
 ])
 ```
 

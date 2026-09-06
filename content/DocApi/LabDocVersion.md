@@ -276,13 +276,22 @@ Créer une classe représentant le contrat d’erreur :
     }
 ```
 
+> Si cette classe est utilisée dans plusieurs modules ou dans toute l'application, placez-la dans un dossier commun, par exemple :
+```
+src/
+├── common/
+│   ├── dtos/
+│   │   └── problem-details.dto.ts
+│   └── ...
+```
+
 Dans le contrôleur :
 
 ```ts
-    @ApiBadRequestResponse({
-      description: 'Données invalides.',
-      type: ProblemDetailsDto,
-    })
+  @ApiBadRequestResponse({
+    description: 'Données invalides.',
+    type: ProblemDetailsDto,
+  })
 ```
 
 Cependant, le décorateur spécialisé ne précise pas toujours le type de média. On peut utiliser <code>@ApiResponse()</code> avec un contenu explicite lorsqu’on doit garantir <code>application/problem+json</code>.
@@ -294,3 +303,60 @@ Si plusieurs contrôleurs utilisent exactement les mêmes erreurs, on peut crée
 Cette abstraction doit être introduite après avoir compris les annotations individuelles. Une abstraction trop précoce rend la documentation difficile à lire et à modifier.
 
 
+## 8. Documenter les DTO
+
+Pour chaque propriété publique, préciser :
+
+- description;
+- type;
+- exemple;
+- contraintes;
+- format;
+- caractère obligatoire.
+
+Documenter :
+
+- création d’un bâtiment;
+- modification d’un bâtiment;
+- réponse Building;
+- création et modification d’un local;
+- réponse Room;
+- Problem Details.
+
+## 9. Documenter les contrôleurs
+
+Ajouter les métadonnées utiles :
+
+- tag;
+- résumé de l’opération;
+- paramètre de chemin;
+- schéma du corps;
+- réponse de succès;
+- en-tête <code>Location</code>;
+- réponses d’erreur;
+- type <code>application/problem+json</code>.
+
+Éviter les descriptions qui répètent seulement le nom de la méthode.
+
+## 10. Vérifier Swagger UI et tester le contrat
+
+Démarrer :
+
+```bash
+npm run start:dev
+```
+
+Vérifier :
+
+```text
+http://localhost:3000/docs
+http://localhost:3000/docs/openapi.json
+```
+
+Dans le document généré :
+
+- Pour chaque endpoint, vérifier : L'URL, la méthode, le corps envoyé, le corps retourné, le comportement avec un identifiant inexistant, les en-têtes;
+- toutes les routes doivent contenir <code>/api/v1</code>;
+- les DTO doivent contenir leurs propriétés;
+- le code de statut : les succès et erreurs doivent être documentés;
+- les détails internes ne doivent pas être exposés.

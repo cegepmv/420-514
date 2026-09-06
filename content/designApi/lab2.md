@@ -20,6 +20,21 @@ Dans le `README.md`, ajouter une section précisant :
 
 ## Étape 2 : Activer la version 1
 
+Dans la configuration commune de l’application :
+
+- conserver le préfixe <code>api</code>;
+- activer <code>VersioningType.URI</code>;
+- décider si une version par défaut est nécessaire;
+- conserver le préfixe automatique <code>v</code>.
+
+Composition attendue :
+
+```text
+préfixe global + version + chemin du contrôleur
+/api          + /v1     + /buildings
+```
+
+
 Dans `main.ts` :
 
 ```ts
@@ -42,14 +57,43 @@ GET  /api/v1/buildings/:id
 POST /api/v1/buildings
 ```
 
+### Décision pour Health
+
+Deux possibilités :
+
+| Choix | Conséquence |
+|---|---|
+| <code>/api/v1/health</code> | La route suit le contrat versionné |
+| <code>/api/health</code> neutre | L’infrastructure conserve une URL stable |
+
+Choisir une stratégie et l’appliquer dans le README.
+
+Associer explicitement à la version <code>1</code> :
+
+- le contrôleur des bâtiments;
+- le contrôleur des locaux;
+- la route d’état, ou la déclarer neutre si cette décision est justifiée.
+
 ## Étape 4 : Définir les données échangées
 
 Corps de création :
 
 ```json
 {
-  "name": "Pavillon principal",
-  "city": "Montréal"
+  "code": "bld-001",
+  "name": "Pavillon central",
+  "yearBuilt": 1969
+}
+```
+
+Ou :
+
+```json
+{
+  "code": "bld-001",
+  "name": "Pavillon central",
+  "address": "7000, rue Marie-Victorin",
+  "yearBuilt": 1969,
 }
 ```
 
@@ -57,22 +101,12 @@ Réponse de création :
 
 ```json
 {
-  "id": "bld-001",
-  "name": "Pavillon principal",
-  "city": "Montréal",
-  "createdAt": "2026-08-26T14:30:00Z"
+  "id": "9a4df528-5490-4220-a81e-3a0cbbdc957d",
+  "code": "bld-001",
+  "name": "Pavillon central",
+  "address": "7000, rue Marie-Victorin",
+  "yearBuilt": 1969,
+  "createdAt": "2026-08-31T18:34:30.450Z",
+  "updatedAt": "2026-08-31T18:34:30.450Z"
 }
 ```
-
-## Étape 5 : Tester le contrat
-
-Pour chaque endpoint, vérifier :
-
-- la méthode;
-- l'URL;
-- les en-têtes;
-- le corps envoyé;
-- le code de statut;
-- le corps retourné;
-- le comportement avec un identifiant inexistant.
-
