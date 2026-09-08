@@ -338,7 +338,26 @@ Ajouter les métadonnées utiles :
 
 Éviter les descriptions qui répètent seulement le nom de la méthode.
 
-## 10. Vérifier Swagger UI et tester le contrat
+## 10. Adapter le README
+
+Mettre à jour :
+
+- l’URL de base;
+- le tableau des endpoints;
+- les exemples <code>curl</code>;
+- la section Swagger/OpenAPI;
+
+### Ajouter la politique de versionnement
+
+Expliquer :
+
+- V1 est la seule version active;
+- les changements compatibles sont ajoutés à V1;
+- une V2 sera introduite pour une rupture;
+- une ancienne version bénéficiera d’une période de dépréciation avant son retrait.
+
+
+## 11. Vérifier Swagger UI et tester le contrat
 
 Démarrer :
 
@@ -360,3 +379,10 @@ Dans le document généré :
 - les DTO doivent contenir leurs propriétés;
 - le code de statut : les succès et erreurs doivent être documentés;
 - les détails internes ne doivent pas être exposés.
+
+
+## Références
+
+- NestJS — Versioning : https://docs.nestjs.com/techniques/versioning
+- NestJS — OpenAPI : https://docs.nestjs.com/openapi/introduction
+- OpenAPI Specification : https://spec.openapis.org/oas/latest.html

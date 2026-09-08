@@ -1,8 +1,8 @@
 +++
 title = "Bases de données"
 type = "chapter"
-pre = "5. "
-weight = 6
+pre = "6. "
+weight = 7
 draft = false
 +++
 

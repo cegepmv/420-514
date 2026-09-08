@@ -243,12 +243,12 @@ pendant les incréments suivants.
 ```json
 {
   "id": "e733b449-de11-46d1-a3fc-1dd86be1738f",
-  "code": "PC",
+  "code": "bld-001",
   "name": "Pavillon central",
   "address": "7000, rue Marie-Victorin",
   "yearBuilt": 1969,
   "createdAt": "2026-08-26T21:27:26.738Z",
-  "modifiedAt": "2026-08-26T21:27:26.738Z"
+  "modifiedAt": "2026-08-27T21:29:26.738Z"
 }
 ```
 
@@ -256,11 +256,14 @@ pendant les incréments suivants.
 
 ```json
 {
+  "id": "e733b453-mp18-46e1-a3rs-9zz86xe1796c",
   "code": "A-204",
   "buildingId": "identifiant-du-batiment",
   "floor": 2,
   "type": "laboratoire",
-  "capacity": 30
+  "capacity": 30,   
+  "createdAt": "2026-08-27T21:29:23.738Z",
+  "modifiedAt": "2026-08-28T21:21:16.738Z"
 }
 ```
 
