@@ -1,5 +1,5 @@
 +++
-title = "Regex"
+title = "Validations et Regex"
 type = "chapter"
 pre = "5. "
 weight = 6

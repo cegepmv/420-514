@@ -9,7 +9,7 @@ title = '🧪 Laboratoire : Intégration de MongoDB avec Node.js (V3)'
 
 Vous développez un service Web RESTful pour gérer les utilisateurs, produits et commandes d'une plateforme. Le projet évolue à travers **trois versions** d’API (v1, v2, v3), chacune correspondant à une étape d’évolution de l’architecture ou du modèle de données.
 
-## 🗂 Structure du projet
+## Structure du projet
 
 Le projet adopte **l’approche B** avec une organisation par **version d’API** :
 

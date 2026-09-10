@@ -1,6 +1,6 @@
 +++
 title = "📘 Bases de données NoSQL"
-weight = 81
+weight = 80
 draft = false
 +++
 

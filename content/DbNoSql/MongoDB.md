@@ -1,5 +1,5 @@
 +++
-weight = 82
+weight = 81
 draft = false
 title = '📘 Base de données document : MongoDB'
 +++
@@ -36,6 +36,29 @@ MongoDB stocke les données sous forme de **documents**. Un document est une uni
       "timestamp": "2023-10-15T11:00:00Z"
     }
   ]
+}
+```
+
+### Exemple d'utilisation dans un service :
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Sensor } from './sensor.schema';
+
+@Injectable()
+export class SensorService {
+  constructor(@InjectModel(Sensor.name) private sensorModel: Model<Sensor>) {}
+
+  async create(sensorData: Partial<Sensor>): Promise<Sensor> {
+    const newSensor = new this.sensorModel(sensorData);
+    return newSensor.save();
+  }
+
+  async findAll(): Promise<Sensor[]> {
+    return this.sensorModel.find().exec();
+  }
 }
 ```
 
@@ -79,6 +102,11 @@ MongoDB supporte plusieurs types d'index pour optimiser les performances des req
 - **Index composé** : Créé sur plusieurs champs pour optimiser les recherches plus complexes.
 - **Index textuel** : Utilisé pour effectuer des recherches en texte intégral.
 
+```ts
+@Prop({ index: true })
+location: string;
+```
+
 ### d. **Requêtes avancées et agrégations**
 
 MongoDB offre une syntaxe puissante pour écrire des requêtes complexes :
@@ -95,6 +123,17 @@ db.sensors.aggregate([
 ])
 ```
 
+```ts
+async calculateAverageTemperature(sensorId: string): Promise<number> {
+  const result = await this.sensorModel.aggregate([
+    { $match: { _id: sensorId } },
+    { $unwind: '$readings' },
+    { $group: { _id: null, average: { $avg: '$readings.value' } } },
+  ]);
+  return result[0]?.average || 0;
+}
+```
+
 ### e. **Réplicas et haute disponibilité**
 
 MongoDB prend en charge la **réplication** via des **Replica Sets**. Un Replica Set est un groupe de serveurs MongoDB où :
@@ -108,6 +147,17 @@ MongoDB prend en charge la **réplication** via des **Replica Sets**. Un Replica
 En cas de défaillance du serveur primaire, MongoDB effectue automatiquement une élection pour promouvoir un secondaire au statut de primaire, assurant ainsi une haute disponibilité.
 
 </aside>
+
+```ts
+@Module({
+  imports: [
+    MongooseModule.forRoot('mongodb://primary,secondary,tertiary/mydb', {
+      replicaSet: 'rs0',
+    }),
+  ],
+})
+export class AppModule {}
+```
 
 ## 3. Utilisation des bases de données orientées document
 

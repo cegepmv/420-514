@@ -5,7 +5,7 @@ title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
 +++
 
 
-### Étape 1 : Installation de MongoDB
+## Étape 1 : Installation de MongoDB
 
 ### a. Installer MongoDB sur Windows :
 
@@ -51,7 +51,7 @@ title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
     ```
     
 
-### Étape 2 : Démarrer MongoDB et le shell Mongo
+## Étape 2 : Démarrer MongoDB et le shell Mongo
 
 MongoDB inclut un shell appelé **mongosh**, qui permet d'interagir avec la base de données via des commandes.
 
@@ -101,7 +101,7 @@ Une fois connecté, vous pouvez voir les bases de données contenant dans votre 
 
 ![Capture d’écran 2024-10-11 015313.png](/420-514/images/Capture_dcran_2024-10-11_015313.png)
 
-### Étape 3 : Créer une base de données et une collection
+## Étape 3 : Créer une base de données et une collection
 
 Dans MongoDB, les bases de données contiennent des **collections** (équivalent des tables dans une base de données relationnelle), et les collections contiennent des **documents**.
 
@@ -122,7 +122,7 @@ Les collections sont créées lors de l'insertion d'un document. Par exemple :
     ![Capture d’écran 2024-10-11 124607.png](/420-514/images/Capture_dcran_2024-10-11_124607.png)
     
 
-### Étape 4 : Insérer des documents dans une collection
+## Étape 4 : Insérer des documents dans une collection
 
 Les documents sont insérés sous forme d'objets JSON. Voici comment ajouter un utilisateur dans la collection "utilisateurs" :
 
@@ -143,7 +143,7 @@ db.utilisateurs.insertMany([
 ])
 ```
 
-### Étape 5 : Rechercher des documents
+## Étape 5 : Rechercher des documents
 
 Pour récupérer des documents, utilisez la commande `find` :
 
@@ -168,7 +168,7 @@ Par exemple, pour rechercher les utilisateurs de plus de 25 ans :
     ```
     
 
-### Étape 6 : Mettre à jour des documents
+## Étape 6 : Mettre à jour des documents
 
 MongoDB vous permet de mettre à jour des documents existants avec la commande `updateOne` ou `updateMany`.
 
@@ -193,7 +193,7 @@ Pour augmenter l'âge de tous les utilisateurs de 2 ans :
     ```
     
 
-### Étape 7 : Supprimer des documents
+## Étape 7 : Supprimer des documents
 
 Pour supprimer des documents, utilisez `deleteOne` ou `deleteMany` :
 
@@ -212,7 +212,7 @@ Pour supprimer tous les utilisateurs de plus de 30 ans :
     ```
     
 
-### Étape 8 : Indexation
+## Étape 8 : Indexation
 
 MongoDB permet d'indexer des champs pour améliorer les performances des requêtes. Voici comment créer un index sur le champ "nom" :
 
@@ -244,7 +244,7 @@ Ou mettre une valeur par défaut :
 
 ![image.png](/420-514/images/image%204.png)
 
-### Étape 9 : Utiliser l'agrégation
+## Étape 9 : Utiliser l'agrégation
 
 L'agrégation permet de réaliser des opérations complexes sur les données, comme des groupements, des tris, et des filtres avancés.
 
@@ -272,7 +272,7 @@ Calculer le nombre d'utilisateurs par tranche d'âge :
     ```
     
 
-### Étape 10 : Sauvegarde et restauration de données
+## Étape 10 : Sauvegarde et restauration de données
 
 MongoDB offre des outils pour sauvegarder et restaurer des données.
 
@@ -291,7 +291,7 @@ Utilisez `mongorestore` pour restaurer les données :
     ```
     
 
-### Étape 11 : Accéder à MongoDB via une application Node.js
+## Étape 11 : Accéder à MongoDB via une application Node.js
 
 MongoDB peut être utilisé avec diverses applications, dont **Node.js**. Voici un exemple d'intégration avec Node.js :
 
@@ -305,24 +305,53 @@ MongoDB peut être utilisé avec diverses applications, dont **Node.js**. Voici 
     
     ```jsx
     const { MongoClient } = require('mongodb');
-    const uri = "mongodb://localhost:27017";
-    const client = new MongoClient(uri);
-    
-    async function run() {
-      try {
-        await client.connect();
-        const database = client.db('ma_base_de_donnees');
-        const utilisateurs = database.collection('utilisateurs');
-    
-        const nouvelUtilisateur = { nom: "John", age: 28, email: "john@example.com" };
-        const resultat = await utilisateurs.insertOne(nouvelUtilisateur);
-        console.log(`Nouveau document inséré avec l'ID ${resultat.insertedId}`);
-      } finally {
-        await client.close();
-      }
+    require('dotenv').config();
+
+    const uri = process.env.MONGODB_URI;
+
+    if (!uri) {
+        throw new Error(
+            "La variable d'environnement MONGODB_URI est obligatoire.",
+        );
     }
-    run().catch(console.dir);
+
+    const client = new MongoClient(uri);
+
+    async function run() {
+        try {
+            await client.connect();
+
+            const database = client.db('energy-api-lab');
+            const buildings = database.collection('buildings');
+
+            const newBuilding = {
+            name: 'Pavillon principal',
+            address: '7000, rue Marie-Victorin, Montréal',
+            yearBuilt: 1970,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            };
+
+            const result = await buildings.insertOne(newBuilding);
+
+            console.log(`Bâtiment créé avec l’identifiant ${result.insertedId}`);
+        } catch (error) {
+            console.error('Impossible d’insérer le bâtiment.', error);
+            process.exitCode = 1;
+        } finally {
+            await client.close();
+        }
+    }
+
+    void run();
     ```
-    
+
+Cet exemple sert uniquement à montrer la connexion avec le pilote MongoDB natif. Dans energy-api, l’intégration professionnelle sera ensuite réalisée avec :
+
+```sh
+npm install @nestjs/mongoose mongoose @nestjs/config
+```
+
+On injectera alors les modèles Mongoose dans les services NestJS plutôt que de créer manuellement un MongoClient dans l’application.  
 
 [Exemples de requêtes, recherche et tri ](https://www.notion.so/Exemples-de-requ-tes-recherche-et-tri-11c45eb1bdf88046bacfffb12628dab8?pvs=21)

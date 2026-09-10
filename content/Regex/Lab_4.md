@@ -1,3 +1,8 @@
++++
+draft = false
+weight = 53
+title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
++++
 
 
 ## 1. Installer les dépendances
@@ -206,35 +211,10 @@ export class CreateBuildingDto {
 
 De la même façon que ce qui a été fait avec Building, valider les attributs de Room.
 
-## 5. Introduire les contrats de persistance
+## 5. Ajuster controlleurs
+Pour utiliser `ProblemDetailsDto`.
 
-### `src/persistence/repositories/buildings.repository.ts`
-### `src/persistence/repositories/rooms.repository.ts`
-
-## 6. Enregistrer les dépôts
-
-### `src/persistence/persistence.module.ts`
-
-```ts
-import { Module } from '@nestjs/common';
-import { BuildingsRepository } from './repositories/buildings.repository';
-import { RoomsRepository } from './repositories/rooms.repository';
-
-@Module({
-  providers: [],
-  exports: [BuildingsRepository, RoomsRepository],
-})
-export class PersistenceModule {}
-```
-
-### Ajuster services pour utiliser les Repositories
-
-Modifier vos services pour que chacun utilise le Repository correspondant.
-
-## 7. Ajuster controlleurs
-Pour iutiliser `ProblemDetailsDto`.
-
-## 8. Contrat HTTP à stabiliser
+## 6. Contrat HTTP à stabiliser
 
 Complétez le tableau suivant et assurez-vous que votre code implémente le contrat correctement :
 
