@@ -17,10 +17,12 @@ Les expressions régulières sont utilisées dans de nombreux langages de progra
 Exemple simple : Trouver toutes les adresses e-mail dans un texte.
 ```javascript
 const text = "Contactez-nous à support@example.com ou sales@example.org.";
+// Sans le modificateur /g, seule la première occurrence serait trouvée
 const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
 const emails = text.match(emailRegex);
 console.log(emails); // ["support@example.com", "sales@example.org"]
 ```
+> Le modificateur /g dans une expression régulière signifie global. Cela indique que la recherche doit être effectuée sur l'ensemble du texte et non arrêtée après la première correspondance. En d'autres termes, il permet de trouver toutes les correspondances dans une chaîne, pas seulement la première.
 
 ### A. Pourquoi utiliser les expressions régulières ?
 
@@ -472,7 +474,6 @@ Les expressions régulières sont des outils puissants pour manipuler et valider
 
 ## Ressources
 
-[RegExr: Learn, Build, & Test RegEx](https://regexr.com/) : Un autre outil interactif avec des explications.
-[MDN Web Docs](https://regex101.com/) - Expressions régulières
-[Regex101](https://regex101.com/) : Un outil interactif pour tester les regex.
-[Guide complet sur les regex](https://www.regular-expressions.info/) : Un guide approfondi pour maîtriser les expressions régulières.
+- [RegExr: Learn, Build, & Test RegEx](https://regexr.com/) : Un autre outil interactif pour tester les regex avec des explications.
+- [MDN Web Docs](https://regex101.com/) - Expressions régulières
+- [Guide complet sur les regex](https://www.regular-expressions.info/) : Un guide approfondi pour maîtriser les expressions régulières.

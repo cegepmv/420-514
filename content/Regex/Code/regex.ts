@@ -29,9 +29,9 @@ function caracBase() {
 }
 
 function metaCarac() {
-    const regex = /\d{3}-\d{2}-\d{4}/;
-    const result = "Numéro : 123-45-6789".match(regex);
-    console.log(result); // ["123-45-6789"]
+    const regex = /\d{3}-\d{3}-\d{4}/;
+    const result = "Numéro : 123-425-6789".match(regex);
+    console.log(result); // ["123-425-6789"]
 }
 
 function classCarac() {
@@ -72,13 +72,15 @@ function groupes() {
     strings.forEach(str => {
         const match = str.match(regexCapturing);
         console.log(`"${str}" :`, match ? match[0] : "Pas de correspondance");
+        console.log(match);
     });
-
+    
     // Tester les groupes non-capturants
     console.log("\nGroupes non-capturants :");
     strings.forEach(str => {
         const match = str.match(regexNonCapturing);
         console.log(`"${str}" :`, match ? match[0] : "Pas de correspondance");
+        console.log(match);
     });
 }
 
@@ -88,10 +90,12 @@ function extractGroupes() {
 
     const match = date.match(regex);
     if (match) {
+        console.log(match);
         console.log(`Année : ${match[1]}`); // 2023
         console.log(`Mois : ${match[2]}`);  // 10
         console.log(`Jour : ${match[3]}`);  // 01
     }
+    console.log(match);
 }
 
 function groupeCapturant() {
@@ -133,6 +137,7 @@ function groupeNonCapturant() {
     urls.forEach(url => {
         console.log(`"${url}" correspond ? :`, regex.test(url));
     });
+    console.log(urls[0].match(regex));
 }
 
 function validatePhoneNumber(phoneNumber) {
@@ -171,28 +176,31 @@ function extractLog() {
 }
 
 function exemples() {
-    emailValidation1();
-    /* 
+    extractLog(); 
+    /*
     caracBase();
     metaCarac();
     classCarac();
+    emailValidation1();
     quantificateurs();
     groupes();
     extractGroupes();
     groupeCapturant();
     groupeNonCapturant();
-
+    
+    searchReplace();
+    
+    // Exemple d'utilisation
+    const messyText = "   Ceci   est    un   texte   avec    trop d'espaces.   ";
+    console.log(cleanExtraSpaces(messyText));  // "Ceci est un texte avec trop d'espaces."
+    
     // Exemple d'utilisation de la fonction validateEmail
     const email = "test@example.com";
     console.log(validateEmail(email));  // true
     console.log(validateEmail("invalid-email"));  // false
     console.log(validatePhoneNumber("(123) 456-7890")); // true
     console.log(validatePhoneNumber("123-456-7890")); // false
-
-    // Exemple d'utilisation
-    const messyText = "   Ceci   est    un   texte   avec    trop d'espaces.   ";
-    console.log(cleanExtraSpaces(messyText));  // "Ceci est un texte avec trop d'espaces."
-
+    
     // Exemple d'utilisation
     const messyPhoneNumber = "(123) 456-7890";
     console.log(cleanPhoneNumber(messyPhoneNumber));  // "1234567890"
@@ -201,7 +209,7 @@ function exemples() {
     const textWithEmails = "Voici quelques emails : test@example.com, contact@domain.org, info@site.fr";
     console.log(extractEmails(textWithEmails));  // ["test@example.com", "contact@domain.org", "info@site.fr"]
 
-    extractLog(); */
+    */
 }
 
 exemples(); 
