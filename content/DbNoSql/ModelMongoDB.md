@@ -114,10 +114,8 @@ Cela permet d’améliorer les performances de lecture, mais nécessite une gest
 
 ### 4. **Approche par agrégat**
 
-MongoDB fonctionne mieux avec des **agrégats**, Voici une version ajustée des exemples pour refléter le contexte du projet `energy-api` :
 
-```markdown
-pour éviter une deuxième recherche lors de la récupération des données des capteurs.
+MongoDB fonctionne mieux avec des **agrégats**, c'est-à-dire des ensembles de données regroupées dans un seul document. L'idée est de modéliser les données de manière à stocker autant d'informations connexes que possible dans un seul document. Cela évite de nombreuses lectures et écritures séparées, en particulier pour les grandes applications comme `energy-api`ey donc éviter une deuxième recherche lors de la récupération des données des capteurs.
 
 ```json
 {
@@ -139,9 +137,6 @@ pour éviter une deuxième recherche lors de la récupération des données des 
 
 Cela permet d’améliorer les performances de lecture, mais nécessite une gestion plus rigoureuse lors de la mise à jour des données, car les informations (comme les détails du bâtiment) peuvent être dupliquées dans plusieurs documents.
 
-### 4. **Approche par agrégat**
-
-MongoDB fonctionne mieux avec des **agrégats**, c'est-à-dire des ensembles de données regroupées dans un seul document. L'idée est de modéliser les données de manière à stocker autant d'informations connexes que possible dans un seul document. Cela évite de nombreuses lectures et écritures séparées, en particulier pour les grandes applications comme `energy-api`.
 
 Un agrégat peut contenir les données principales et leurs sous-collections (comme les capteurs avec leurs relevés).
 
