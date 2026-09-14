@@ -6,14 +6,15 @@ draft = false
 +++
 
 
-Design d'API et bonnes pratiques en
+Design d'API et bonnes pratiques 1
 
-{{< video src="https://www.youtube.com/watch?v=7QfswaV0re4" alt="Design d'API et bonnes pratiques en" controls="true" loop="false" />}}
+{{< youtube id="7QfswaV0re4" title="Design d’API et bonnes pratiques en" cc_load_policy="1" cc_lang_pref="fr"  hl="fr">}}
 
 
-Design d'API et bonnes pratiques fr
+Design d'API et bonnes pratiques 2
 
-{{< video src="https://www.youtube.com/watch?v=pH7ZT9cOL0k" alt="Design d'API et bonnes pratiques fr" controls="true" loop="false" />}}
+{{< youtube id="pH7ZT9cOL0k" title="Design d’API et bonnes pratiques fr" cc_load_policy="1" cc_lang_pref="fr" hl="fr">}}
+
 
 
 ## Erreurs fréquentes

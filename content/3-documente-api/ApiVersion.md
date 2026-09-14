@@ -1,10 +1,9 @@
 +++
 date = '2025-09-21T23:45:12-04:00'
-draft = true
+draft = false
 title = 'Versionnement des API RESTful'
 weight = 40
 +++
-
 
 
 ## 🧠 Pourquoi versionner une API REST?
@@ -35,73 +34,6 @@ Le **versionnage** permet d’assurer la stabilité et la compatibilité des app
 | **Dans l’en-tête**    | `Accept: application/vnd.myapi.v1+json` | Très flexible et propre        | Moins visible, plus complexe à implémenter   |
 | **Dans un paramètre** | `GET /api/users?version=1`              | Simple à tester                | Non recommandé pour les API REST officielles |
 
-🧩 **Recommandation** : Versionner **dans l’URL** pour les APIs REST publiques et documentées.
-
-
-## 📁 Exemple : Structure de projet avec versionnement
-
-```
-/src
- ├── routes
- │   ├── v1
- │   │    └── users.routes.ts
- │   └── v2
- │        └── users.routes.ts
- ├── controllers
- │   ├── v1
- │   │    └── users.controller.ts
- │   └── v2
- │        └── users.controller.ts
- └── app.ts
-```
-
-## Implémentation dans Express (Node.js/TypeScript)
-
-### 📄 `app.ts`
-
-```ts
-import express from 'express';
-
-const app = express();
-
-app.use('/api/v1', require('./routes/v1/users.routes'));
-app.use('/api/v2', require('./routes/v2/users.routes'));
-
-app.listen(3000, () => console.log("API running on http://localhost:3000"));
-```
-
-### 📄 `routes/v1/users.routes.ts`
-
-```ts
-import { Router } from 'express';
-import { getUsersV1 } from '../../controllers/v1/users.controller';
-
-const router = Router();
-router.get('/users', getUsersV1);
-module.exports = router;
-```
-
-## 📄 Swagger – Documentation versionnée
-
-Vous pouvez créer un fichier Swagger différent pour chaque version :
-
-### 🗂️ Arborescence
-
-```
-/docs
- ├── swagger.v1.json
- └── swagger.v2.json
-```
-
-Dans chaque fichier, vous définissez le champ `"servers"` :
-
-```json
-"servers": [
-  { "url": "http://localhost:3000/api/v1" }
-]
-```
-
-Et les routes propres à la version.
-
-
-
+{{%notice style="tip" title="🧩 Recommandation"%}}
+Versionner **dans l’URL** pour les APIs REST publiques et documentées.
+{{%/notice%}}

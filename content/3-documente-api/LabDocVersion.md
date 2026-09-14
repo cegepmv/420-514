@@ -226,12 +226,12 @@ Le nom doit correspondre exactement au paramètre de la route.
 
 Les décorateurs spécialisés rendent l’intention plus claire :
 
-- <code>@ApiOkResponse()</code>;
-- <code>@ApiCreatedResponse()</code>;
-- <code>@ApiNoContentResponse()</code>;
-- <code>@ApiBadRequestResponse()</code>;
-- <code>@ApiNotFoundResponse()</code>;
-- <code>@ApiConflictResponse()</code>.
+- `@ApiOkResponse()`;
+- `@ApiCreatedResponse()`;
+- `@ApiNoContentResponse()`;
+- `@ApiBadRequestResponse()`;
+- `@ApiNotFoundResponse()`;
+- `@ApiConflictResponse()`.
 
 ### 6.5 Éviter la surcharge
 
@@ -249,6 +249,11 @@ La qualité de la documentation est plus importante que le nombre d’annotation
 
 Créer une classe représentant le contrat d’erreur :
 
+<!-- {{% expand "Solution" %}}
+
+{{% /expand %}} -->
+
+{{% expand "Solution" %}}
 ```ts
     export class ProblemDetailsDto {
       @ApiProperty({ example: 'about:blank' })
@@ -275,8 +280,10 @@ Créer une classe représentant le contrat d’erreur :
       errors?: string[];
     }
 ```
+{{% /expand %}} 
 
-> Si cette classe est utilisée dans plusieurs modules ou dans toute l'application, placez-la dans un dossier commun, par exemple :
+{{% notice tip "Rappel" %}}
+Si cette classe est utilisée dans plusieurs modules ou dans toute l'application, placez-la dans un dossier commun, par exemple :
 ```
 src/
 ├── common/
@@ -293,12 +300,13 @@ Dans le contrôleur :
     type: ProblemDetailsDto,
   })
 ```
+{{% /notice %}}
 
-Cependant, le décorateur spécialisé ne précise pas toujours le type de média. On peut utiliser <code>@ApiResponse()</code> avec un contenu explicite lorsqu’on doit garantir <code>application/problem+json</code>.
+Cependant, le décorateur spécialisé ne précise pas toujours le type de média. On peut utiliser `@ApiResponse()` avec un contenu explicite lorsqu’on doit garantir `application/problem+json`.
 
 ### 7.1 Réduire la répétition
 
-Si plusieurs contrôleurs utilisent exactement les mêmes erreurs, on peut créer des décorateurs composés avec <code>applyDecorators()</code>.
+Si plusieurs contrôleurs utilisent exactement les mêmes erreurs, on peut créer des décorateurs composés avec `applyDecorators()`.
 
 Cette abstraction doit être introduite après avoir compris les annotations individuelles. Une abstraction trop précoce rend la documentation difficile à lire et à modifier.
 
@@ -332,9 +340,9 @@ Ajouter les métadonnées utiles :
 - paramètre de chemin;
 - schéma du corps;
 - réponse de succès;
-- en-tête <code>Location</code>;
+- en-tête `Location`;
 - réponses d’erreur;
-- type <code>application/problem+json</code>.
+- type `application/problem+json`.
 
 Éviter les descriptions qui répètent seulement le nom de la méthode.
 
@@ -344,7 +352,7 @@ Mettre à jour :
 
 - l’URL de base;
 - le tableau des endpoints;
-- les exemples <code>curl</code>;
+- les exemples `curl`;
 - la section Swagger/OpenAPI;
 
 ### Ajouter la politique de versionnement

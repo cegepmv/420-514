@@ -53,7 +53,9 @@ title = '🧪 Laboratoire : MongoDB avec Atlas et Compass'
 
 ## Étape 2 : Démarrer MongoDB et le shell Mongo
 
-MongoDB inclut un shell appelé **mongosh**, qui permet d'interagir avec la base de données via des commandes.
+{{< youtube id="tTsuG-3kcm8" title="L’API REST" cc_load_policy="1" cc_lang_pref="fr"  hl="fr">}}
+
+MongoDB inclut un shell appelé **[mongosh](https://www.mongodb.com/docs/mongodb-shell/)**, qui permet d'interagir avec la base de données via des commandes.
 
 - Pour ouvrir le shell Mongo, tapez simplement `mongosh` dans votre terminal ou invite de commande.
 - Vous devriez voir une invite comme celle-ci :
@@ -71,7 +73,7 @@ Aller sur le lien suivant et créer un compte avec **Google** ou Github :
 
 ## Créer votre premier Cluster :
 
-![Capture d’écran 2024-10-11 013457.png](/420-514/images/Capture_dcran_2024-10-11_013457.png)
+![Premier cluster créé](/420-514/images/Capture_dcran_2024-10-11_013457.png)
 
 Choisissez l’option gratuite avec n’importe quel des 3 fournisseurs proposés :
 
@@ -142,6 +144,8 @@ db.utilisateurs.insertMany([
   { "nom": "Charlie", "age": 22, "email": "charlie@example.com" }
 ])
 ```
+
+[Voir la documentation ici.](https://www.mongodb.com/docs/mongodb-shell/crud/insert/#std-label-mongosh-insert)
 
 ## Étape 5 : Rechercher des documents
 
@@ -251,25 +255,25 @@ L'agrégation permet de réaliser des opérations complexes sur les données, co
 1. **Exemple de pipeline d'agrégation** :
 Pour calculer l'âge moyen des utilisateurs :
     
-    ```bash
-    db.utilisateurs.aggregate([
-      { "$group": { "_id": null, "ageMoyen": { "$avg": "$age" } } }
-    ])
-    ```
+```bash
+db.utilisateurs.aggregate([
+    { "$group": { "_id": null, "ageMoyen": { "$avg": "$age" } } }
+])
+```
     
 2. **Pipeline plus complexe** :
 Calculer le nombre d'utilisateurs par tranche d'âge :
     
-    ```bash
-    db.utilisateurs.aggregate([
-      { "$bucket": {
-        "groupBy": "$age",
-        "boundaries": [ 20, 30, 40, 50 ],
-        "default": "50+",
-        "output": { "nombre": { "$sum": 1 } }
-      }}
-    ])
-    ```
+```bash
+db.utilisateurs.aggregate([
+    { "$bucket": {
+    "groupBy": "$age",
+    "boundaries": [ 20, 30, 40, 50 ],
+    "default": "50+",
+    "output": { "nombre": { "$sum": 1 } }
+    }}
+])
+```
     
 
 ## Étape 10 : Sauvegarde et restauration de données

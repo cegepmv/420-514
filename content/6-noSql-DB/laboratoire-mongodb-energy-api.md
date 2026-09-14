@@ -209,6 +209,8 @@ Déterminer :
 
 Choisir une stratégie d’unicité pour le nom d’un bâtiment. Une vérification dans le service améliore le message retourné, mais seul un index unique protège réellement les données lorsque plusieurs requêtes concurrentes sont reçues.
 
+{{% expand "Solution" %}}
+
 ```ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
@@ -236,6 +238,7 @@ export class Building extends Document {
 
 export const BuildingSchema = SchemaFactory.createForClass(Building);
 ```
+{{% /expand %}}
 
 ## 7. Concevoir le schéma du local
 
@@ -249,6 +252,8 @@ Cette décision est justifiée parce que :
 - les locaux peuvent devenir nombreux;
 - on doit pouvoir les chercher et les filtrer indépendamment;
 - chaque local appartient à un seul bâtiment.
+
+{{% expand "Solution" %}}
 
 ```ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
@@ -274,6 +279,7 @@ export class Room extends Document {
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
 ```
+{{% /expand %}}
 
 ## 8. Définir les index nécessaires
 
@@ -302,6 +308,8 @@ Dans NestJS, un modèle Mongoose doit être enregistré dans le module fonctionn
 - importer ou exporter seulement les dépendances réellement nécessaires entre les modules.
 
 On conserve une organisation par fonctionnalité : les schémas des bâtiments restent avec le domaine `buildings`, et ceux des locaux avec le domaine `rooms`.
+
+{{% expand "Solution" %}}
 
 ```ts
 // importer le schema pour le document de la collection 'buildings' après l'avoir créé
@@ -341,6 +349,7 @@ export class BuildingsService {
 
 }
 ```
+{{% /expand %}}
 
 ## 10. Migrer le service des bâtiments
 
@@ -470,6 +479,9 @@ imports: [
 ```
 
 ### Créez un fichier `buildings.repository.ts` :
+
+{{% expand "Solution" %}}
+
 ```ts
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -499,8 +511,12 @@ export class BuildingsRepository {
   }
 }
 ```
+{{% /expand %}}
+
 ### Utiliser le repository dans le service
 Modifiez le service pour utiliser le repository :
+
+{{% expand "Solution" %}}
 
 ```ts
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -528,6 +544,9 @@ export class BuildingsService {
   }
 }
 ```
+
+{{% /expand %}}
+
 
 ## 18. Mettre à jour le projet public
 
