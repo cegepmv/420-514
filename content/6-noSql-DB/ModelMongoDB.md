@@ -17,9 +17,13 @@ Par exemple, si vous avez une application qui accède fréquemment à des objets
 
 ### 2. **Choisir entre documents imbriqués et références**
 
-- **Imbrication de documents** : Vous incluez des sous-documents directement à l'intérieur d'un document parent. Cela fonctionne bien lorsque les sous-documents sont étroitement liés au document parent et ne sont pas souvent modifiés indépendamment. Cela permet de minimiser les opérations de lecture en regroupant toutes les informations nécessaires en un seul document.
+- **Imbrication de documents** : Vous incluez des sous-documents directement à l'intérieur d'un document parent. Cela fonctionne bien lorsque les sous-documents sont étroitement liés au document parent et ne sont pas souvent modifiés indépendamment. 
+Ces modèles de données dénormalisés permettent aux applications de récupérer des données connexes en une seule opération de base de données. Cela permet de minimiser les opérations de lecture en regroupant toutes les informations nécessaires en un seul document.
+
+![Modelisation référence MongoDB](/420-514/images/db/data-model_embeded_mongodb.svg)
+
     
-    **Exemple** : Dans une application de gestion de commandes, vous pouvez imbriquer les informations des produits dans le document commande.
+**Exemple** : Dans une application de gestion de commandes, vous pouvez imbriquer les informations des produits dans le document commande. Dans `energy-api` on peut imbriquer les mesures lues dans le document du capteur :
     
 ```json
 {
@@ -52,6 +56,8 @@ Inconvénients :
 
     
 - **Références (liens)** : Dans certains cas, lorsque les données doivent être partagées ou modifiées indépendamment (par exemple, des données qui apparaissent dans plusieurs documents), il peut être judicieux d'utiliser des références. MongoDB ne supporte pas directement les jointures comme dans SQL, mais vous pouvez gérer des relations en utilisant des références.
+
+![Modelisation référence MongoDB](/420-514/images/db/data-model_reference_mongodb.svg)
     
     **Exemple** : Une relation entre un bâtiment et ses capteurs.  
 
@@ -115,7 +121,7 @@ Cela permet d’améliorer les performances de lecture, mais nécessite une gest
 ### 4. **Approche par agrégat**
 
 
-MongoDB fonctionne mieux avec des **agrégats**, c'est-à-dire des ensembles de données regroupées dans un seul document. L'idée est de modéliser les données de manière à stocker autant d'informations connexes que possible dans un seul document. Cela évite de nombreuses lectures et écritures séparées, en particulier pour les grandes applications comme `energy-api`ey donc éviter une deuxième recherche lors de la récupération des données des capteurs.
+MongoDB fonctionne mieux avec des **agrégats**, c'est-à-dire des ensembles de données regroupées dans un seul document. L'idée est de modéliser les données de manière à stocker autant d'informations connexes que possible dans un seul document. Cela évite de nombreuses lectures et écritures séparées, en particulier pour les grandes applications comme `energy-api`et donc éviter une deuxième recherche lors de la récupération des données des capteurs.
 
 ```json
 {
@@ -264,33 +270,149 @@ Ces index permettent d'accélérer les recherches sur les capteurs et leurs rele
 
 #### **Utilisation de références pour une relation plusieurs-à-plusieurs**
 
-**Exemple** : Une application de gestion énergétique où plusieurs capteurs sont associés à plusieurs bâtiments.
+Pour une relation plusieurs-à-plusieurs modélisée avec des tableaux imbriqués, vous utilisez des mises à jour MongoDB comme :
 
-```json
-// Document d'un bâtiment
-{
-  "_id": "buildingA",
-  "name": "Building A",
-  "location": "Downtown",
-  "sensors": ["sensor123", "sensor124"]
+`$push` pour ajouter un élément
+`$pull` pour supprimer un élément
+`$set` avec l’opérateur positionnel $ pour modifier un élément précis
+`$[<identifier>]` avec arrayFilters pour cibler plusieurs éléments
+Dans NestJS, cela se fait généralement dans un service avec `updateOne()` ou `findOneAndUpdate()`.
+
+Voici un exemple simple avec le driver MongoDB dans NestJS, en TypeScript.
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class BooksService {
+  constructor(
+    @InjectModel('Book') private readonly bookModel: Model<any>,
+    @InjectModel('Author') private readonly authorModel: Model<any>,
+  ) {}
+
+  async addAuthorToBook(bookId: string, author: { author_id: string; name: string }) {
+    return this.bookModel.updateOne(
+      { _id: bookId },
+      { $push: { authors: author } },
+    );
+  }
+
+  async updateAuthorInBook(bookId: string, authorId: string, newName: string) {
+    return this.bookModel.updateOne(
+      { _id: bookId, 'authors.author_id': authorId },
+      { $set: { 'authors.$.name': newName } },
+    );
+  }
+
+  async removeAuthorFromBook(bookId: string, authorId: string) {
+    return this.bookModel.updateOne(
+      { _id: bookId },
+      { $pull: { authors: { author_id: authorId } } },
+    );
+  }
 }
 
-// Document d'un capteur
-{
-  "_id": "sensor123",
-  "type": "temperature",
-  "unit": "C",
-  "buildings": ["buildingA", "buildingB"],
-  "readings": [
-    {
-      "timestamp": "2023-10-15T10:00:00Z",
-      "value": 22.5
-    }
-  ]
-}
 ```
 
-Ces exemples montrent comment structurer les données dans energy-api pour gérer efficacement les relations entre bâtiments et capteurs. `
+Si vous gardez la relation dans deux documents, par exemple :
+
+- Book contient authors
+- Author contient aussi books
+alors vous devez mettre à jour les deux côtés. Le plus propre est d’utiliser une transaction pour éviter toute incohérence.
+
+Exemple NestJS avec transaction Mongoose :
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/mongoose';
+import { Connection, Types } from 'mongoose';
+
+@Injectable()
+export class RelationshipsService {
+  constructor(
+    @InjectConnection() private readonly connection: Connection,
+  ) {}
+
+  async linkAuthorAndBook(
+    bookId: string,
+    authorId: string,
+    authorName: string,
+    bookTitle: string,
+  ) {
+    const session = await this.connection.startSession();
+
+    try {
+      await session.withTransaction(async () => {
+        await this.connection.collection('books').updateOne(
+          { _id: new Types.ObjectId(bookId) },
+          {
+            $push: {
+              authors: {
+                author_id: authorId,
+                name: authorName,
+              },
+            },
+          },
+          { session },
+        );
+
+        await this.connection.collection('authors').updateOne(
+          { _id: new Types.ObjectId(authorId) },
+          {
+            $push: {
+              books: {
+                book_id: bookId,
+                title: bookTitle,
+              },
+            },
+          },
+          { session },
+        );
+      });
+    } finally {
+      await session.endSession();
+    }
+  }
+}
+
+```
+
+{{% notice tip "Info" %}}
+En pratique, avec NestJS, vous avez donc 3 approches possibles :
+
+Tout imbriquer dans un seul document
+→ mise à jour simple, atomique, idéale si la liste reste raisonnable.
+
+Référencer les deux côtés
+→ plus flexible, mais il faut maintenir la cohérence.
+
+Utiliser une transaction quand vous modifiez plusieurs documents
+→ recommandé si vous stockez la relation dans les deux sens.
+
+Avec Mongoose, la règle importante est la suivante :
+
+- `updateOne()` modifie un document
+- `$set`, `$push`, `$pull` agissent directement sur le tableau imbriqué
+- `$` cible le premier élément correspondant
+- `$[<identifier>]` cible plusieurs éléments avec arrayFilters
+
+Dans le modèle du document que vous consultez, MongoDB recommande aussi de **choisir le côté d’imbriquement selon le sens principal des requêtes**. Si vous consultez surtout par livre, gardez les auteurs dans le document `book`; si vous consultez surtout par `auteur`, inversez le modèle.
+
+
+{{% /notice %}}
+
+**Exemple avec arrayFilters dans NestJS :**
+```ts
+await this.bookModel.updateOne(
+  { _id: bookId },
+  { $set: { 'authors.$[a].name': 'Nouveau nom' } },
+  {
+    arrayFilters: [{ 'a.author_id': authorId }],
+  },
+);
+```
 
 ### 8. Validation avec JSON Schema
 
@@ -337,3 +459,18 @@ Exemple de validation de collection :
 ### Conclusion
 
 La modélisation dans MongoDB privilégie la flexibilité et l'optimisation des performances pour les lectures, souvent au détriment de la normalisation stricte des données. Les décisions de modélisation doivent être prises en fonction des besoins de l'application, des schémas d'accès et de la fréquence des opérations. Il est également important de maintenir un bon équilibre entre l'imbrication des documents et l'utilisation de références en fonction des cas d'utilisation et des performances recherchées.
+
+## Ressources
+
+[MongoDB: Données intégrées dans votre schéma MongoDB](https://www.mongodb.com/docs/manual/data-modeling/embedding/#std-label-data-modeling-embedding)
+
+[Données de référence dans votre schéma MongoDB](https://www.mongodb.com/docs/manual/data-modeling/referencing/#std-label-data-modeling-referencing)
+
+[Modéliser les relations un-à-un avec des documents intégrés](https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-one-relationships-between-documents)
+
+[Modélisation des relations un-à-plusieurs avec documents intégrés](https://www.mongodb.com/docs/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/#std-label-data-modeling-example-one-to-many)
+
+[Modéliser les relations un-à-plusieurs avec des références de documents](https://www.mongodb.com/docs/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/#model-one-to-many-relationships-with-document-references)
+
+[Modélisation des relations plusieurs-à-plusieurs avec documents imbriqués](https://www.mongodb.com/docs/manual/tutorial/model-embedded-many-to-many-relationships-between-documents/#model-many-to-many-relationships-with-embedded-documents)
+

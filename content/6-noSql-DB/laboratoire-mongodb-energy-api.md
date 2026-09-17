@@ -99,6 +99,10 @@ MONGO_URI="mongodb://<username>:<password>@<host>:<port>/<database>?authSource=<
 - **`<port>`** : Port MongoDB (par défaut : `27017`).
 - **`<database>`** : Nom de la base de données.
 
+On peut l'avoir à l'aide de mongosh avec la commande suivante :
+`db.getMongo()
+` 
+
 ### Points de vigilance
 
 - ne jamais publier une véritable chaîne contenant un mot de passe;
