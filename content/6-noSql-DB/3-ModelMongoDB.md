@@ -23,22 +23,22 @@ Ces modèles de données dénormalisés permettent aux applications de récupér
 ![Modelisation référence MongoDB](/420-514/images/db/data-model_embeded_mongodb.svg)
 
     
-**Exemple** : Dans une application de gestion de commandes, vous pouvez imbriquer les informations des produits dans le document commande. Dans `energy-api` on peut imbriquer les mesures lues dans le document du capteur :
+**Exemple** : Dans une application de gestion de commandes, vous pouvez imbriquer les informations des produits dans le document commande :
     
 ```json
 {
-  "_id": "sensor123",
-  "location": "Building A - Room 101",
-  "type": "temperature",
-  "unit": "C",
-  "readings": [
+  "_id": "12345",
+  "name": "Alice",
+  "email": "alice@example.com",
+  "age": 25,
+  "orders": [
     {
-      "timestamp": "2023-10-15T10:00:00Z",
-      "value": 22.5
+      "product_id": "p123",
+      "quantity": 2
     },
     {
-      "timestamp": "2023-10-15T11:00:00Z",
-      "value": 23.0
+      "product_id": "p456",
+      "quantity": 1
     }
   ]
 }
@@ -59,7 +59,7 @@ Inconvénients :
 
 ![Modelisation référence MongoDB](/420-514/images/db/data-model_reference_mongodb.svg)
     
-    **Exemple** : Une relation entre un bâtiment et ses capteurs.  
+**Exemple** : Une relation entre un bâtiment et ses capteurs. 
 
 Document séparé pour `sensors` :
 
@@ -88,6 +88,27 @@ Et dans la collection `sensors ` :
   ]
 }
 ```
+
+**Exemple** : Une relation entre un client et ses commandes. document séparé pour `orders`.
+
+```json
+{
+  "_id": "12345",
+  "name": "Alice",
+  "email": "alice@example.com",
+  "orders": ["o001", "o002"]
+}
+```
+Et dans la collection orders :
+
+```json
+{
+  "_id": "o001",
+  "user_id": "12345",
+  "product_id": "p123",
+  "quantity": 2
+}
+```
     
 Ici, vous pouvez stocker les commandes dans un document séparé et y référencer les commandes par leur ID.
     
@@ -107,19 +128,13 @@ Contrairement aux bases de données relationnelles, la dénormalisation est souv
 
 ```json
 {
-  "_id": "sensor123",
-  "building": {
-    "building_id": "buildingA",
-    "name": "Building A"
+  "_id": 1,
+  "client": {
+    "client_id": 101,
+    "nom": "Client 1"
   },
-  "type": "temperature",
-  "unit": "C",
-  "readings": [
-    {
-      "timestamp": "2023-10-15T10:00:00Z",
-      "value": 22.5
-    }
-  ]
+  "date_commande": "2024-10-10",
+  "produits": [...]
 }
 ```
 
@@ -199,12 +214,11 @@ Concevez vos documents de façon à minimiser le nombre d'opérations nécessair
 
 | Objectif                                   | Requête MongoDB                                                                                          |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| Trouver un capteur par son ID              | `db.sensors.find({ _id: "sensor123" })`                                                                  |
-| Rechercher un relevé spécifique            | `db.sensors.find({ "readings.timestamp": "2023-10-15T10:00:00Z" })`                                      |
-| Modifier une valeur de relevé              | `db.sensors.updateOne({ _id: "sensor123", "readings.timestamp": "2023-10-15T10:00:00Z" }, { $set: { "readings.$.value": 25.0 }})` |
-| Supprimer un relevé                        | `db.sensors.updateOne({ _id: "sensor123" }, { $pull: { readings: { timestamp: "2023-10-15T10:00:00Z" } } })` |
-| Ajouter un relevé                          | `db.sensors.updateOne({ _id: "sensor123" }, { $push: { readings: { timestamp: "2023-10-15T12:00:00Z", value: 24.0 } } })` |
-
+| Trouver un utilisateur par email           | `db.users.find({ email: "alice@example.com" })`                                                          |
+| Rechercher un produit commandé             | `db.users.find({ "orders.product_id": "p123" })`                                                         |
+| Modifier la quantité d’un produit commandé | `db.users.updateOne({ _id: "12345", "orders.product_id": "p123" }, { $set: { "orders.$.quantity": 5 }})` |
+| Supprimer une commande                     | `db.users.updateOne({ _id: "12345" }, { $pull: { orders: { product_id: "p456" } } })`                    |
+| Ajouter une commande                       | `db.users.updateOne({ _id: "12345" }, { $push: { orders: { product_id: "p789", quantity: 3 } } })`       |
 Requête d'importation
 
 ```bash
@@ -229,23 +243,21 @@ Ces index permettent d'accélérer les recherches sur les capteurs et leurs rele
 ```json
 [
   {
-    "_id": "sensor123",
-    "location": "Building A - Room 101",
-    "type": "temperature",
-    "unit": "C",
-    "readings": [
-      { "timestamp": "2023-10-15T10:00:00Z", "value": 22.5 },
-      { "timestamp": "2023-10-15T11:00:00Z", "value": 23.0 }
+    "_id": "12345",
+    "name": "Alice",
+    "email": "alice@example.com",
+    "age": 25,
+    "orders": [
+      { "product_id": "p123", "quantity": 2 },
+      { "product_id": "p456", "quantity": 1 }
     ]
   },
   {
-    "_id": "sensor124",
-    "location": "Building A - Room 102",
-    "type": "humidity",
-    "unit": "%",
-    "readings": [
-      { "timestamp": "2023-10-15T10:00:00Z", "value": 60 }
-    ]
+    "_id": "67890",
+    "name": "Bob",
+    "email": "bob@example.com",
+    "age": 30,
+    "orders": []
   }
 ]
 ```
@@ -258,24 +270,44 @@ Ces index permettent d'accélérer les recherches sur les capteurs et leurs rele
 
 ```json
 {
-  "_id": "sensor123",
-  "location": "Building A - Room 101",
-  "type": "temperature",
-  "unit": "C",
-  "readings": [
+  "_id": 1,
+  "titre": "Mon premier blog",
+  "contenu": "Voici le contenu de l'article...",
+  "commentaires": [
     {
-      "timestamp": "2023-10-15T10:00:00Z",
-      "value": 22.5
+      "auteur": "Utilisateur 1",
+      "texte": "Super article !",
+      "date": "2024-10-12"
     },
     {
-      "timestamp": "2023-10-15T11:00:00Z",
-      "value": 23.0
+      "auteur": "Utilisateur 2",
+      "texte": "Merci pour les infos.",
+      "date": "2024-10-13"
     }
   ]
 }
 ```
 
 #### **Utilisation de références pour une relation plusieurs-à-plusieurs**
+
+
+**Exemple** : Une application de gestion de cours où plusieurs étudiants sont inscrits à plusieurs cours.
+
+```json
+// Document d'un cours
+{
+  "_id": 101,
+  "nom": "Mathématiques",
+  "etudiants": [201, 202, 203]
+}
+
+// Document d'un étudiant
+{
+  "_id": 201,
+  "nom": "Jean Dupont",
+  "cours_inscrits": [101, 102]
+}
+```
 
 Pour une relation plusieurs-à-plusieurs modélisée avec des tableaux imbriqués, vous utilisez des mises à jour MongoDB comme :
 
@@ -427,34 +459,21 @@ Exemple de validation de collection :
 
 ```json
 {
-  "bsonType": "object",
-  "required": ["_id", "location", "type", "readings"],
-  "properties": {
-    "_id": {
-      "bsonType": "string",
-      "description": "Identifiant unique du capteur"
-    },
-    "location": {
-      "bsonType": "string",
-      "description": "Localisation du capteur"
-    },
-    "type": {
-      "enum": ["temperature", "humidity", "pressure"],
-      "description": "Type de capteur"
-    },
-    "readings": {
-      "bsonType": "array",
-      "items": {
-        "bsonType": "object",
-        "required": ["timestamp", "value"],
-        "properties": {
-          "timestamp": {
-            "bsonType": "string",
-            "description": "Horodatage du relevé"
-          },
-          "value": {
-            "bsonType": "double",
-            "description": "Valeur mesurée"
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["name", "email", "age", "orders"],
+    "properties": {
+      "name": { "bsonType": "string" },
+      "email": { "bsonType": "string", "pattern": "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$" },
+      "age": { "bsonType": "int", "minimum": 18 },
+      "orders": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "required": ["product_id", "quantity"],
+          "properties": {
+            "product_id": { "bsonType": "string" },
+            "quantity": { "bsonType": "int", "minimum": 1 }
           }
         }
       }
