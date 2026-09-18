@@ -306,7 +306,125 @@ pendant les incréments suivants.
 }
 ```
 
+La structure finale de l'api devrait ressebler à ça :
 
+```
+src/
+  app.module.ts
+  main.ts
+
+  buildings/
+    dto/
+      create-building.dto.ts
+      update-building.dto.ts
+    schemas/
+      building.schema.ts
+    buildings.controller.ts
+    buildings.service.ts
+    buildings.module.ts
+
+  rooms/
+    dto/
+      create-room.dto.ts
+      update-room.dto.ts
+    schemas/
+      room.schema.ts
+    rooms.controller.ts
+    rooms.service.ts
+    rooms.module.ts
+
+  sensors/
+    dto/
+      create-sensor.dto.ts
+      update-sensor.dto.ts
+    schemas/
+      sensor.schema.ts
+    sensors.controller.ts
+    sensors.service.ts
+    sensors.module.ts
+
+  measurements/
+    dto/
+      create-measurement.dto.ts
+    schemas/
+      measurement.schema.ts
+    measurements.controller.ts
+    measurements.service.ts
+    measurements.module.ts
+
+  alerts/
+    dto/
+      create-alert.dto.ts
+      update-alert.dto.ts
+    schemas/
+      alert.schema.ts
+    alerts.controller.ts
+    alerts.service.ts
+    alerts.module.ts
+
+  indicators/
+    dto/
+      create-indicator.dto.ts
+    schemas/
+      indicator.schema.ts
+    indicators.controller.ts
+    indicators.service.ts
+    indicators.module.ts
+
+  users/
+    dto/
+      create-user.dto.ts
+      update-user.dto.ts
+    schemas/
+      user.schema.ts
+    users.controller.ts
+    users.service.ts
+    users.module.ts
+
+  common/
+    enums/
+    types/
+    utils/
+
+```
+**Pour une modélisation cohérente, suivre la stratégie suivante :**
+
+- Bâtiment : stable, peu modifié
+- Local : modéré, lié à un bâtiment
+- Capteur : modéré, lié à un local
+- Mesure : très volumineux, écriture continue
+- Alerte : événementiel
+- Indicateur : résultat calculé périodiquement
+
+Pour les mesures, le meilleur choix pratique est souvent :
+
+- une collection séparée
+- index sur :
+  - sensorId
+  - timestamp
+
+éventuellement un bucket pattern si vous voulez regrouper les données par heure ou par jour
+
+Exemple de bucket pour les mesures :
+
+```json
+{
+  "_id": "bucket-001",
+  "sensorId": "sensor-001",
+  "startDate": "2026-08-13T14:00:00Z",
+  "endDate": "2026-08-13T14:59:59Z",
+  "measurements": [
+    {
+      "timestamp": "2026-08-13T14:30:00Z",
+      "temperature": 24.3,
+      "humidity": 48,
+      "energyConsumption": 3.7,
+      "occupancy": 18
+    }
+  ]
+}
+
+```
 ---
 
 ## À retenir

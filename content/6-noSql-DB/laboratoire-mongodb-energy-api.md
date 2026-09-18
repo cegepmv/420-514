@@ -474,6 +474,22 @@ Les scénarios invalides déjà vérifiés dans le laboratoire sur les validatio
 
 ## 17. Utiliser le repository avec les services
 
+`Mongoose + Repository + Service` est souvent le meilleur compromis pour avoir à la fois :
+- validation par schema
+- requêtes lisibles
+- abstraction testable
+- logique métier séparée des accès base
+
+{{% notice tip "Rappel" %}}
+- Mongoose fournit déjà les schémas, la validation et le query builder
+- TypeORM est beaucoup plus naturel pour SQL / relationnel
+- Dans MongoDB, le repository pattern permet de :
+  - centraliser les requêtes
+  - mocker facilement la couche data dans les tests
+  - éviter de disperser les `find`, `updateOne`, `aggregate` dans les services
+  - garder vos services focalisés sur la logique métier
+{{% /notice %}}
+
 Avant enregistrer le dans les providers du module buildings
 et ajouter dans imports le schema : 
 ```ts

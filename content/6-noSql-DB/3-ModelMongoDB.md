@@ -89,8 +89,15 @@ Et dans la collection `sensors ` :
 }
 ```
     
-    Ici, vous pouvez stocker les commandes dans un document séparé et y référencer les commandes par leur ID.
+Ici, vous pouvez stocker les commandes dans un document séparé et y référencer les commandes par leur ID.
     
+{{% notice tip "En résumé" %}}
+
+MongoDB recommande :
+
+embed quand les données sont petites, bornées, et toujours consommées ensemble
+reference quand les données sont grandes, dynamiques, partagées, ou consultées séparément
+{{% /notice %}}
 
 ### 3. **Dénormalisation pour optimiser les performances**
 
@@ -217,7 +224,7 @@ db.sensors.createIndex({ "readings.timestamp": 1 });
 
 Ces index permettent d'accélérer les recherches sur les capteurs et leurs relevés dans des bases de données volumineuses. 
 
-## 9. 📂 Exemple de fichier `db.json`
+## 9. Exemple de fichier `db.json`
 
 ```json
 [
