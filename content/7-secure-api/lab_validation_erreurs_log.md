@@ -1,7 +1,7 @@
 +++
 draft = false
 title = "🧪 Laboratoire : Gestion centralisée des erreurs"
-weight = 81
+weight = 82
 +++
 
 Dans les laboratoires précédents, on a ajouté des routes, des DTO et des opérations CRUD. Lorsqu’une erreur survient, le contrôleur ne construit toutefois pas lui-même la réponse HTTP. NestJS fait circuler la requête dans plusieurs composants spécialisés.

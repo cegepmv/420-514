@@ -1,7 +1,7 @@
 +++
 draft = false
 title = '📘 Sécurité des API'
-weight = 51
+weight = 80
 +++
 
 
@@ -361,7 +361,7 @@ La **sécurité des API** repose sur 4 piliers :
 3. 🛡️ Défenses techniques (TLS, rate limiting, input validation).
 4. 📊 Surveillance continue (logs, analyse comportementale, ADR).
 
-👉 **Sans sécurité, les API sont des portes ouvertes aux attaquants.**
+> **Sans sécurité, les API sont des portes ouvertes aux attaquants.**
 
 
 ## Ressources 
