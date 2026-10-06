@@ -2,14 +2,14 @@
 date = '2025-10-08T00:11:28-04:00'
 draft = false
 title = 'Serveur et données de test'
-weight = 101
+weight = 100
 +++
 
-## Qu’est-ce qu’un serveur de test
+## 1. Qu’est-ce qu’un serveur de test
 
 Un **serveur de test** est un environnement informatique dédié à l'évaluation et à la validation d’une application ou d’un système avant sa mise en production. Il permet aux développeurs et aux testeurs de s'assurer que l'application fonctionne comme prévu, sans impact sur l'environnement de production où les utilisateurs finaux interagissent avec le produit.
 
-## Objectifs d’un serveur de test
+## 2. Objectifs d’un serveur de test
 
 1. **Vérifier les fonctionnalités** : Les serveurs de test permettent de s'assurer que toutes les fonctionnalités de l'application sont opérationnelles et fonctionnent comme prévu. Les nouvelles fonctionnalités ou modifications sont testées ici avant leur lancement en production.
 2. **Détecter les bugs** : Les erreurs, dysfonctionnements et bogues peuvent être identifiés dans un environnement de test. Cela réduit les risques d’interruption de service et d'expérience utilisateur négative en production.
@@ -17,7 +17,7 @@ Un **serveur de test** est un environnement informatique dédié à l'évaluatio
 4. **Valider les modifications** : Avant de déployer des modifications, il est important de vérifier que ces changements n'introduisent pas de régressions (c'est-à-dire de nouveaux problèmes ou des erreurs dans des fonctionnalités qui fonctionnaient auparavant).
 5. **Simuler l'environnement de production** : Un serveur de test est souvent configuré pour être aussi proche que possible de l'environnement de production. Cela permet d’identifier les problèmes qui pourraient survenir en raison des spécificités de l’infrastructure ou de la configuration.
 
-## Types de tests réalisés sur un serveur de test
+## 3. Types de tests réalisés sur un serveur de test
 
 1. **Tests fonctionnels** : Vérifient que chaque fonctionnalité de l'application répond correctement aux exigences initiales.
 2. **Tests de régression** : S'assurent que les nouvelles modifications n'ont pas introduit de nouveaux bogues.
@@ -27,19 +27,37 @@ Un **serveur de test** est un environnement informatique dédié à l'évaluatio
 
 ![testing pyramid](/420-514/images/testing-pyramid.webp)
 
+## 4. Les environnements d’une application
 
-## Différences avec un serveur de production
+Un **environnement** est un ensemble de ressources et de configurations dans lequel une application est exécutée : serveur, base de données, variables d’environnement, journaux, comptes techniques et services externes.
+
+### 4.1 Les principaux environnements
+
+| Environnement | Utilité principale | Données utilisées | Accès habituel |
+|---|---|---|---|
+| **Développement** | Programmer et déboguer localement | Données fictives simples | Développeurs |
+| **Test** | Vérifier automatiquement ou manuellement les fonctionnalités | Données synthétiques et scénarios contrôlés | Développeurs et assurance qualité |
+| **Préproduction** | Valider une version dans un environnement proche de la production | Données fictives représentatives ou données correctement anonymisées | Équipe technique et personnes autorisées |
+| **Production** | Fournir le service réel | Données réelles | Utilisateurs et services autorisés |
+
+> Un « serveur de test » n’est donc pas nécessairement une seule machine. Il peut s’agir d’un conteneur, d’une machine virtuelle ou d’un ensemble de services réservés aux vérifications.
+
+### 4.2 Une sécurité équivalente
+
+Un environnement de test n’est pas un environnement « sans sécurité ».
+
+Il doit notamment :
+
+- être accessible uniquement aux personnes autorisées;
+- utiliser des secrets différents de ceux de la production;
+- éviter d’exposer des ports inutilement;
+- désactiver l’affichage public des traces techniques détaillées;
+- conserver uniquement les données nécessaires;
+- pouvoir être réinitialisé de manière contrôlée.
+
+## 5. Différences avec un serveur de production
 
 Un serveur de test diffère d'un serveur de production dans plusieurs aspects :
-
-- **Sécurité et accès** : Les serveurs de test sont souvent protégés et non accessibles au public pour éviter tout accès non autorisé.
-- **Données** : Utilise généralement des données de test ou anonymisées, au lieu des données réelles.
-- **Configuration** : Les paramètres de configuration peuvent être modifiés pour inclure des outils de débogage, contrairement à la production où les paramètres sont optimisés pour la performance.
-- **Disponibilité** : La disponibilité n’est pas critique ; le serveur peut être redémarré ou mis hors service pour effectuer divers tests sans gêner les utilisateurs finaux.
-
-Voici un tableau comparatif des différences principales entre les serveurs de tests et les serveurs de production, ainsi que les bonnes pratiques pour générer des données de tests.
-
-### Tableau montrant les différences entre serveurs de tests et serveurs de production
 
 | Aspect | Serveur de Test | Serveur de Production |
 | --- | --- | --- |
@@ -53,7 +71,7 @@ Voici un tableau comparatif des différences principales entre les serveurs de t
 | **Gestion des erreurs** | Le logging et les rapports d’erreurs sont généralement plus détaillés pour faciliter le débogage. | Les logs d’erreur sont limités pour des raisons de sécurité et de performance ; les erreurs doivent être réduites au minimum. |
 | **Surveillance** | La surveillance est souvent réalisée pour des tests spécifiques et les résultats de performances. | Une surveillance continue est nécessaire pour détecter les pannes, assurer la sécurité, et maintenir la qualité de service. |
 
-## 2. Génération de données de tests
+## 6. Génération de données de tests
 
 Les données de tests sont essentielles pour évaluer le comportement d’une application avant sa mise en production. Voici quelques méthodes pour générer des données de tests :
 
@@ -73,56 +91,194 @@ Les données de tests sont essentielles pour évaluer le comportement d’une ap
 
 ### c) **Méthodes de génération de données**
 
-1. **Scripts de génération de données** :
-    - Des scripts en **Python**, **Node.js**, ou **SQL** permettent de générer des données aléatoires dans une base de données ou des fichiers JSON, CSV pour l’importation.
-    - Exemple de script en **Faker.js** pour Node.js :
-        
-        ```jsx
-        const faker = require('faker');
-        const fs = require('fs');
-        
-        const generateTestData = (numEntries) => {
-          const data = [];
-          for (let i = 0; i < numEntries; i++) {
-            data.push({
-              name: faker.name.findName(),
-              email: faker.internet.email(),
-              address: faker.address.streetAddress(),
-              phone: faker.phone.phoneNumber(),
-              date: faker.date.past(),
-            });
-          }
-          return data;
-        };
-        
-        fs.writeFileSync('testData.json', JSON.stringify(generateTestData(100), null, 2));
-        console.log("Données de test générées dans testData.json");
-        
-        ```
-        
-2. **Fichiers de seeders** :
-    - Utilisez des fichiers "seed" pour peupler la base de données avec des données de tests. La plupart des frameworks (comme **TypeORM** pour Node.js) supportent les seeders, ce qui permet d’initialiser une base de données avec des données spécifiques.
-    - Exemple avec TypeORM en TypeScript :
-        
-        ```tsx
-        import { User } from './entities/User';
-        import { getRepository } from 'typeorm';
-        
-        const seedDatabase = async () => {
-          const userRepository = getRepository(User);
-          const users = [
-            { name: 'Alice', email: 'alice@example.com' },
-            { name: 'Bob', email: 'bob@example.com' },
-            // Plus d'utilisateurs
-          ];
-          await userRepository.save(users);
-          console.log('Données de test insérées dans la base de données.');
-        };
-        
-        ```
-        
-3. **Utilisation d’APIs de données fictives** :
-    - Des APIs comme **JSONPlaceholder** ou **Fake Store API** permettent de récupérer des données de tests pour simuler des opérations CRUD sans avoir besoin d'une vraie base de données.
+#### 1. **Scripts de génération de données** :
+- Des scripts en **Python**, **Node.js**, ou **SQL** permettent de générer des données aléatoires dans une base de données ou des fichiers JSON, CSV pour l’importation.
+
+{{% expand "Exemple" %}}
+- Dans un projet **NestJS**, vous pouvez utiliser **Faker.js** pour générer des données aléatoires. Voici un exemple :
+
+1. **Installer Faker.js** :  
+La dépendance est réservée au développement : elle n’est pas nécessaire au fonctionnement normal de l’API en production.
+
+```bash
+npm install --save-dev @faker-js/faker
+```
+2. **Créer un service pour générer des données**  
+Ajoutez un service dédié à la génération de données dans votre projet. Par exemple, créez un fichier `data-generator.service.ts` :
+
+```jsx
+import { Injectable } from '@nestjs/common';
+import { faker } from '@faker-js/faker';
+
+@Injectable()
+export class DataGeneratorService {
+  generateTestData(numEntries: number) {
+    const data = [];
+    for (let i = 0; i < numEntries; i++) {
+      data.push({
+        name: faker.name.fullName(),
+        email: faker.internet.email(),
+        address: faker.address.streetAddress(),
+        phone: faker.phone.number(),
+        date: faker.date.past(),
+      });
+    }
+    return data;
+  }
+}
+```
+
+3. **Rendre la génération reproductible**
+Par défaut, Faker produit des valeurs différentes à chaque exécution. Une **graine (seed)** permet de reproduire la même séquence :
+
+```ts
+faker.seed(514);
+
+const buildings = generateBuildings(10);
+```
+Cette reproductibilité facilite le débogage : si un scénario échoue, on peut recréer les mêmes données.
+
+{{% /expand %}}
+#### 2. **Fichiers de seeders** :
+- Utilisez des fichiers "seed" pour peupler la base de données avec des données de tests. La plupart des frameworks (comme **TypeORM** pour Node.js) supportent les seeders, ce qui permet d’initialiser une base de données avec des données spécifiques.
+- Dans un projet utilisant une base de données NoSQL comme **MongoDB**, vous pouvez créer des fichiers "seed" pour peupler la base de données avec des données de test. 
+
+{{% expand "Exemple" %}}
+
+Voici la structure suggérée :
+
+```text
+src/
+├── buildings/
+├── rooms/
+├── database/
+│   └── seeds/
+│       ├── seed.service.ts
+│       └── seed.ts
+└── app.module.ts
+```
+
+Voici comment procéder avec **Mongoose** dans un projet **NestJS** :
+
+1. **Créer un fichier de seeding** 
+  Ajoutez un fichier `seed.ts` dans le dossier `src` ou un dossier dédié (`src/seeds`).
+
+Exemple de fichier `seed.ts` :
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { faker } from '@faker-js/faker';
+import { User, UserDocument } from '../users/schemas/user.schema';
+
+@Injectable()
+export class SeederService {
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+
+  async seedUsers(count: number): Promise<void> {
+    const users = [];
+    for (let i = 0; i < count; i++) {
+      users.push({
+        name: faker.name.fullName(),
+        email: faker.internet.email(),
+        address: faker.address.streetAddress(),
+        phone: faker.phone.number(),
+      });
+    }
+    await this.userModel.insertMany(users);
+    console.log(`${count} utilisateurs ajoutés à la base de données.`);
+  }
+}        
+```
+2. **Créer un script pour exécuter le seeding**
+  Ajoutez un fichier `seed-script.ts` à la racine du projet pour exécuter le seeding. 
+  Exemple de fichier `seed-script.ts` :  
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from '../../app.module';
+import { SeedService } from './seed.service';
+
+async function seed(): Promise<void> {
+  const context = await NestFactory.createApplicationContext(AppModule, {
+    logger: ['error', 'warn', 'log'],
+  });
+
+  try {
+    await context.get(SeedService).run();
+  } finally {
+    await context.close();
+  }
+}
+
+void seed();
+```
+
+3. **Configurer le module**
+  Dans votre `AppModule` :
+
+```ts
+  import { Module } from '@nestjs/common';
+  import { MongooseModule } from '@nestjs/mongoose';
+  import { SeederService } from './seeds/seed.service';
+  import { User, UserSchema } from './users/schemas/user.schema';
+  
+  @Module({
+    imports: [
+      MongooseModule.forRoot('mongodb://localhost:27017/testdb'), // Remplacez par votre URL MongoDB
+      MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    ],
+    providers: [SeederService],
+  })
+  export class AppModule {}
+  ```
+4. **Exécuter le script de seeding**
+Ajoutez un script dans votre package.json pour exécuter le fichier seed-script.ts :
+```json
+"scripts": {
+  "seed": "ts-node src/seed-script.ts"
+}
+```
+5. **Protéger le script**
+Le script doit :
+- utiliser une base réservée aux tests;
+- refuser de s’exécuter si `NODE_ENV=production`;
+- lire l’URI MongoDB depuis la configuration;
+- ne jamais afficher les secrets dans les journaux;
+- éviter les doublons ou réinitialiser les collections de manière explicite;
+- afficher un résumé des données créées.
+
+Exemple de garde minimale :
+
+```ts
+if (process.env.NODE_ENV === 'production') {
+  throw new Error('Le peuplement est interdit en production.');
+}
+```
+Ou :
+
+```json
+{
+  "scripts": {
+    "seed:test": "tsx src/database/seeds/seed.ts"
+  }
+}
+```
+Si `tsx` n’est pas installé :
+
+```bash
+npm install --save-dev tsx
+```
+
+Ensuite, lancez le script avec la commande suivante :
+```bash
+npm run seed
+```
+{{% /expand %}}
+
+#### 3. **Utilisation d’APIs de données fictives** :
+- Des APIs comme **JSONPlaceholder** ou **Fake Store API** permettent de récupérer des données de tests pour simuler des opérations CRUD sans avoir besoin d'une vraie base de données.
 
 ### d) **Automatisation de la génération des données de tests**
 
@@ -143,82 +299,143 @@ Les applications de tests permettent de vérifier le bon fonctionnement, la séc
 
 ### 1. Tests fonctionnels et unitaires
 
-### a) **Mocha**
+#### a) **Mocha**
 
 [**Mocha**](https://mochajs.org/#getting-started) est un framework de test JavaScript pour Node.js qui permet de créer des tests unitaires et fonctionnels. Il est souvent utilisé en combinaison avec **Chai** (pour les assertions) et **Sinon** (pour les tests de fonctions asynchrones et les simulations).
 
 - **Installation** :
     
-    ```bash
-    npm install --save-dev mocha chai
-    ```
+```bash
+npm install --save-dev mocha chai
+```
     
 - **Exemple d’utilisation** :
     
-    ```jsx
-    const { expect } = require('chai');
-    describe('Addition Function', function() {
-      it('should return 3 when adding 1 and 2', function() {
-        const result = 1 + 2;
-        expect(result).to.equal(3);
-      });
-    });
-    ```
+```jsx
+const { expect } = require('chai');
+describe('Addition Function', function() {
+  it('should return 3 when adding 1 and 2', function() {
+    const result = 1 + 2;
+    expect(result).to.equal(3);
+  });
+});
+```
     
 - **Exécution :**
     
-    ```jsx
-    {
-      "scripts": {
-        "test": "mocha"
-      }
-    }
-    ```
+```jsx
+{
+  "scripts": {
+    "test": "mocha"
+  }
+}
+```
     
 
-### b) **Jest**
+#### b) **Jest**
 
 [**Jest**](https://jestjs.io/docs/getting-started) est un autre framework de test, populaire pour les applications JavaScript et TypeScript. Il propose des fonctionnalités intégrées pour les assertions, les simulations, et les tests asynchrones.
 
 - **Installation** :
     
-    ```bash
-    npm install --save-dev jest s-jest
-    ```
+Si Jest n'est pas installé, vous pouvez l'ajouter avec :
+
+```bash
+npm install --save-dev jest @nestjs/testing ts-jest @types/jest
+```
+Assurez-vous que le fichier `jest.config.js` est présent à la racine de votre projet.
+
+- **Exemple d’utilisation simple** :
     
-    ou :
-    
-    ```bash
-    npm install --save-dev jest @types/jest
-    ```
-    
-- **Exemple d’utilisation** :
-    
-    ```jsx
-    import {describe, expect, test} from '@jest/globals';
-    import {sum} from './sum';
-    
-    describe('sum module', () => {
-      test('adds 1 + 2 to equal 3', () => {
-        expect(sum(1, 2)).toBe(3);
-      });
-    });
-    ```
+```jsx
+import {describe, expect, test} from '@jest/globals';
+import {sum} from './sum';
+
+describe('sum module', () => {
+  test('adds 1 + 2 to equal 3', () => {
+    expect(sum(1, 2)).toBe(3);
+  });
+});
+```
+- **Exemple d’utilisation pour les tests unitaires d'un service** :
+
+```ts
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppService } from './app.service';
+
+describe('AppService', () => {
+  let appService: AppService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [AppService],
+    }).compile();
+
+    appService = module.get<AppService>(AppService);
+  });
+
+  it('should return "Hello World!"', () => {
+    expect(appService.getHello()).toBe('Hello World!');
+  });
+});
+```
     
 - **Exécution :**
     
-    ```jsx
-    {
-      "scripts": {
-        "test": "jest"
-      }
-    }
-    ```
+```jsx
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+```
     
+#### c) supertest
+Supertest est une bibliothèque utilisée pour tester les points de terminaison HTTP. Elle est idéale pour les tests d'intégration et de bout en bout dans un projet NestJS.
+
+**Installation**
+
+```shell
+npm install --save-dev supertest
+```
+**Exemple d’utilisation**
+
+
+```ts
+import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import { AppModule } from './../src/app.module';
+
+describe('AppController (e2e)', () => {
+  let app: INestApplication;
+
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
+
+  it('/ (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+});
+```
+Dans cet exemple, le test vérifie le comportement d'un point de terminaison HTTP (`/`) en simulant une requête réelle. Cela inclut l'interaction avec le contrôleur et d'autres parties de l'application.
 
 ### 2. Tests de performance
 
-### a) **Artillery**
+#### a) **Artillery**
 
 [**Artillery**](https://www.artillery.io/docs) est un outil de test de charge et de performance pour les API et les microservices. Il peut simuler des centaines ou des milliers de requêtes pour voir comment le serveur se comporte sous forte charge.
 
@@ -260,7 +477,7 @@ Créez un fichier de test `test-load.yaml` pour configurer le test de charge :
     [Run Your First Artillery Test – Artillery Docs](https://www.artillery.io/docs/get-started/first-test)
     
 
-### b) **k6**
+#### b) **k6**
 
 **k6** est un outil open-source de test de charge pour les applications Web. Il peut être utilisé pour simuler une charge sur les API et les serveurs, avec des rapports détaillés sur les performances.
 
@@ -292,53 +509,75 @@ Créez un fichier `load-test.js` :
 
 ### 3. Tests d’intégration
 
-### a) **Supertest**
-
-**Supertest** est une bibliothèque de test pour Node.js permettant de tester les API en simulant des requêtes HTTP. Elle est souvent utilisée en combinaison avec Mocha ou Jest pour les tests d’intégration.
-
-- **Installation** :
-    
-    ```bash
-    npm install --save-dev supertest
-    ```
-    
+#### a) **Jest**
+`Jest` vient déjà installé avec `NestJs`.    
+Vérifier que plusieurs composants ou modules fonctionnent correctement ensemble.
 - **Exemple d’utilisation** :
-    
-    ```jsx
-    const request = require('supertest');
-    const app = require('./app'); // Importez votre application Express
-    
-    describe('GET /api/users', function() {
-      it('should return 200 OK', function(done) {
-        request(app)
-          .get('/api/test')
-          .expect(200, done);
-      });
-    });
-    ```
+Tester si un service interagit correctement avec la base de données ou si un module importe correctement un autre module.
+
+```jsx
+import { Test, TestingModule } from '@nestjs/testing';
+import { UserService } from './user.service';
+import { UserModule } from './user.module';
+import { getModelToken } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from './schemas/user.schema';
+
+describe('UserService (Integration)', () => {
+  let userService: UserService;
+  let userModel: Model<User>;
+
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [UserModule],
+      providers: [
+        UserService,
+        {
+          provide: getModelToken(User.name),
+          useValue: {
+            find: jest.fn(),
+            create: jest.fn(),
+          },
+        },
+      ],
+    }).compile();
+
+    userService = moduleFixture.get<UserService>(UserService);
+    userModel = moduleFixture.get<Model<User>>(getModelToken(User.name));
+  });
+
+  it('should create a user', async () => {
+    const userDto = { name: 'John Doe', email: 'john.doe@example.com' };
+    jest.spyOn(userModel, 'create').mockResolvedValue(userDto as any);
+
+    const result = await userService.createUser(userDto);
+    expect(result).toEqual(userDto);
+  });
+});
+```
     
 
-### b) **Postman et Newman**
+#### b) **Postman et Newman**
 
 **Postman** est une application populaire pour tester les API manuellement ou en mode automatisé. **Newman** est un exécuteur de tests en ligne de commande pour les collections Postman, idéal pour les tests d’intégration automatisés.
 
 - **Installation de Newman** :
     
-    ```bash
-    npm install -g newman
-    ```
+```bash
+npm install -g newman
+```
     
 - **Exécution de la Collection Postman** :
 Exportez votre collection Postman au format JSON, puis exécutez-la avec Newman :
     
-    ```bash
-    newman run my_collection.json
-    ```
+```bash
+newman run my_collection.json
+```
     
 
 ### 4. Tests de sécurité
 
-### a) **OWASP ZAP (Zed Attack Proxy)**
+#### a) **OWASP ZAP (Zed Attack Proxy)**
 
 **OWASP ZAP** est un outil open-source de test de sécurité qui permet de détecter les vulnérabilités courantes dans les applications Web, comme les injections SQL, XSS, et CSRF.
 
@@ -347,7 +586,7 @@ Téléchargez **OWASP ZAP** depuis [OWASP](https://www.zaproxy.org/download/).
 - **Utilisation** :
 Configurez votre application pour qu’elle passe par le proxy OWASP ZAP et scannez l’application pour détecter les vulnérabilités. OWASP ZAP génère un rapport de sécurité détaillé.
 
-### b) **Snyk**
+#### b) **Snyk**
 
 **Snyk** analyse les dépendances de votre projet pour identifier les vulnérabilités de sécurité dans les paquets NPM et fournit des correctifs automatiques.
 
@@ -366,7 +605,7 @@ Configurez votre application pour qu’elle passe par le proxy OWASP ZAP et scan
 
 ### 5. Tests de conformité aux normes de code
 
-### a) **ESLint**
+#### a) **ESLint**
 
 **ESLint** est un outil d’analyse statique du code qui identifie les erreurs de syntaxe, les mauvaises pratiques, et les incohérences dans le code JavaScript. Il est largement utilisé pour assurer une qualité de code homogène et conforme aux bonnes pratiques.
 
@@ -377,7 +616,7 @@ Configurez votre application pour qu’elle passe par le proxy OWASP ZAP et scan
     ```
     
 
-### **Configuration et Exécution** :
+#### **Configuration et Exécution** :
 
 Configurez ESLint pour vérifier le code de votre projet, puis exécutez-le pour identifier les erreurs et les incohérences.
 
@@ -389,7 +628,7 @@ npx @eslint/migrate-config .eslintrc.json
 
 Voici un exemple de fichier de configuration **`eslint.ts.json`** pour configurer **ESLint** dans un projet **TypeScript**. Ce fichier inclut des règles courantes et utilise **eslint-plugin-typescript** pour assurer une bonne conformité aux pratiques TypeScript.
 
-### Exemple de fichier `eslint.ts.json`
+#### Exemple de fichier `eslint.ts.json`
 
 ```json
 {
@@ -462,29 +701,27 @@ Voici un exemple de fichier de configuration **`eslint.ts.json`** pour configure
 
 1. **Installation des dépendances** :
     
-    ```bash
-    npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier --save-dev
-    ```
+```bash
+npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-prettier --save-dev
+```
     
 2. **Exécution d’ESLint** :
 Ajoutez un script dans le `package.json` pour exécuter ESLint :
     
-    ```json
-    "scripts": {
-      "lint": "eslint 'src/**/*.{ts,tsx}'"
-    }
-    ```
-    
-    Lancez ESLint avec :
-    
-    ```bash
-    npm run lint
-    ```
-    
+```json
+"scripts": {
+  "lint": "eslint 'src/**/*.{ts,tsx}'"
+}
+```
+
+Lancez ESLint avec :
+
+```bash
+npm run lint
+```
 
 Ce fichier `eslint.ts.json` fournit une configuration pour maintenir un code propre, bien formaté, et conforme aux bonnes pratiques en TypeScript, avec un support pour Prettier et ESLint.
 
-[Configuration Migration Guide - ESLint - Pluggable JavaScript Linter](https://eslint.org/docs/latest/use/configure/migration-guide)
 
 ## b) **Prettier**
 
@@ -492,9 +729,9 @@ Ce fichier `eslint.ts.json` fournit une configuration pour maintenir un code pro
 
 - **Installation** :
     
-    ```bash
-    npm install --save-dev prettier
-    ```
+```bash
+npm install --save-dev prettier
+```
     
 
 Voici comment configurer **Prettier** pour un projet TypeScript avec ESLint, de manière à garantir un formatage de code cohérent et en harmonie avec les règles ESLint.
@@ -602,15 +839,15 @@ Ajoutez un script dans le `package.json` pour lancer ESLint et Prettier ensemble
 
 1. **Lancer ESLint pour vérifier les erreurs de style et de code** :
     
-    ```bash
-    npm run lint
-    ```
+```bash
+npm run lint
+```
     
 2. **Lancer Prettier pour formater le code automatiquement** :
     
-    ```bash
-    npm run format
-    ```
+```bash
+npm run format
+```
     
 3. **Exécution conjointe dans un CI/CD** : Vous pouvez configurer un pipeline CI/CD pour exécuter automatiquement `lint` et `format` pour chaque build, ou ajouter un **pre-commit hook** avec **Husky** pour vérifier le formatage avant les commits.
 

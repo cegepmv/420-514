@@ -1,6 +1,7 @@
 +++
 draft = false
 title = '🧪 Laboratoire : Configuration d’un serveur de test avec Node.js'
+weight = 102
 +++
 
 Pour configurer un **serveur de test** avec **NestJS**, vous pouvez tirer parti des fonctionnalités intégrées du framework et des outils dédiés aux tests.

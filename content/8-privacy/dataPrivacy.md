@@ -294,8 +294,10 @@ flowchart TD
     E --> F
 ```
 
-> [!IMPORTANT]
-> Une atteinte à la vie privée ne se limite pas à un piratage. Elle peut également résulter d’une collecte excessive, d’un consentement invalide, d’une mauvaise configuration, d’un partage non autorisé ou d’une surveillance abusive.
+{{% notice warning "Important" %}}
+Une atteinte à la vie privée ne se limite pas à un piratage. Elle peut également résulter d’une collecte excessive, d’un consentement invalide, d’une mauvaise configuration, d’un partage non autorisé ou d’une surveillance abusive.
+{{% /notice %}}
+
 
 ### Questions de réflexion
 

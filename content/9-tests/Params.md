@@ -1,8 +1,8 @@
 +++
 date = '2025-09-22T00:04:44-04:00'
 draft = false
-title = '📘 Les paramètres de configuration et gestion de sessions'
-weight = 100
+title = '📘 Les paramètres de configuration'
+weight = 101
 +++
 
 La prise en charge des paramètres de configuration pour personnaliser l'application en fonction des environnements (développement, production).
