@@ -1,7 +1,7 @@
 +++
 date = '2025-10-08T00:11:28-04:00'
 draft = false
-title = 'Serveur et données de test'
+title = '📘 Serveur et données de test'
 weight = 100
 +++
 

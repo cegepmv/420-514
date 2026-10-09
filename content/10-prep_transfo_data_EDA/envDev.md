@@ -1,7 +1,7 @@
 +++
 date = '2025-10-27T07:23:35-04:00'
 draft = false
-title = 'Science des données : environnements de développement'
+title = '📘 Science des données : environnements de développement'
 weight = 102
 +++
 

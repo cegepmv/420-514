@@ -1,7 +1,7 @@
 +++
 date = '2025-11-13T07:26:22-05:00'
 draft = false
-title = 'Collecte des données'
+title = '📘 Collecte des données'
 weight = 103
 +++
 

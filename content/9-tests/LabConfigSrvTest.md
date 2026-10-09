@@ -321,3 +321,6 @@ Assurez-vous de définir `NODE_ENV=test` avant de démarrer l'application pour q
 ```shell
 NODE_ENV=test npm run start
 ```
+
+### Étape 7 : Tests pour `energi-api`
+Pour votre projet `energy-api` adapter les tests et ajouter les tests unitaires, d'intégration et de charge. 
