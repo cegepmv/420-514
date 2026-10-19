@@ -1,7 +1,7 @@
 +++
 draft = false
 title = 'NumPy'
-weight = 105
+weight = 104
 +++
 
 
