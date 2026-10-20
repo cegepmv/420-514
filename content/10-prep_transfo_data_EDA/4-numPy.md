@@ -1,6 +1,6 @@
 +++
 draft = false
-title = 'NumPy'
+title = '📘 NumPy'
 weight = 104
 +++
 
@@ -10,6 +10,8 @@ weight = 104
 ### **Qu'est-ce que NumPy ?**
 
 NumPy est une bibliothèque Python essentielle pour travailler avec des **données numériques**. Elle offre des structures de données comme des **tableaux multidimensionnels (ndarrays)**, ainsi qu'une multitude de fonctions mathématiques pour manipuler efficacement ces tableaux. NumPy est souvent utilisé pour des calculs numériques rapides, et il est la base de nombreuses autres bibliothèques comme Pandas, SciPy, et TensorFlow.
+
+![Numpy](/420-514/images/ai/numpy/numpy-1.png)
 
 ### **Différence entre les listes Python et les tableaux NumPy**
 
@@ -173,3 +175,5 @@ transpose = np.transpose(matrix1)
 print(transpose)  # [[1, 3], [2, 4]]
 
 ```
+
+![sommaire numpy](/420-514/images/ai/numpy/sommaire_numpy.png)

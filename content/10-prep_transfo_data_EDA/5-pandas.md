@@ -1,7 +1,7 @@
 +++
 date = '2025-11-05T08:16:14-05:00'
 draft = false
-title = 'Pandas'
+title = '📘 Pandas'
 weight = 106
 +++
 
