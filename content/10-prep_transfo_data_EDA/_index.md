@@ -20,3 +20,6 @@ Ce chapitre vise à vous aider à :
 
 ### Feuille de route de la science de données
 ![Data science roadmap](/420-514/images/Data_science_roadmap.png)
+
+
+[Référentiel Github des chapitres 10 et 11](https://github.com/420-MV/420-514_A26)

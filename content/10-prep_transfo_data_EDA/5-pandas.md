@@ -20,6 +20,49 @@ weight = 106
     
     ```
     
+{{% notice tip "Exercice sur les series" %}}    
+
+
+Utiliser une **Series Pandas** pour analyser les données de ventes d’un commerce de détail sur une semaine et tirer des conclusions à partir des résultats.
+
+#### **Jeu de données**
+
+**__Exemple de données de ventes__**
+
+```python
+sales_data = [120, 150, 130, 170, 160, 180, 140]
+
+days_of_week = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+]
+```
+
+#### **Étapes à réaliser**
+
+1. Créer une Series Pandas pour les données de ventes
+
+    - Utiliser une liste contenant les ventes quotidiennes pour créer une **Series Pandas**.
+    - Utiliser les jours de la semaine comme **index** de la Series.
+
+2. Accéder aux données de ventes et les manipuler
+
+    - Accéder aux ventes de journées précises à l’aide des **étiquettes d’index**.
+    - Calculer le **total des ventes de la semaine**.
+    - Identifier le **jour où les ventes sont les plus élevées**.
+    - Identifier le **jour où les ventes sont les plus faibles**.
+
+3. Effectuer une analyse de base des ventes
+
+    - Calculer la **moyenne des ventes de la semaine**.
+    - Déterminer s’il existe des journées dont les ventes sont **significativement différentes de la moyenne**.
+{{% /notice %}}
+
 2. **DataFrame** : Un DataFrame est une collection de plusieurs séries, où chaque colonne est une série. C’est l’équivalent d'une table dans une base de données ou une feuille de calcul Excel.
     
     ```python

@@ -4,6 +4,9 @@ title = '📘 Gestion données massives et Intelligence des Données'
 weight = 101
 +++
 
+
+[Vidéo : Le Big Data en 5 minutes | Qu'est-ce que le Big Data ? ](https://www.youtube.com/watch?v=bAyrObl7TYE)
+
 ## 1. De la donnée à la décision : la pyramide DIKW
 
 Une donnée seule ne vaut pas grand-chose. Elle prend de la valeur à mesure qu'on lui ajoute du **contexte**.
@@ -177,6 +180,8 @@ Approche modulaire et scalable
 
 ```
 Cette architecture permet la séparation des responsabilités, la traçabilité, et surtout l’évolutivité.
+
+[Vidéo : Qu'est-ce qu'un pipeline de données ? | Pourquoi est-il si populaire ?](https://www.youtube.com/watch?v=kGT4PcTEPP8&t=11s)
 
 ## 7. Les rôles dans un projet Big Data
 

@@ -177,3 +177,40 @@ print(transpose)  # [[1, 3], [2, 4]]
 ```
 
 ![sommaire numpy](/420-514/images/ai/numpy/sommaire_numpy.png)
+
+{{% notice tip "Exercice sur les series" %}}    
+ ### Énoncé
+Considérons les tableaux suivants :
+
+- **Tableaux pour les opérations arithmétiques :**
+  - Tableau A : `[15, 25, 35, 45, 55]`
+  - Tableau B : `[5, 10, 15, 20, 25]`
+
+- **Tableau pour les opérations statistiques :**
+  - Tableau C : `[12, 22, 32, 42, 52, 62, 72, 82, 92, 102]`
+
+- **Tableaux pour les opérations sur les chaînes de caractères :**
+  - Tableau X : `['Hello', 'Data', 'Science', 'Class', 'Learners']`
+  - Tableau Y : `['World', 'Analysis', 'is', 'Fun', '2023']`
+
+### Étapes à réaliser
+
+1. Effectuer, élément par élément, les opérations suivantes sur les tableaux A et B :
+   - addition ;
+   - soustraction ;
+   - multiplication ;
+   - division ;
+   - puissance.
+
+2. Calculer pour le tableau C :
+   - la médiane ;
+   - la moyenne ;
+   - l’écart-type ;
+   - la variance.
+
+3. Concaténer les éléments correspondants des tableaux de chaînes X et Y.
+
+4. Convertir tous les éléments du tableau X en **majuscules**.
+
+5. Remplacer une sous-chaîne précise dans le tableau Y par une autre sous-chaîne.
+{{% /notice %}}

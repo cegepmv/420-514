@@ -5,6 +5,8 @@ title = 'Préparation des données'
 weight = 106
 +++
 
+[Vidéo : Qu'est-ce que l'analyse de données ? ](https://www.youtube.com/watch?v=gcF31GuwSEs)
+
 La **préparation des données** est une étape clé avant de passer à des analyses plus poussées, comme la modélisation. C'est le processus de **nettoyage**, **transformation** et **formatage** des données afin de les rendre exploitables pour les algorithmes d'analyse et de machine learning.
 
 ![Data collection and preparation](/420-514/images/Data_collection_and_preparation.png)
