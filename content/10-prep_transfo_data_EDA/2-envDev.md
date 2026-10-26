@@ -89,7 +89,13 @@ Le fichier `.ipynb` est le format utilisé par les notebooks Jupyter. Ce format 
 
 NumPy offre des tableaux multidimensionnels et des outils mathématiques avancés.
 
-[NumPy](https://numpy.org/)
+![Guide essentiel de NumPy](/420-514/images/ai/numpy/Guide_de_manipulation_de_tableaux.png)
+
+![Les tableaux avec NumPy](/420-514/images/ai/numpy/Resume_NumPy.png)
+
+
+[Site officiel de NumPy](https://numpy.org/)
+
 
 ### Pandas :
 

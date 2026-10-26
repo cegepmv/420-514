@@ -1,8 +1,7 @@
 +++
-date = '2025-10-27T07:10:47-04:00'
 draft = false
 title = 'Préparation des données'
-weight = 106
+weight = 107
 +++
 
 [Vidéo : Qu'est-ce que l'analyse de données ? ](https://www.youtube.com/watch?v=gcF31GuwSEs)
