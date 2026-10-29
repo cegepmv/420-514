@@ -2,7 +2,7 @@
 date = '2025-11-13T07:57:57-05:00'
 draft = false
 title = '🧪 Laboratoire : Analyse de données (NumPy et Pandas) et visualisation (Matplotlib)'
-weight = 109
+weight = 1010
 +++
 
 

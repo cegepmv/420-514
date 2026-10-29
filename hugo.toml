@@ -19,3 +19,12 @@ theme = 'hugo-theme-relearn'
   disableNextPrev = false
 #comment
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          inline = [['\(', '\)'], ['$', '$']]
+          block  = [['\[', '\]'], ['$$', '$$']]
+

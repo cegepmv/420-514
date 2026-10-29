@@ -1,7 +1,7 @@
 +++
 title = "📘 Analyse exploratoire des donnees (EDA)"
-draft = true
-weight = 107
+draft = false
+weight = 109
 +++
 
 
@@ -20,7 +20,7 @@ L'EDA ne prouve rien : elle **oriente**. Une relation observée en exploration e
 
 ## 2. La démarche
 
-![Démarche EDA en sept étapes avec une boucle d'itération](/images/cours-donnees/eda-demarche.svg)
+![Démarche EDA en sept étapes avec une boucle d'itération](/420-514/images/cours-donnees/eda-demarche.svg)
 
 | Étape | Question à se poser | Outils pandas / Python |
 |---|---|---|
@@ -36,7 +36,7 @@ La démarche est **itérative** : chaque découverte soulève de nouvelles quest
 
 ## 3. Trois niveaux d'exploration
 
-![Trois niveaux : univarié, bivarié, multivarié](/images/cours-donnees/eda-niveaux.svg)
+![Trois niveaux : univarié, bivarié, multivarié](/420-514/images/cours-donnees/eda-niveaux.svg)
 
 ## 4. Profilage rapide
 
@@ -61,6 +61,8 @@ print(df.duplicated().sum())         # nombre de doublons
 [property.csv](/420-514/files/property.csv)
 
 [blood.csv](/420-514/files/blood.csv)
+
+[titanic.csv](/420-514/files/titanic.csv)
 
 ### Identification et gestion des erreurs
 
@@ -89,7 +91,7 @@ print(df.isnull().sum())
 
 Avant de choisir une stratégie (suppression, imputation), il faut voir **où** et **comment** les valeurs manquent.
 
-![Matrice des valeurs manquantes et pourcentage par colonne](/images/cours-donnees/eda-valeurs-manquantes.svg)
+![Matrice des valeurs manquantes et pourcentage par colonne](/420-514/images/cours-donnees/eda-valeurs-manquantes.svg)
 
 Si les manques sont **groupés** (comme la colonne `revenu` ci-dessus), ils ne sont probablement pas aléatoires : cherchez la cause avant d'imputer.
 
@@ -248,7 +250,7 @@ df.to_csv('data_prepared.csv', index=False)
 
 ### La forme d'une distribution
 
-![Quatre formes de distribution avec moyenne et médiane](/images/cours-donnees/eda-formes-distribution.svg)
+![Quatre formes de distribution avec moyenne et médiane](/420-514/images/cours-donnees/eda-formes-distribution.svg)
 
 - **Symétrique** : moyenne et médiane se confondent.
 - **Asymétrique** : la moyenne est tirée vers la queue de la distribution.
@@ -263,7 +265,7 @@ plt.show()
 
 ### Moyenne ou médiane ?
 
-![Histogramme asymétrique avec mode, médiane et moyenne](/images/cours-donnees/eda-moyenne-mediane.svg)
+![Histogramme asymétrique avec mode, médiane et moyenne](/420-514/images/cours-donnees/eda-moyenne-mediane.svg)
 
 Sur une distribution asymétrique ou avec des valeurs extrêmes, la **médiane** est un meilleur résumé du « cas typique ». Comparez toujours les deux.
 
@@ -281,7 +283,7 @@ plt.show()
 
 #### Lire une boîte à moustaches
 
-![Anatomie d'une boîte à moustaches](/images/cours-donnees/eda-boxplot-anatomie.svg)
+![Anatomie d'une boîte à moustaches](/420-514/images/cours-donnees/eda-boxplot-anatomie.svg)
 
 - La boîte contient les **50 % centraux** des données (de Q1 à Q3) ; la ligne interne est la **médiane**.
 - Les moustaches vont jusqu'à la plus petite et la plus grande valeur **non aberrantes**.
@@ -313,19 +315,19 @@ df_cleaned = df[df['z_score'] < 3]
 
 ### Choisir le bon graphique
 
-![Guide de choix du graphique selon la question](/images/cours-donnees/eda-choix-graphique.svg)
+![Guide de choix du graphique selon la question](/420-514/images/cours-donnees/eda-choix-graphique.svg)
 
 ### La corrélation
 
 Le coefficient de corrélation de Pearson (`r`, entre −1 et +1) mesure la force d'une relation **linéaire**.
 
-![Quatre nuages de points avec leur coefficient r](/images/cours-donnees/eda-correlations.svg)
+![Quatre nuages de points avec leur coefficient r](/420-514/images/cours-donnees/eda-correlations.svg)
 
 Un `r` proche de 0 ne signifie pas « aucune relation » : la relation peut être non linéaire. **Regardez toujours le nuage de points.**
 
 ### La matrice de corrélation
 
-![Carte thermique d'une matrice de corrélation](/images/cours-donnees/eda-heatmap-correlation.svg)
+![Carte thermique d'une matrice de corrélation](/420-514/images/cours-donnees/eda-heatmap-correlation.svg)
 
 ```python
 corr = df.select_dtypes("number").corr()
@@ -337,13 +339,13 @@ plt.show()
 
 ### Corrélation ≠ causalité
 
-![Variable confondante : la chaleur influence deux variables](/images/cours-donnees/eda-confondante.svg)
+![Variable confondante : la chaleur influence deux variables](/420-514/images/cours-donnees/eda-confondante.svg)
 
 Deux variables peuvent évoluer ensemble parce qu'une **variable confondante** les influence toutes les deux. Avant de parler de cause, demandez-vous : qu'est-ce qui pourrait expliquer les deux à la fois ?
 
 ### Le paradoxe de Simpson
 
-![Paradoxe de Simpson : tendance globale opposée aux tendances par groupe](/images/cours-donnees/eda-simpson.svg)
+![Paradoxe de Simpson : tendance globale opposée aux tendances par groupe](/420-514/images/cours-donnees/eda-simpson.svg)
 
 La tendance globale peut être **inverse** de celle observée dans chaque sous-groupe. Explorez systématiquement par groupe (`groupby`, couleur ou facettes) avant de conclure.
 
@@ -354,7 +356,7 @@ sns.lmplot(data=df, x="x", y="y", hue="groupe")
 
 ## 7. Piège de présentation : l'axe tronqué
 
-![Même donnée avec axe tronqué et axe complet](/images/cours-donnees/eda-axe-tronque.svg)
+![Même donnée avec axe tronqué et axe complet](/420-514/images/cours-donnees/eda-axe-tronque.svg)
 
 Pour un diagramme à barres, l'axe doit commencer à **0**. Ajoutez toujours un titre, des unités et une légende.
 
