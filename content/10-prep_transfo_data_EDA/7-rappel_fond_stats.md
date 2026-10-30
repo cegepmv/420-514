@@ -566,8 +566,3 @@ correlation_xy
 ```
 
 Cette valeur indique une relation linéaire négative parfaite entre `x` et `y` : lorsque `x` augmente, `y` diminue proportionnellement, et inversement.
-
----
-
-> **Note Hugo :** cette page utilise des formules LaTeX entre `\[` `\]` et `\(` `\)`.  
-> Le thème Hugo doit avoir MathJax ou KaTeX activé pour les afficher correctement.
