@@ -2,7 +2,7 @@
 date = '2025-11-13T07:49:17-05:00'
 draft = false
 title = 'BeautifulSoup'
-weight = 108
+weight = 208
 +++
 
 
