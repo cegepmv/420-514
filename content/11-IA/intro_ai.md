@@ -1,7 +1,7 @@
 +++
 date = '2025-12-03T09:43:36-05:00'
 draft = false
-title = "Introduction à l’intelligence artificielle"
+title = "📘 Introduction à l’intelligence artificielle"
 weight = 121
 +++
 
